@@ -71,8 +71,6 @@ void AfficherPlante(Plante plante, int col)
   {
     tabPotag[4,col] = @" /^^\";
     tabPotag[3,col] = @"  /\";
-
-    
   }
 }
 // //ajoute chaque plante avec un tab

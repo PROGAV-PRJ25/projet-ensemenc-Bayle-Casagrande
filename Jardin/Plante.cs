@@ -29,5 +29,36 @@ abstract class Plante
         string affichage = Nature;
         return affichage;
     }
+    void AfficherPlante(Plante plante)
+    {
+        string[] pousse = new string[4];
+        if (plante.Taille==4)
+        {
+            tpousse[4]  = @" /^^\";
+            pousse[3]  = "  ||";
+            pousse[2]  = "  ||";
+            pousse[1]  = @"\_\/_/";
+            pousse[0]  = " _   _";
+        }
+        else if (plante.Taille==3)
+        {
+            pousse[4] = @" /^^\";
+            pousse[3]  = "  ||";
+            pousse[2]  = "  ||";
+            pousse[1]  = @"  /\";
+            
+        }
+        else if (plante.Taille==2)
+        {
+            pousse[4]  = @" /^^\";
+            pousse[3]  = "  ||";
+            pousse[2]  = @"  /\";
+        }
+        else if (plante.Taille==1)
+        {
+            pousse[4]  = @" /^^\";
+            pousse[3]  = @"  /\";
+        }
+    }
 }
     
