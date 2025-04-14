@@ -1,26 +1,34 @@
 public class Terrain
 {
-    public int PlaceDisponible {get; set;}
+    public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
     public int NombreDePlante {get; set;}
-    List<Plante> Plantation = new List<Plante>() {get; set;};
+    public List<Plante> Plantation {get; set;}
     public Terrain(int placeDisponible)
     {
-        PlaceDisponible = placeDisponible;
         NombreDePlante = 0;
         Plantation = new List<Plante>();
+        Capacite = 4;
     }
     public override string ToString()
     {
         string affichage ="";
-        for (int i=0; i<=Plantation.Count(); i++)
+        for (int i=0; i<Plantation.Count(); i++)
         {
             affichage += Plantation[i].ToString();
         }
         return affichage;
     }
-    public void Planter(Plante nouvellePlante)
+    public string Semer(Plante nouvellePlante)
     {
-        NombreDePlante +=1;
-        PlaceDisponible -= nouvellePlante.PlaceNecessaire;
+        if (NombreDePlante == Capacite)
+        {
+            return "Ce terrain n'a plus de place pour acceuillir de nouvelle plante.";
+        }
+        else 
+        {
+            NombreDePlante +=1;
+            Plantation.Add(nouvellePlante);
+            return "La graine a été semé.";
+        }
     }
 }
