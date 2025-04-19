@@ -7,7 +7,7 @@ public class Terrain
     {
         NombreDePlante = 0;
         Plantation = new List<Plante>();
-        Capacite = 4;
+        Capacite = 10;
     }
     public override string ToString()
     {

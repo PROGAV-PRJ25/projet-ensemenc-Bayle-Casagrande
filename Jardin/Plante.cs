@@ -34,7 +34,7 @@ public class Plante
         string affichage="";
         for(int i=0; i<pousse.Length; i++)
         {
-            affichage +=pousse[i];
+            affichage +=$"{pousse[i]}\n";
         }
         return affichage;
     }
