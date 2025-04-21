@@ -1,5 +1,6 @@
 public class Potager
 {
+    public int Saison {get; set;}
     public List<Terrain> Terrains {get; set;}
     public Potager()
     {
@@ -100,6 +101,45 @@ public class Potager
             {
                 sensHorizontale = sensHorizontale*(-1);
             }  
+        }
+    }
+
+
+
+    public void ChgmtSaison()
+    {
+        
+        if (this.Saison==1)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite = 50;
+                terrain.Temperature = 16;
+            }
+        }
+        else if (this.Saison==2)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite = 30;
+                terrain.Temperature = 21;
+            }
+        }
+        else if (this.Saison==3)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite = 70;
+                terrain.Temperature = 12;
+            }
+        }
+        else
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite = 80;
+                terrain.Temperature = 5;
+            }
         }
     }
 }

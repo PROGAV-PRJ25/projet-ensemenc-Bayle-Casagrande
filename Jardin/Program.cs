@@ -42,8 +42,8 @@ for (int i = 0; i<nbTour; i++)
     }
     else 
     {
-        //changement de météo !
-        //actualisation des plantes
+        ChangerClimat();
+        ActualiserPlantes();
         //afficher état jardin
         //action joueur
         //magasin
@@ -56,6 +56,22 @@ for (int i = 0; i<nbTour; i++)
 
 //-------------------fonctions principales de déroulement de tour--------------
 
+void ChangerClimat()
+{
+    potagerTest.Saison = temps%4;
+
+    potagerTest.ChgmtSaison();
+
+    foreach (Terrain terrain in potagerTest.Terrains)
+    {
+        terrain.ChangerMeteo();
+    }
+
+}
+
+
+
+
 void ActualiserPlantes()
 {
     foreach (Terrain terrain in potagerTest.Terrains)
@@ -63,7 +79,7 @@ void ActualiserPlantes()
         foreach (Plante plante in terrain.Plantation)
         {
             plante.Age++;
-            plante.VerifierEtatPlante(); //vérifier les critères de terrains
+            plante.VerifierEtatPlante(terrain, potagerTest); //vérifier les critères de terrains
             plante.TombeMalade();
             plante.Pousser(); //fait grandir la plante selon la vitesse de croissance et change son statut de récoltable
         }
@@ -72,7 +88,7 @@ void ActualiserPlantes()
 
 
 //test de croissance de plante
-Plante test = new Plante(1);
+Plante test = new Trefle();
 Terrain terrain1 = new Terrain(4);
 terrain1.Semer(test);
 

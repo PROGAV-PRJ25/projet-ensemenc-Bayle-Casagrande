@@ -1,4 +1,4 @@
-public class Plante 
+public abstract class Plante 
 {
 
     //---!!!!!attention mettre en protected et mettre la classe en abstract
@@ -43,12 +43,12 @@ public class Plante
             }}}
 
 
-    public Plante(int taille) //enlver la taille et ajouter un terrain de plantage
+    public Plante() //enlver la taille et ajouter un terrain de plantage
     {
-        Taille = taille;
-        VitesseDeCroissance = 2;
+        Taille = 1;
+        VitesseDeCroissance = 1;
         Age = 0;
-        EsperanceDeVie = 1;
+        
     }
 
 
@@ -108,6 +108,7 @@ public class Plante
         else if (this.Recoltable==1)
         {
             Console.WriteLine("La plante est récoltable");
+            //+ changer la couleur
         }
         else 
         {
@@ -118,28 +119,9 @@ public class Plante
     }
 
 
-    public void ChangerEtatPlante(double croissance ) //défini pour chaque plante individuellement à mettre dans les classes plus tard
-    {
-        if (croissance<3)
-        {
-            this.Taille = 1;
-        }
-        else if ((croissance>=3)&&(croissance<6))
-        {
-            this.Taille = 2;
+    public abstract void ChangerEtatPlante(double croissance ); //défini pour chaque plante individuellement à mettre dans les classes plus tard
+    
 
-        }
-        else if ((croissance>=6)&&(croissance<9))
-        {
-            this.Taille = 3;
-            
-        }
-        else if (croissance>=9)
-        {
-            this.Taille = 4;
-            
-        }
-    }
     public void TombeMalade()
     {
         Random aleaMaladie = new Random();
@@ -148,13 +130,47 @@ public class Plante
         if (chanceMalade==10)
         {
             this.VitesseDeCroissance -= 0.25;
+            //+ changer la couleur
         }
     }
 
-    public void VerifierEtatPlante()
+    public void VerifierEtatPlante(Terrain terter, Potager lepotager)
     {
         //si les 50% des conditions ne sont pas complètes
         //mort plante
+        // this.PlaceNecessaire;
+        // TerrainPrefere 
+        // BesoinHumidite 
+        // BesoinTemperature 
+        // SaisonDePlantaison 
+        int eval = 5;
+
+        if (terter.Capacite>=terter.NombreDePlante)
+        {
+            eval -=1;
+        }
+        if ((terter.Humidite>this.BesoinHumidite*1.1)||(terter.Humidite<this.BesoinHumidite*0.9))
+        {
+            eval -=1;
+        }
+        if ((terter.Temperature>this.BesoinTemperature*1.1)||(terter.Temperature<this.BesoinTemperature*0.9))
+        {
+            eval -=1;
+        }
+        if (this.SaisonDePlantaison!=lepotager.Saison)
+        {
+            eval -= 1;
+        }
+
+        // this.TerrainPrefere = Terrain; ne fonctionne pas en objet ???
+        if (eval<3)
+        {
+            this.MortPlante();
+        }
+        else if (eval==3)
+        {
+            //+ changer couleur plante
+        }
     }
 
     public void MortPlante() // mettre la fonction dans la classe terrain ?
