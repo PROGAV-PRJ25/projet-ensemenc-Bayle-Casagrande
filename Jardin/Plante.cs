@@ -1,8 +1,23 @@
 public abstract class Plante
 {
-    public string Nature {get; set;} //Comestible ou non
-    public int VitesseDeCroissance {get; set;} // Echelle de 1 à 5
-    public int EsperanceDeVie {get; set;} // Si cette éspérence de vie est atteinte, la plante est déclaré morte
+    //---!!!!!attention mettre en protected et mettre la classe en abstract
+    public string Nature {get; set;} 
+    public double VitesseDeCroissance {get; set;} // Echelle de 1 à 5 ??
+    public int esperanceDeVie;
+    public int EsperanceDeVie // Si cette éspérence de vie est atteinte, la plante est déclaré morte
+    {
+        get {return esperanceDeVie;}
+        set{
+                if(esperanceDeVie < 0) 
+                {
+                    esperanceDeVie = 0;
+                }
+                else
+                {
+                    esperanceDeVie= value;
+                }
+            }
+    } 
     public int PrixDeVente {get; set;} 
     public int Taille {get; set;} // 1, 2, 3 ou 4
     public Terrain? TerrainPlante {get; set;} //C'est le terrain ou la plante est semé
@@ -34,11 +49,11 @@ public abstract class Plante
             {
                 compteur -=1;
             }
-            if (BesoinHumidite != TerrainPlante.Humidite)
+            if ((TerrainPlante.Humidite>BesoinHumidite*1.1)||(TerrainPlante.Humidite<BesoinHumidite*0.9)) // Marge de +/- 10% sur les besoins en humidité
             {
                 compteur -=1;
             }
-            if (BesoinTemperature != TerrainPlante.Temperature)
+            if ((TerrainPlante.Temperature>BesoinTemperature*1.1)||(TerrainPlante.Temperature<BesoinTemperature*0.9)) // Marge de +/- 10% sur les besoins en temperature
             {
                 compteur -=1;
             }
@@ -50,22 +65,23 @@ public abstract class Plante
         }} //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
     public int PlaceNecessaire {get; set;} // Chaque plante a besoin d'une certaine place diponible dans le jardin pour être à l'aise
     public string TerrainPrefere {get; set;}
-    public int BesoinHumidite {get; set;} // Echelle de 0 à 5
+    public int BesoinHumidite {get; set;} // Pourcentage
     public int BesoinTemperature {get; set;} 
     public int SaisonDePlantaisonPrefere {get; set;} // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante devrait etre planté
     public int SaisonDePlantaison{get; set;} // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante est planté
-    public Plante(int taille)
+    public Plante()
     {
-        Taille = taille;
-        Age = 0;
 
     }
     public override string ToString()
     {
         if (Mort == 1)
         {
+            // afficher quand meme la planet ? 
+            // la mettre en couleur ?
             return "La plante est morte vous devez la récolter.";
         }
+        // Faire un cas quand la plante est proche de la mort ?
         string[] pousse = AfficherPlante(this);
         string affichage="";
         for(int i=0; i<pousse.Length; i++)
@@ -106,6 +122,53 @@ public abstract class Plante
         }
         return pousse;
     }
-    
+    public void Pousser()
+    {
+        double croissance = this.Age*this.VitesseDeCroissance;
+        if (this.Mort==1)
+        {
+            this.MortPlante();
+        }
+        else if (this.Taille==4)
+        {
+            Console.WriteLine("La plante est récoltable");
+            //+ changer la couleur
+        }
+        else 
+        {
+            this.ChangerEtatPlante(croissance);
+        }
+    } 
+    public virtual void ChangerEtatPlante(double croissance )//défini pour chaque plante individuellement
+    {
+    } 
+    public void TomberMalade()
+    {
+        Random aleaMaladie = new Random();
+        int chanceMalade = aleaMaladie.Next(1,11);
+        if (chanceMalade==10)
+        {
+            this.VitesseDeCroissance -= 0.25;
+            //+ changer la couleur
+        }
+    }
+    public void VerifierEtatPlante(Terrain terter, Potager lepotager) // Pas sur que cette fonction soit utile ? on peut le faire dans le ToString() ?
+    {
+        if (Mort == 1)
+        {
+            this.MortPlante();
+        }
+        else if (this.Compteur==3)
+        {
+            //+ changer couleur plante
+        }
+    }
+    public void MortPlante() // Sert peut etre a rien ? On fait juste attention au cas ou la plante est morte dans les autres fonctions
+
+    {
+        //enlever la plante de la liste
+        //Dans ToString déjà un cas pour la mort de la plante donc ca ne sert a rien ici ?
+        Console.WriteLine("Oh non la plante est morte...");
+    }
 }
     

@@ -1,6 +1,8 @@
 public class Potager
 {
+    
     public List<Terrain> Terrains {get; set;}
+    public int Saison {get; set;}
     public Potager()
     {
         Terrains = new List<Terrain>();
@@ -83,6 +85,7 @@ public class Potager
         return grille;
     }
 
+
     public void DeplacerSouris(ref int positionLigne, ref int positionColonne, ref int sensHorizontale, ref int sensVerticale, int taille)
     {
         if((positionColonne+1+sensVerticale > 0)&&(positionColonne+sensVerticale<taille/2))
@@ -100,6 +103,44 @@ public class Potager
             {
                 sensHorizontale = sensHorizontale*(-1);
             }  
+        }
+    }
+
+
+    public void ChangerSaison()
+    {
+        
+        if (this.Saison==1)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite -= 30;
+                terrain.Temperature +=11;
+            }
+        }
+        else if (this.Saison==2)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite -=20;
+                terrain.Temperature += 5;
+            }
+        }
+        else if (this.Saison==3)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite += 40;
+                terrain.Temperature -=7;
+            }
+        }
+        else
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite +=10;
+                terrain.Temperature -=9;
+            }
         }
     }
 }

@@ -4,16 +4,43 @@ public abstract class Terrain
     public int NombreDePlante {get; set;}
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
-    public int Humidite {get; set;} // Comprit entre 0 et 5
-    public int Temperature {get; set;} 
+    public int humidite;
+    public int Humidite // En pourcentage
+    {
+        get {return humidite;}
+        set{
+                if(humidite < 0) 
+                {
+                    humidite = 0;
+                }
+                else if (humidite > 100)
+                {
+                    humidite = 100;
+                }
+                else {temperature = value;}
+            }
+    }
+    public int temperature;
+    public int Temperature 
+    {
+        get {return temperature;}
+        set{
+                if(temperature < 0) 
+                {
+                    temperature = 0;
+                }
+                else
+                {
+                    temperature= value;
+                }
+            }
+    }
 
     public Terrain(int placeDisponible)
     {
         NombreDePlante = 0;
         Plantation = new List<Plante>();
         Capacite = 10;
-        Plantation = new List<Plante>();
-
     }
     public override string ToString()
     {
@@ -35,7 +62,29 @@ public abstract class Terrain
             NombreDePlante +=1;
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
+            nouvellePlante.Age =0;
             return "La graine a été semé.";
+        }
+    }
+    public void ChangerMeteo()
+    {
+        Random alea = new Random();
+        int meteo = alea.Next(1,4);
+
+        if (meteo==1) //soleil
+        {
+            this.Humidite -=20;
+            this.Temperature += 5;
+        }
+        else if (meteo==2) //pluie
+        {
+            this.Humidite +=30;
+            this.Temperature -= 5;
+        }
+        else if (meteo==3) //neige
+        {
+            this.Humidite +=25;
+            this.Temperature -= 15;
         }
     }
 }
