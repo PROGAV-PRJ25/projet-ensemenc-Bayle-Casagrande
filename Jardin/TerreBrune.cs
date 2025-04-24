@@ -3,7 +3,7 @@ public class TerreBrune: Terrain
 
     public TerreBrune(int placeDisponible) : base (placeDisponible)
     {
-        Type = "terre Brune";
+        Type = "Terre Brune";
         Humidite = 1;
         Temperature = 15;
     }
