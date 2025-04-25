@@ -1,18 +1,4 @@
-﻿// Plante plante1 = new Plante (3);
-// Plante plante2 = new Plante (1);
-// Plante plante3 = new Plante (2);
-// Plante plante4 = new Plante (4);
-
-// Terrain terrain1 = new Terrain(4);
-// Console.WriteLine(terrain1.Semer(plante1));
-// Console.WriteLine(terrain1.Semer(plante2));
-// Console.WriteLine(terrain1.Semer(plante3));
-// Console.WriteLine(terrain1.Semer(plante4));
-// Console.WriteLine(terrain1);
-
-// Potager potager1 = new Potager();
-// Console.WriteLine(potager1.AjouterTerrain(terrain1));
-// potager1.Urgence(terrain1, "Souris");
+﻿
 
 
 
@@ -21,7 +7,7 @@
 //---------programme principal structure-------------------------------
 
 int temps = 0;
-int nbTour = 5;
+int nbTour = 0;
 int modeUrgence = 0;
 Potager potagerTest = new Potager();
 
@@ -38,15 +24,14 @@ for (int i = 0; i<nbTour; i++)
 
     if (modeUrgence == 1)
     {
-        //déclenchement du mode urgence manque intemperie
+        //déclenchement du mode urgence
     }
     else 
     {
         ChangerClimat();
         ActualiserPlantes();
-        //evenement spécial jardin obstacle
         //afficher état jardin
-        //action joueur + wiki
+        //action joueur
         //magasin
         temps++;
     }
@@ -59,8 +44,9 @@ for (int i = 0; i<nbTour; i++)
 
 void ChangerClimat()
 {
-    potagerTest.Saison = temps%4; //changement de saison affecte l'ensemble des terrains du potager
-    potagerTest.ChgmtSaison(); 
+    potagerTest.Saison = temps%4;
+
+    potagerTest.ChangerSaison();
 
     foreach (Terrain terrain in potagerTest.Terrains)
     {
@@ -80,28 +66,38 @@ void ActualiserPlantes()
         {
             plante.Age++;
             plante.VerifierEtatPlante(terrain, potagerTest); //vérifier les critères de terrains
-            plante.TombeMalade();
+            plante.TomberMalade();
             plante.Pousser(); //fait grandir la plante selon la vitesse de croissance et change son statut de récoltable
         }
     }
 }
 
 
-void DeclencheEvent()
-{
-    Random alea = new Random();
-    int chanceEvent = alea.Next();
-
-    
-}
-
 //test de croissance de plante
-Plante test = new Trefle();
-Terrain terrain1 = new Terrain(4);
-terrain1.Semer(test);
+//Trefle test = new Trefle();
+//TerreBrune terrain1 = new TerreBrune(4);
+//terrain1.Semer(test);
 
-for (int i=0;i<15;i++)
-{
-    test.Pousser();
-    Console.WriteLine(terrain1);
-}
+//for (int i = 0; i < 15; i++)
+//{
+//    test.Pousser();
+//    Console.WriteLine(terrain1);
+//}
+
+// test mode urgence
+
+Trefle  plante1 = new Trefle ();
+Trefle  plante2 = new Trefle ();
+Trefle  plante3 = new Trefle ();
+Trefle plante4 = new Trefle  ();
+
+TerreBrune terrain1 = new TerreBrune(4);
+Console.WriteLine(terrain1.Semer(plante1));
+Console.WriteLine(terrain1.Semer(plante2));
+Console.WriteLine(terrain1.Semer(plante3));
+Console.WriteLine(terrain1.Semer(plante4));
+Console.WriteLine(terrain1);
+
+Potager potager1 = new Potager();
+Console.WriteLine(potager1.AjouterTerrain(terrain1));
+potager1.Urgence(terrain1, "Tempête");

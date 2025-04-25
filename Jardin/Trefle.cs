@@ -2,42 +2,42 @@ public class Trefle : Plante
 {
     public Trefle()
     {
-        this.Nature = "plante chanceuse";
-        this.PrixDeVente = 10;
-
-        this.EsperanceDeVie = 12;
-
-
-        this.PlaceNecessaire = 2;
-        // this.TerrainPrefere = Terrain; ne fonctionne pas en objet ???
-        this.BesoinHumidite = 50;
-        this.BesoinTemperature = 15;
-        this.SaisonDePlantaison = 1; //== printemps
-
-
+        Nature = "Plante chanceuse";
+        VitesseDeCroissance = 1;
+        EsperanceDeVie = 12;
+        PrixDeVente = 10;
+        PlaceNecessaire=2;
+        TerrainPrefere = "Terre Brune";
+        BesoinHumidite = 1;
+        BesoinTemperature = 15;
+        SaisonDePlantaisonPrefere = 1;
+        Taille = 1;
+        Nom = "un trèfle";
     }
-
-
-    public override void ChangerEtatPlante(double croissance)
+    public override string ToString()
     {
-        if (croissance < 3)
+        return base.ToString();
+    }
+    public override void ChangerEtatPlante(double croissance )
+    {
+        if (croissance<3)
         {
             this.Taille = 1;
         }
-        else if ((croissance >= 3) && (croissance < 6))
+        else if ((croissance>=3)&&(croissance<6))
         {
             this.Taille = 2;
 
         }
-        else if ((croissance >= 6) && (croissance < 9))
+        else if ((croissance>=6)&&(croissance<9))
         {
             this.Taille = 3;
-
+            
         }
-        else if (croissance >= 9)
+        else if (croissance>=9)
         {
             this.Taille = 4;
-
+            
         }
     }
 }

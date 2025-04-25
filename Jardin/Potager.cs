@@ -1,7 +1,8 @@
 public class Potager
 {
-    public int Saison {get; set;}
+    
     public List<Terrain> Terrains {get; set;}
+    public int Saison {get; set;}
     public Potager()
     {
         Terrains = new List<Terrain>();
@@ -15,6 +16,7 @@ public class Potager
         Terrains.Add(nouveauTerrain);
         return "Le terrain a été ajouté au potager.";
     }
+
     public void Urgence(Terrain terrain, string type)
     {
         int taille = terrain.Capacite;
@@ -27,18 +29,130 @@ public class Potager
             int positionColonne = random.Next(0,taille/2);
             int sensHorizontale =1;
             int sensVerticale=1;
-            for(int i=0; i<30; i++)
+            string? actionJoueur ="";
+            string planteManger = "";
+            int reussite = 0; //Le joueur ne reussit pas forcement à faire fuir la souris
+            Console.Clear();
+            Console.WriteLine("URGENCE : Une souris se déplace dans votre terrain ! Elle mange toutes vos plantes.");
+            Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
+            Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
+            System.Threading.Thread.Sleep(500);
+            while(!(actionJoueur=="chasser"&&reussite==1))
             {
+                
+                Console.Clear();
+                Console.WriteLine("URGENCE : Une souris se déplace dans votre terrain ! Elle mange toutes vos plantes.");
+                Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
+                Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
                 grille[positionLigne,positionColonne]=null;
                 DeplacerSouris(ref positionLigne, ref positionColonne, ref sensHorizontale, ref sensVerticale, taille);
+                if (grille[positionLigne,positionColonne]=="🌱​")
+                {
+                    int indexPlanteSupprimer = random.Next(0,terrain.Plantation.Count);
+                    planteManger+=$"{terrain.Plantation[indexPlanteSupprimer]}\n ";
+                    terrain.Plantation.RemoveAt(indexPlanteSupprimer);
+                }
                 grille[positionLigne,positionColonne]="🐁";
-                Console.Clear();
                 Console.WriteLine(AfficherPotagerDynamique(taille, grille));
-                System.Threading.Thread.Sleep(200);
+                if (actionJoueur=="chasser"&&reussite!=1)
+                {
+                    Console.WriteLine("Recommencez !");
+                    actionJoueur ="";
+                }
+                System.Threading.Thread.Sleep(500);
+                // Si une touche a été pressée, lire la ligne
+                if (Console.KeyAvailable)
+                {
+                    actionJoueur = Console.ReadLine();
+                    reussite = random.Next(0,2); //Le joueur a une chance sur 2 de reussir à faire fuir la souris
+                }
+
             }
+            Console.WriteLine("Bravo ! Vous avez fais fuir la souris 🐁");
+            if (planteManger =="")
+            {
+                Console.WriteLine("Elle ne vous a rien manger !");
+            }
+            else
+            {
+                Console.WriteLine($"Elle vous a manger : \n {planteManger}");
+            }
+        }
+        if (type == "Tempête")
+        {     
+            Random random = new Random();
+            string[,] grillePluie = new string[taille/2,taille/2]; //Pour afficher la pluie sur le jardin
+            for (int i=0; i<taille/2;i++)
+                {
+                    for(int j =0; j<taille/2;j++)
+                    {
+                        grillePluie[i,j] = grille[i,j];
+                    }
+                }
+            string? actionJoueur ="";
+            int reussite = 0;
+            int esperancePerdu = 0;
+            int perdre = 0; //Les plantes ne perdront pas de l'esperance de vie à chaque tour de boucle
+            Console.Clear();
+            Console.WriteLine("URGENCE : Une tempête passe sur votre jardin ! Elle endomage l'éspérance de vie de vos plante.");
+            Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bache sur vos plantes !");
+            Console.WriteLine("Attention la bache n'est pas facile à mettre...");
+            System.Threading.Thread.Sleep(500);
+            while(!(actionJoueur=="proteger"&&reussite==1))
+            {
+
+                Console.Clear();
+                Console.WriteLine("URGENCE : Une tempête passe sur votre jardin. Elle endomage l'éspérance de vie de vos plante !");
+                Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bache sur vos plantes !");
+                Console.WriteLine("Attention la bache n'est pas facile à mettre...");
+                foreach(Plante plante in terrain.Plantation)
+                {
+                    perdre = random.Next(0,10); // Les plantes ont 1 chance sur 10 de perdre 1 d'espérance de vie à chaque tour de boucle
+                    if (perdre==9)
+                    {
+                        plante.EsperanceDeVie -= 1;
+                        esperancePerdu -=1;
+                    }
+                }
+                for(int i =0; i<taille/2; i++)
+                {
+                    for(int j = 0; j<taille/2; j++)
+                    {
+                        int goutte = random.Next(0,2); // une chance sur 2 pour que la goutte s'affiche sur la case
+                        if(goutte ==1)
+                        {
+                            grillePluie[i,j]="💧​";
+                        }
+                    }
+                }
+                Console.WriteLine(AfficherPotagerDynamique(taille, grillePluie));
+                if (actionJoueur=="proteger"&&reussite!=1)
+                {
+                    Console.WriteLine("Raté... Recommencez !");
+                    actionJoueur ="";
+                }
+                System.Threading.Thread.Sleep(500);
+                // Si une touche a été pressée, lire la ligne 
+                if (Console.KeyAvailable)
+                {
+                    actionJoueur = Console.ReadLine();
+                    reussite = random.Next(0,2); //Le joueur a une chance sur 2 de reussir à faire fuir la souris
+                }
+                // on remet l'affichage du jardin a zéro
+                for (int i=0; i<taille/2;i++)
+                {
+                    for(int j =0; j<taille/2;j++)
+                    {
+                        grillePluie[i,j] = grille[i,j];
+                    }
+                }
+            }
+            Console.WriteLine("Bravo ! Vous avez installer la bache.");
+            Console.WriteLine("Mais certaines plantes ont perdu de l'espérance de vie...");
         }
     }
 
+// Fonction pour Urgence()
     public string AfficherPotagerDynamique(int taille, string[,] grille)
     {
         string retour = "";
@@ -48,7 +162,7 @@ public class Potager
             {   
                 if (grille[j,i] == null)
                 {
-                    retour += " . ";
+                    retour += "🟫🟫​​";
                 }
                 else 
                 {
@@ -72,13 +186,13 @@ public class Potager
         {
             int nombreAleatoire = random.Next(0,taille/2);
             colonne = nombreAleatoire;
-            grille [colonne, ligne] = "🌿";
+            grille [colonne, ligne] = "​🌱​";
             while (colonne == nombreAleatoire)
             {
                 nombreAleatoire = random.Next(0,taille/2);
             }
             colonne = nombreAleatoire;
-            grille [colonne, ligne] = "🌿";
+            grille [colonne, ligne] = "🌱​";
             ligne +=1;
         }
         return grille;
@@ -104,33 +218,31 @@ public class Potager
         }
     }
 
-
-
-    public void ChgmtSaison()
+    public void ChangerSaison()
     {
         
         if (this.Saison==1)
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite -= 20;
-                terrain.Temperature += 5;
+                terrain.Humidite -= 30;
+                terrain.Temperature +=11;
             }
         }
         else if (this.Saison==2)
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite -= 10;
-                terrain.Temperature += 6;
+                terrain.Humidite -=20;
+                terrain.Temperature += 5;
             }
         }
         else if (this.Saison==3)
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite += 15;
-                terrain.Temperature -= 6;
+                terrain.Humidite += 40;
+                terrain.Temperature -=7;
             }
         }
         else
@@ -138,7 +250,7 @@ public class Potager
             foreach (Terrain terrain in this.Terrains)
             {
                 terrain.Humidite +=10;
-                terrain.Temperature -= 8;
+                terrain.Temperature -=9;
             }
         }
     }

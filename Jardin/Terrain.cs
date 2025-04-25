@@ -1,11 +1,11 @@
-public class Terrain
+public abstract class Terrain
 {
     public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
     public int NombreDePlante {get; set;}
     public List<Plante> Plantation {get; set;}
-
+    public string Type {get; set;}
     public int humidite;
-    public int Humidite // 0 ou 1
+    public int Humidite // En pourcentage
     {
         get {return humidite;}
         set{
@@ -17,13 +17,24 @@ public class Terrain
                 {
                     humidite = 100;
                 }
+                else {humidite = value;}
             }
     }
-
     public int temperature;
-
-
-    public int Temperature {get; set;}
+    public int Temperature 
+    {
+        get {return temperature;}
+        set{
+                if(temperature < 0) 
+                {
+                    temperature = 0;
+                }
+                else
+                {
+                    temperature= value;
+                }
+            }
+    }
 
     public Terrain(int placeDisponible)
     {
@@ -34,9 +45,9 @@ public class Terrain
     public override string ToString()
     {
         string affichage ="";
-        for (int i=0; i<Plantation.Count(); i++)
+        foreach (var plante in Plantation)
         {
-            affichage += Plantation[i].ToString();
+            affichage += plante.ToString();
         }
         return affichage;
     }
@@ -50,14 +61,12 @@ public class Terrain
         {
             NombreDePlante +=1;
             Plantation.Add(nouvellePlante);
+            nouvellePlante.TerrainPlante=this;
+            nouvellePlante.Age =0;
             return "La graine a été semé.";
         }
     }
-
-
-
-
-     public void ChangerMeteo()
+    public void ChangerMeteo()
     {
         Random alea = new Random();
         int meteo = alea.Next(1,4);
