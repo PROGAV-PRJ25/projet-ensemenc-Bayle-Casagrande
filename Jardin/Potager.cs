@@ -113,32 +113,32 @@ public class Potager
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite = 50;
-                terrain.Temperature = 16;
+                terrain.Humidite -= 20;
+                terrain.Temperature += 5;
             }
         }
         else if (this.Saison==2)
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite = 30;
-                terrain.Temperature = 21;
+                terrain.Humidite -= 10;
+                terrain.Temperature += 6;
             }
         }
         else if (this.Saison==3)
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite = 70;
-                terrain.Temperature = 12;
+                terrain.Humidite += 15;
+                terrain.Temperature -= 6;
             }
         }
         else
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite = 80;
-                terrain.Temperature = 5;
+                terrain.Humidite +=10;
+                terrain.Temperature -= 8;
             }
         }
     }

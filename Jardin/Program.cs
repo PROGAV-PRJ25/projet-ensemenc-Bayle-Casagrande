@@ -38,14 +38,15 @@ for (int i = 0; i<nbTour; i++)
 
     if (modeUrgence == 1)
     {
-        //déclenchement du mode urgence
+        //déclenchement du mode urgence manque intemperie
     }
     else 
     {
         ChangerClimat();
         ActualiserPlantes();
+        //evenement spécial jardin obstacle
         //afficher état jardin
-        //action joueur
+        //action joueur + wiki
         //magasin
         temps++;
     }
@@ -58,9 +59,8 @@ for (int i = 0; i<nbTour; i++)
 
 void ChangerClimat()
 {
-    potagerTest.Saison = temps%4;
-
-    potagerTest.ChgmtSaison();
+    potagerTest.Saison = temps%4; //changement de saison affecte l'ensemble des terrains du potager
+    potagerTest.ChgmtSaison(); 
 
     foreach (Terrain terrain in potagerTest.Terrains)
     {
@@ -86,6 +86,14 @@ void ActualiserPlantes()
     }
 }
 
+
+void DeclencheEvent()
+{
+    Random alea = new Random();
+    int chanceEvent = alea.Next();
+
+    
+}
 
 //test de croissance de plante
 Plante test = new Trefle();
