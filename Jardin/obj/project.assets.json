@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/Users/faneliebayle/.nuget/packages/": {}
+    "C:\\Users\\daphné\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/faneliebayle/Library/CloudStorage/OneDrive-Personnel/Documents/ENSC/1A/Informatique/ProjetInfoS2/projet-ensemenc-Bayle-Casagrande/Jardin/Jardin.csproj",
+      "projectUniqueName": "C:\\Users\\daphné\\projet-ensemenc-Bayle-Casagrande\\Jardin\\Jardin.csproj",
       "projectName": "Jardin",
-      "projectPath": "/Users/faneliebayle/Library/CloudStorage/OneDrive-Personnel/Documents/ENSC/1A/Informatique/ProjetInfoS2/projet-ensemenc-Bayle-Casagrande/Jardin/Jardin.csproj",
-      "packagesPath": "/Users/faneliebayle/.nuget/packages/",
-      "outputPath": "/Users/faneliebayle/Library/CloudStorage/OneDrive-Personnel/Documents/ENSC/1A/Informatique/ProjetInfoS2/projet-ensemenc-Bayle-Casagrande/Jardin/obj/",
+      "projectPath": "C:\\Users\\daphné\\projet-ensemenc-Bayle-Casagrande\\Jardin\\Jardin.csproj",
+      "packagesPath": "C:\\Users\\daphné\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\daphné\\projet-ensemenc-Bayle-Casagrande\\Jardin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/faneliebayle/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\daphné\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.402/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

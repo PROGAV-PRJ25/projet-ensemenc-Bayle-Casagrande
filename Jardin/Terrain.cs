@@ -4,6 +4,8 @@ public abstract class Terrain
     public int NombreDePlante {get; set;}
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
+
+    public bool Event {get; set;}
     public int humidite;
     public int Humidite // En pourcentage
     {
@@ -20,6 +22,42 @@ public abstract class Terrain
                 else {humidite = value;}
             }
     }
+
+    public double fertilite = 1; //influence croissance du terrain entre 0 et 1,5
+
+    public double Fertilite
+    {
+        get
+        {
+            return fertilite; 
+        }
+        set
+        {
+            if(fertilite < 0.5) 
+                {
+                    fertilite = 0.5;
+                }
+                else if (fertilite > 1.5)
+                {
+                    fertilite=1.5;
+                }
+                else {fertilite = value;}
+        }
+    }
+    public bool acidite = false; //les plantes ne poussent plus
+
+    public bool Acidite
+    {
+        get
+        { 
+            return acidite;
+        }
+        set
+        {
+            acidite = value;
+        }
+    }
+
     public int temperature;
     public int Temperature 
     {
@@ -41,6 +79,7 @@ public abstract class Terrain
         NombreDePlante = 0;
         Plantation = new List<Plante>();
         Capacite = 10;
+        Event = false;
     }
     public override string ToString()
     {
@@ -85,6 +124,32 @@ public abstract class Terrain
         {
             this.Humidite +=25;
             this.Temperature -= 15;
+        }
+    }
+
+    public void DeclencherEvent()
+    {
+        Random alea = new Random();
+        int chance = alea.Next(1,4);
+
+        if (chance==1)
+        {
+            Evenement fee = new Fee();
+            //fee.BonneAction(); augmente fertilite du terrain
+        }
+        else if (chance==2)
+        {
+            Evenement insecte = new Insecte();
+            //insecte.Action()
+            Event = true; //au bout de 3 mois l'enlever, descend la fertilite du terrain
+            //faire une fonction pour l'enlever
+        }
+        else
+        {
+            Evenement herbe = new Herbe();
+            //herbe action //permanent a part si désherbage, met l'acidite à true donc aucune croissance
+            Event = true;
+            //faire une fonction pour l'enlever
         }
     }
 }
