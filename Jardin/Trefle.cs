@@ -18,7 +18,7 @@ public class Trefle : Plante
     {
         return base.ToString();
     }
-    public override void ChangerEtatPlante(double croissance )
+    public override void ChangerTaillePlante(double croissance )
     {
         if (croissance<3)
         {
