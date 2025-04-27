@@ -11,7 +11,12 @@ public class Trefle : Plante
         BesoinHumidite = 1;
         BesoinTemperature = 15;
         SaisonDePlantaisonPrefere = 1;
-        Taille = 0;
+        Taille = 1;
+        Nom = "un trèfle";
+    }
+    public override string ToString()
+    {
+        return base.ToString();
     }
     public override void ChangerEtatPlante(double croissance )
     {

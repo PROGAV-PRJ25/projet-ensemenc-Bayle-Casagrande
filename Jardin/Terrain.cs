@@ -17,7 +17,7 @@ public abstract class Terrain
                 {
                     humidite = 100;
                 }
-                else {temperature = value;}
+                else {humidite = value;}
             }
     }
     public int temperature;
@@ -45,9 +45,9 @@ public abstract class Terrain
     public override string ToString()
     {
         string affichage ="";
-        for (int i=0; i<Plantation.Count(); i++)
+        foreach (var plante in Plantation)
         {
-            affichage += Plantation[i].ToString();
+            affichage += plante.ToString();
         }
         return affichage;
     }

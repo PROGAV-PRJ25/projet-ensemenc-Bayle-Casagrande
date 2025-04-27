@@ -2,6 +2,7 @@ public abstract class Plante
 {
     //---!!!!!attention mettre en protected et mettre la classe en abstract
     public string Nature {get; set;} 
+    public string Nom {get; set;}
     public double VitesseDeCroissance {get; set;} // Echelle de 1 à 5 ??
     public int esperanceDeVie;
     public int EsperanceDeVie // Si cette éspérence de vie est atteinte, la plante est déclaré morte
@@ -23,46 +24,35 @@ public abstract class Plante
     public Terrain? TerrainPlante {get; set;} //C'est le terrain ou la plante est semé
     public int Age {get; set;} // Permet de savoir si l'éspérance de vie est dépassé ou non
     int mort; 
-    public int Mort // 0 ou 1
+    public int Mort
     {
-        get {return mort;}
-        set{
-            if((Age > EsperanceDeVie)||(Compteur<3)) 
-            {
-                mort = 1;
-            }
-            else
-            {
-                mort = 0;
-            }}}
-    public int compteur;
-    // Comprit entre 0 et 5
-    public int Compteur {
-        get{return compteur;} 
-        set{
-            compteur = 5;
-            if (TerrainPlante.Capacite-TerrainPlante.NombreDePlante<PlaceNecessaire) // Le trèfle a besoin d'un espace libre de 1 dans le terrain ou il a été planté
-            {
-                compteur -=1;
-            }
+        get
+        {
+            return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0;
+        }
+    }
+// Comprit entre 0 et 5
+public int Compteur
+{
+    get
+    {
+        int compteur = 5;
+        if (TerrainPlante != null)
+        {
+            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
+                compteur -= 1;
             if (TerrainPlante.Type != TerrainPrefere)
-            {
-                compteur -=1;
-            }
-            if ((TerrainPlante.Humidite>BesoinHumidite*1.1)||(TerrainPlante.Humidite<BesoinHumidite*0.9)) // Marge de +/- 10% sur les besoins en humidité
-            {
-                compteur -=1;
-            }
-            if ((TerrainPlante.Temperature>BesoinTemperature*1.1)||(TerrainPlante.Temperature<BesoinTemperature*0.9)) // Marge de +/- 10% sur les besoins en temperature
-            {
-                compteur -=1;
-            }
-            if (SaisonDePlantaison!=SaisonDePlantaisonPrefere)
-            {
-                compteur -=1;
-            }
-
-        }} //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
+                compteur -= 1;
+            if ((TerrainPlante.Humidite > BesoinHumidite * 1.5) || (TerrainPlante.Humidite < BesoinHumidite * 0.5))
+                compteur -= 1;
+            if ((TerrainPlante.Temperature > BesoinTemperature * 1.5) || (TerrainPlante.Temperature < BesoinTemperature * 0.5))
+                compteur -= 1;
+            if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
+                compteur -= 1;
+        }
+        return compteur;
+    }
+} //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
     public int PlaceNecessaire {get; set;} // Chaque plante a besoin d'une certaine place diponible dans le jardin pour être à l'aise
     public string TerrainPrefere {get; set;}
     public int BesoinHumidite {get; set;} // Pourcentage
@@ -77,50 +67,61 @@ public abstract class Plante
     {
         if (Mort == 1)
         {
-            // afficher quand meme la planet ? 
+            // afficher quand meme la plante? 
             // la mettre en couleur ?
             return "La plante est morte vous devez la récolter.";
         }
-        // Faire un cas quand la plante est proche de la mort ?
-        string[] pousse = AfficherPlante(this);
-        string affichage="";
-        for(int i=0; i<pousse.Length; i++)
+        else
         {
-            affichage +=$"{pousse[i]}\n";
+            // Faire un cas quand la plante est proche de la mort ?
+            string[] pousse = AfficherPlante(this);
+            string affichage=$"- Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
+            for(int i=0; i<pousse.Length; i++)
+            {
+                affichage +=$"{pousse[i]}\n";
+            }
+            return affichage;
         }
-        return affichage;
     }
     public string[] AfficherPlante(Plante planteAfficher)
     {
-        string[] pousse = new string[5];
         if (planteAfficher.Taille==4)
         {
+            string[] pousse = new string[5];
             pousse[4]  = @" /^^\";
             pousse[3]  = "  ||";
             pousse[2]  = "  ||";
             pousse[1]  = @"\_\/_/";
             pousse[0]  = " _   _";
+            return pousse;
         }
         else if (planteAfficher.Taille==3)
         {
-            pousse[4] = @" /^^\";
-            pousse[3]  = "  ||";
+            string[] pousse = new string[4];
+            pousse[3] = @" /^^\";
             pousse[2]  = "  ||";
-            pousse[1]  = @"  /\";
+            pousse[1]  = "  ||";
+            pousse[0]  = @"  /\";
+            return pousse;
             
         }
         else if (planteAfficher.Taille==2)
         {
-            pousse[4]  = @" /^^\";
-            pousse[3]  = "  ||";
-            pousse[2]  = @"  /\";
+            string[] pousse = new string[3];
+            pousse[2]  = @" /^^\";
+            pousse[1]  = "  ||";
+            pousse[0]  = @"  /\";
+            return pousse;
         }
-        else if (planteAfficher.Taille==1)
+        else
         {
-            pousse[4]  = @" /^^\";
-            pousse[3]  = @"  /\";
+            string[] pousse = new string[2];
+            pousse[1]  = @" /^^\";
+            pousse[0]  = @" /\";
+            return pousse;
         }
-        return pousse;
+        
+        
     }
     public void Pousser()
     {
