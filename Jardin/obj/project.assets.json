@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\daphné\\.nuget\\packages\\": {}
+    "C:\\Users\\daphn\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daphné\\projet-ensemenc-Bayle-Casagrande\\Jardin\\Jardin.csproj",
+      "projectUniqueName": "C:\\Users\\daphn\\projet-ensemenc-Bayle-Casagrande\\Jardin\\Jardin.csproj",
       "projectName": "Jardin",
-      "projectPath": "C:\\Users\\daphné\\projet-ensemenc-Bayle-Casagrande\\Jardin\\Jardin.csproj",
-      "packagesPath": "C:\\Users\\daphné\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daphné\\projet-ensemenc-Bayle-Casagrande\\Jardin\\obj\\",
+      "projectPath": "C:\\Users\\daphn\\projet-ensemenc-Bayle-Casagrande\\Jardin\\Jardin.csproj",
+      "packagesPath": "C:\\Users\\daphn\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\daphn\\projet-ensemenc-Bayle-Casagrande\\Jardin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\daphné\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\daphn\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

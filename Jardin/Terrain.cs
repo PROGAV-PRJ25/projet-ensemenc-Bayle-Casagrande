@@ -5,7 +5,7 @@ public abstract class Terrain
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
 
-    public bool Event {get; set;}
+    public List<Evenement> EventSurTerrain {get; set;}
     public int humidite;
     public int Humidite // En pourcentage
     {
@@ -74,12 +74,14 @@ public abstract class Terrain
             }
     }
 
+    public bool Event {get; set;}
     public Terrain(int placeDisponible)
     {
         NombreDePlante = 0;
         Plantation = new List<Plante>();
         Capacite = 10;
         Event = false;
+        EventSurTerrain = new List<Evenement>();
     }
     public override string ToString()
     {
@@ -130,26 +132,36 @@ public abstract class Terrain
     public void DeclencherEvent()
     {
         Random alea = new Random();
-        int chance = alea.Next(1,4);
+        int chance = alea.Next(1,11);
 
         if (chance==1)
         {
             Evenement fee = new Fee();
-            //fee.BonneAction(); augmente fertilite du terrain
+            Event = true;
+            this.EventSurTerrain.Add(fee);
+            Console.WriteLine(fee);
         }
         else if (chance==2)
         {
             Evenement insecte = new Insecte();
             //insecte.Action()
-            Event = true; //au bout de 3 mois l'enlever, descend la fertilite du terrain
+            Event = true;
+            this.EventSurTerrain.Add(insecte);
+            Console.WriteLine(insecte);
+            
+             //au bout de 3 mois l'enlever, descend la fertilite du terrain
             //faire une fonction pour l'enlever
         }
-        else
+        else if (chance==3)
         {
             Evenement herbe = new Herbe();
             //herbe action //permanent a part si désherbage, met l'acidite à true donc aucune croissance
             Event = true;
+            this.EventSurTerrain.Add(herbe);
+            Console.WriteLine(herbe);
+
             //faire une fonction pour l'enlever
         }
     }
+
 }
