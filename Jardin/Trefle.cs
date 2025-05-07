@@ -6,6 +6,7 @@ public class Trefle : Plante
         VitesseDeCroissance = 1;
         EsperanceDeVie = 12;
         PrixDeVente = 10;
+        PrixAchatGraine = 2;
         PlaceNecessaire=2;
         TerrainPrefere = "Terre Brune";
         BesoinHumidite = 1;

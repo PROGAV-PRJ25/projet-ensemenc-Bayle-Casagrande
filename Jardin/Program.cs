@@ -1,66 +1,61 @@
 ﻿
 
-
+//Jeu();
 
 
 
 //---------programme principal structure-------------------------------
 
-
-Console.WriteLine("fnfj");
-int temps = 1;
-int nbTour = 5;
-int modeUrgence = 0;
-Potager potagerTest = new Potager();
-
-Trefle plante1 = new Trefle(); //morte
-Trefle plante2 = new Trefle(); //malade
-Trefle plante3 = new Trefle(); //proche mort
-Trefle plante4 = new Trefle(); 
-Trefle plante5 = new Trefle();
-
-TerreBrune terrain1 = new TerreBrune(4);
-Console.WriteLine(terrain1.Semer(plante1));
-Console.WriteLine(terrain1.Semer(plante2));
-Console.WriteLine(terrain1.Semer(plante3));
-Console.WriteLine(terrain1.Semer(plante4));
-Console.WriteLine(terrain1.Semer(plante5));
-
-Console.WriteLine(potagerTest.AjouterTerrain(terrain1));
-
-//phase d'initialisation
-//création de 3 terrain
-// affichage des consignes
-//semis de la première plante
-
-//tours
-for (int i = 0; i < nbTour; i++)
+void Jeu()
 {
-    // Random alea = new Random();
-    // modeUrgence = alea.Next(0, 2);
+    Console.WriteLine("Bienvenu dans le jeu du potager Irlandais !");
+    int temps = 1;
+    int nbTour = 5;
+    int modeUrgence = 0;
+    Potager potagerTest = new Potager();
+    Magasin magasin = new Magasin(10);
 
-    if (modeUrgence == 1)
+    Trefle plante1 = new Trefle(); //morte
+    Trefle plante2 = new Trefle(); //malade
+    Trefle plante3 = new Trefle(); //proche mort
+    Trefle plante4 = new Trefle(); 
+    Trefle plante5 = new Trefle();
+
+    TerreBrune terrain1 = new TerreBrune(4);
+    Console.WriteLine(terrain1.Semer(plante1));
+    Console.WriteLine(terrain1.Semer(plante2));
+    Console.WriteLine(terrain1.Semer(plante3));
+    Console.WriteLine(terrain1.Semer(plante4));
+    Console.WriteLine(terrain1.Semer(plante5));
+
+    Console.WriteLine(potagerTest.AjouterTerrain(terrain1));
+
+    //phase d'initialisation
+    //création de 3 terrain
+    // affichage des consignes
+    //semis de la première plante
+
+    //tours
+    for (int i = 0; i < nbTour; i++)
     {
-        //déclenchement du mode urgence
-    }
-    else
-    {
-        ChangerClimat();
-        ActualiserPlantes();
-        ActualiserEvent();
-        AfficherEtatJardin();
+        System.Threading.Thread.Sleep(500);
+        Console.WriteLine($"#### {i} Tour ###");
+        ChangerClimat(potagerTest,temps);
+        ActualiserPlantes(potagerTest);
+        ActualiserEvent(potagerTest);
+        Console.WriteLine(potagerTest);
         //action joueur + wiki
         //magasin
         temps++;
+
     }
+
+    Console.WriteLine("Fin de partie");
 }
-
-Console.WriteLine("Fin de partie");
-
 
 //-------------------fonctions principales de déroulement de tour--------------
 
-void ChangerClimat()
+void ChangerClimat(Potager potagerTest, int temps)
 {
     potagerTest.Saison = temps % 4;
 
@@ -76,7 +71,7 @@ void ChangerClimat()
 
 
 
-void ActualiserPlantes()
+void ActualiserPlantes(Potager potagerTest)
 {
     foreach (Terrain terrain in potagerTest.Terrains)
     {
@@ -89,7 +84,7 @@ void ActualiserPlantes()
     }
 }
 
-void ActualiserEvent()
+void ActualiserEvent(Potager potagerTest)
 {
     foreach (Terrain terrain in potagerTest.Terrains)
     {
@@ -109,16 +104,7 @@ void ActualiserEvent()
     }
 }
 
-void AfficherEtatJardin()
-{
-    foreach (Terrain ter in potagerTest.Terrains)
-    {
-        Console.WriteLine("Terrain :");
-        Console.WriteLine(ter);
-    }
-}
-
-//test de croissance de plante
+// %%%%%%%% test de croissance de plante %%%%%%%%
 //Trefle test = new Trefle();
 //TerreBrune terrain1 = new TerreBrune(4);
 //terrain1.Semer(test);
@@ -129,7 +115,9 @@ void AfficherEtatJardin()
 //    Console.WriteLine(terrain1);
 //}
 
-// test mode urgence
+
+
+// %%%%%%%% test mode urgence %%%%%%%%
 
 // Trefle plante1 = new Trefle(); //morte
 // Trefle plante2 = new Trefle(); //malade
@@ -154,3 +142,20 @@ void AfficherEtatJardin()
 // Potager potager1 = new Potager();
 // Console.WriteLine(potager1.AjouterTerrain(terrain1));
 // potager1.Urgence(terrain1, "Tempête");
+
+
+
+// %%%%%%%% test magasin %%%%%%%%
+
+Trefle plante1 = new Trefle(); //morte
+Trefle plante2 = new Trefle(); //malade
+Trefle plante3 = new Trefle(); //proche mort
+Trefle plante4 = new Trefle(); //mur
+Trefle plante5 = new Trefle(); //normal
+
+Magasin magasin = new Magasin(10);
+
+Console.WriteLine(magasin.Acheter(plante1));
+Console.WriteLine(magasin.Vendre(plante1));
+Console.WriteLine(magasin);
+
