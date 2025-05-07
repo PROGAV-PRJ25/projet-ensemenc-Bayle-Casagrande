@@ -13,11 +13,10 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jardin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b3720078bdbe5987dace6b49b21b4e21e7c5f55")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+adb365c20da325f2b77dae8043cbbc933f7d7efb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Jardin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Jardin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Généré par la classe MSBuild WriteCodeFragment.
 // Généré par la classe MSBuild WriteCodeFragment.
 

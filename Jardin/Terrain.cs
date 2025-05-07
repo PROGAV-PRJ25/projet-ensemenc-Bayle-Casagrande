@@ -45,7 +45,6 @@ public abstract class Terrain
         }
     }
     public bool acidite = false; //les plantes ne poussent plus
-
     public bool Acidite
     {
         get
