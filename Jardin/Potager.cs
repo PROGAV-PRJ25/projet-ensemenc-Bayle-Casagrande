@@ -9,7 +9,14 @@ public class Potager
     }
     public override string ToString()
     {
-        return "";
+        string affichage ="";
+        int i =0;
+        foreach (Terrain t in Terrains)
+        {
+            affichage += $"{i} Terrain : \n Type : {t.Type} - Capacité {t.Capacite} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C";
+            affichage += t.ToString();
+        }
+        return affichage;
     }
     public string AjouterTerrain(Terrain nouveauTerrain)
     {

@@ -31,28 +31,28 @@ public abstract class Plante
             return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0;
         }
     }
-// Comprit entre 0 et 5
-public int Compteur
-{
-    get
+    // Comprit entre 0 et 5
+    public int Compteur
     {
-        int compteur = 5;
-        if (TerrainPlante != null)
+        get
         {
-            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
-                compteur -= 1;
-            if (TerrainPlante.Type != TerrainPrefere)
-                compteur -= 1;
-            if ((TerrainPlante.Humidite > BesoinHumidite * 1.5) || (TerrainPlante.Humidite < BesoinHumidite * 0.5))
-                compteur -= 1;
-            if ((TerrainPlante.Temperature > BesoinTemperature * 1.5) || (TerrainPlante.Temperature < BesoinTemperature * 0.5))
-                compteur -= 1;
-            if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
-                compteur -= 1;
+            int compteur = 5;
+            if (TerrainPlante != null)
+            {
+                if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
+                    compteur -= 1;
+                if (TerrainPlante.Type != TerrainPrefere)
+                    compteur -= 1;
+                if ((TerrainPlante.Humidite > BesoinHumidite * 1.5) || (TerrainPlante.Humidite < BesoinHumidite * 0.5))
+                    compteur -= 1;
+                if ((TerrainPlante.Temperature > BesoinTemperature * 1.5) || (TerrainPlante.Temperature < BesoinTemperature * 0.5))
+                    compteur -= 1;
+                if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
+                    compteur -= 1;
+            }
+            return compteur;
         }
-        return compteur;
-    }
-} //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
+    } //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
     public int PlaceNecessaire {get; set;} // Chaque plante a besoin d'une certaine place diponible dans le jardin pour être à l'aise
     public string TerrainPrefere {get; set;}
     public int BesoinHumidite {get; set;} // Pourcentage
@@ -128,7 +128,7 @@ public int Compteur
         double croissance = this.Age*this.VitesseDeCroissance;
         if (this.Mort==1)
         {
-            this.MortPlante();
+
         }
         else if (this.Taille==4)
         {
@@ -153,23 +153,6 @@ public int Compteur
             //+ changer la couleur
         }
     }
-    public void VerifierEtatPlante(Terrain terter, Potager lepotager) // Pas sur que cette fonction soit utile ? on peut le faire dans le ToString() ?
-    {
-        if (Mort == 1)
-        {
-            this.MortPlante();
-        }
-        else if (this.Compteur==3)
-        {
-            //+ changer couleur plante
-        }
-    }
-    public void MortPlante() // Sert peut etre a rien ? On fait juste attention au cas ou la plante est morte dans les autres fonctions
 
-    {
-        //enlever la plante de la liste
-        //Dans ToString déjà un cas pour la mort de la plante donc ca ne sert a rien ici ?
-        Console.WriteLine("Oh non la plante est morte...");
-    }
 }
     

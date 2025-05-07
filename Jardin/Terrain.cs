@@ -44,7 +44,7 @@ public abstract class Terrain
     }
     public override string ToString()
     {
-        string affichage ="";
+        string affichage ="Dans ce terrain vous avez :  \n";
         foreach (var plante in Plantation)
         {
             affichage += plante.ToString();

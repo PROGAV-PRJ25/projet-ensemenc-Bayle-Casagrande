@@ -64,10 +64,12 @@ void ActualiserPlantes()
     {
         foreach (Plante plante in terrain.Plantation)
         {
-            plante.Age++;
-            plante.VerifierEtatPlante(terrain, potagerTest); //vérifier les critères de terrains
-            plante.TomberMalade();
-            plante.Pousser(); //fait grandir la plante selon la vitesse de croissance et change son statut de récoltable
+            if (plante.Mort !=0)
+            {
+                plante.Age++;
+                plante.TomberMalade();
+                plante.Pousser(); //fait grandir la plante selon la vitesse de croissance et change son statut de récoltable
+            }
         }
     }
 }
@@ -100,4 +102,4 @@ Console.WriteLine(terrain1);
 
 Potager potager1 = new Potager();
 Console.WriteLine(potager1.AjouterTerrain(terrain1));
-potager1.Urgence(terrain1, "Tempête");
+//potager1.Urgence(terrain1, "Tempête");
