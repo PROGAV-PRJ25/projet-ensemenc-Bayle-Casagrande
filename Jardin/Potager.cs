@@ -245,7 +245,7 @@ public class Potager
                 terrain.Temperature -=7;
             }
         }
-        else
+        else if (this.Saison==4)
         {
             foreach (Terrain terrain in this.Terrains)
             {
