@@ -77,10 +77,11 @@ public abstract class Plante
     public int SaisonDePlantaisonPrefere { get; set; } // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante devrait etre planté
     public int SaisonDePlantaison { get; set; } // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante est planté
 
+    public int Hydratation {get; set;} // à refaire mieux !
     public int Malade { get; set; }
     public Plante()
     {
-
+        Hydratation = 80;
     }
     
     public override string ToString()
@@ -165,8 +166,14 @@ public abstract class Plante
 
         if (TerrainPlante.Acidite!=true)
         {
+            Hydratation -=12;
             double croissance = this.Age * this.VitesseDeCroissance*TerrainPlante.Fertilite;//ajouter acidité du terrain
             this.ChangerTaillePlante(croissance);
+        }
+
+        if (Hydratation <=0)
+        {
+            Mort = 1;
         }
     
         
