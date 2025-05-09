@@ -45,7 +45,6 @@ public abstract class Terrain
         }
     }
     public bool acidite = false; //les plantes ne poussent plus
-
     public bool Acidite
     {
         get
@@ -75,6 +74,7 @@ public abstract class Terrain
     }
 
     public bool Event {get; set;}
+    public Potager PotagerTerrain {get; set;}
     public Terrain(int placeDisponible)
     {
         NombreDePlante = 0;
@@ -85,7 +85,7 @@ public abstract class Terrain
     }
     public override string ToString()
     {
-        string affichage ="";
+        string affichage ="Dans ce terrain vous avez :  \n";
         foreach (var plante in Plantation)
         {
             affichage += plante.ToString();
@@ -96,7 +96,7 @@ public abstract class Terrain
     {
         if (NombreDePlante == Capacite)
         {
-            return "Ce terrain n'a plus de place pour acceuillir de nouvelle plante.";
+            return "Ce terrain n'a plus de place pour accueillir de nouvelle plante.";
         }
         else 
         {

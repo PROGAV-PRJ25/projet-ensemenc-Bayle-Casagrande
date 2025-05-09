@@ -1,19 +1,44 @@
+using System.ComponentModel;
+
 public class Potager
 {
     
     public List<Terrain> Terrains {get; set;}
+
+    public List<Plante> PlantesRecoltables {get;set;}
     public int Saison {get; set;}
     public Potager()
     {
+        PlantesRecoltables = new List<Plante>();
         Terrains = new List<Terrain>();
     }
     public override string ToString()
     {
-        return "";
+        string affichage ="";
+        int i = 1 ;
+        foreach (Terrain t in Terrains)
+        {
+            Random alea = new Random();
+            int modeUrgence = alea.Next(0, 4);
+            if (modeUrgence == 1)
+            {
+                int typeInt = alea.Next(0,2);
+                string type ="";
+                if (typeInt==0){type = "Souris";}
+                else {type = "Tempête";}
+                Urgence(t, type);
+            }
+            affichage += $"###### Terrain ###### \n Type : {t.Type} - Capacité {t.Capacite} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C\n";
+            System.Threading.Thread.Sleep(500);
+            affichage += t.ToString();
+            System.Threading.Thread.Sleep(500);
+        }
+        return affichage;
     }
     public string AjouterTerrain(Terrain nouveauTerrain)
     {
         Terrains.Add(nouveauTerrain);
+        nouveauTerrain.PotagerTerrain = this;
         return "Le terrain a été ajouté au potager.";
     }
 

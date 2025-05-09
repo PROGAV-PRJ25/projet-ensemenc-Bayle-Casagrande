@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 public abstract class Plante
 {
     //---!!!!!attention mettre en protected et mettre la classe en abstract
@@ -20,7 +22,8 @@ public abstract class Plante
             }
         }
     }
-    public int PrixDeVente { get; set; }
+    public int PrixDeVente { get; set; } // Une fois mûre
+    public int PrixAchatGraine {get; set;} //Achat de la graine
     public int Taille { get; set; } // 1, 2, 3 ou 4
     public Terrain? TerrainPlante { get; set; } //C'est le terrain ou la plante est semé
     public int Age { get; set; } // Permet de savoir si l'éspérance de vie est dépassé ou non
@@ -79,49 +82,41 @@ public abstract class Plante
     {
 
     }
+    
     public override string ToString()
     {
-        // ChangerCouleur();
-        string[] pousse = AfficherPlante(this);
-        string affichage = "";
-        
         if (Mort == 1)
         {
             // afficher quand meme la plante? 
             // la mettre en couleur ?
             // Console.ResetColor();
-            affichage += "La plante est morte vous devez la récolter pour l'enlever du terrain.";
-        }
-        else if ((Taille == 4) && (Mort == 0))
-        {
-            // Console.ResetColor();
-            affichage += $"{Nom} est mûr et prêt à être récolté";
-        }
-        else if ((Age == EsperanceDeVie - 1) || (Compteur == 3)) // Faire un cas quand la plante est proche de la mort ?
-        {
-            // Console.ResetColor();
-            affichage += $"{Nom} est proche de la mort !";
-        }
-        else if (Malade == 1)
-        {
-            affichage += $"{Nom} est malade../  Age : {Age}\n ";
+            return "La plante est morte vous devez la jeter.";
         }
         else
         {
-            affichage += $"{Nom}/  Age : {Age}\n ";
+            // Faire un cas quand la plante est proche de la mort ?
+            string[] pousse = AfficherPlante(this);
+            string affichage=$"- Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
+            if ((Taille == 4) && (Mort == 0))
+            {
+                // Console.ResetColor();
+                affichage += $"Cette plante est mûr et prêt à être récolté\n";
+            }
+            if ((Age == EsperanceDeVie - 1) || (Compteur == 3)) // Cas quand la plante est proche de la mort 
+            {
+                // Console.ResetColor();
+                affichage += $"Attention cette plante est proche de la mort !\n";
+            }
+            if (Malade == 1)
+            {
+                affichage += $"Attention cette plante est malade...\n";
+            }
+            for(int i=0; i<pousse.Length; i++)
+            {
+                affichage +=$"{pousse[i]}\n";
+            }
+            return affichage;
         }
-
-
-        for (int i = 0; i < pousse.Length; i++)
-        {
-            affichage += $"{pousse[i]}\n";
-        }
-
-        return affichage;
-
-
-        
-
     }
     public string[] AfficherPlante(Plante planteAfficher)
     {
@@ -141,7 +136,7 @@ public abstract class Plante
             pousse[3] = @" /^^\";
             pousse[2] =  "  ||";
             pousse[1] =  "  ||";
-            pousse[0] = @" /\";
+            pousse[0] = @"  /\";
             return pousse;
 
         }
@@ -150,26 +145,30 @@ public abstract class Plante
             string[] pousse = new string[3];
             pousse[2] = @" /^^\";
             pousse[1] =  "  ||";
-            pousse[0] = @" /\";
+            pousse[0] = @"  /\";
             return pousse;
         }
         else
         {
             string[] pousse = new string[2];
             pousse[1] = @" /^^\";
-            pousse[0] = @" /\";
+            pousse[0] = @"  /\";
             return pousse;
         }
-
-
     }
     public void Pousser()
     {
+        if (Taille==4)
+        {
+            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
+        }
+
         if (TerrainPlante.Acidite!=true)
         {
             double croissance = this.Age * this.VitesseDeCroissance*TerrainPlante.Fertilite;//ajouter acidité du terrain
             this.ChangerTaillePlante(croissance);
         }
+    
         
 
     }
