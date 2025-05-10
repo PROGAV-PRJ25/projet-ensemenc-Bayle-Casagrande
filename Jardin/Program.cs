@@ -9,6 +9,9 @@
 void Jeu()
 {
     Console.WriteLine("Bienvenu dans le jeu du potager Irlandais !");
+    Console.WriteLine("Règle : ");
+    System.Threading.Thread.Sleep(500);
+
     int temps = 1;
     int nbTour = 5;
     int modeUrgence = 0;
@@ -45,7 +48,7 @@ void Jeu()
         ActualiserEvent(potagerTest);
         Console.WriteLine(potagerTest);
         //action joueur + wiki
-        //magasin
+        RentrerMagasin(magasin);
         temps++;
 
     }
@@ -104,6 +107,41 @@ void ActualiserEvent(Potager potagerTest)
     }
 }
 
+void RentrerMagasin(Magasin magasin)
+{
+    Console.WriteLine("Voulez vous passer au magasin ?");
+    string reponse = Console.ReadLine();
+    if (reponse != "oui" && reponse != "non")
+    {
+        Console.WriteLine("Votre réponse n'est pas valide. Ecrivez 'oui' ou 'non'");
+        RentrerMagasin(magasin);
+    }
+    if (reponse == "oui")
+    {
+        Console.WriteLine(magasin);
+        string actionJoueurMagasin = "";
+        while (actionJoueurMagasin != "rien")
+        {
+            Console.WriteLine("Voulez vous 'acheter', 'vendre' ou ne 'rien' faire ?");
+            if (actionJoueurMagasin == "acheter");
+            {
+                Console.WriteLine("Quelle plante ?");
+                string planteChoisie = Console.ReadLine();
+                magasin.Acheter(planteChoisie);
+            }
+            if (actionJoueurMagasin == "vendre");
+            {
+                Console.WriteLine("Quelle planten donnez son numéro ?");
+                int numeroChoisie = Convert.ToInt32(Console.ReadLine());
+                magasin.Vendre(numeroChoisie);
+            }
+        }
+    }
+
+}
+
+
+
 // %%%%%%%% test de croissance de plante %%%%%%%%
 //Trefle test = new Trefle();
 //TerreBrune terrain1 = new TerreBrune(4);
@@ -155,7 +193,7 @@ Trefle plante5 = new Trefle(); //normal
 
 Magasin magasin = new Magasin(10);
 
-Console.WriteLine(magasin.Acheter(plante1));
-Console.WriteLine(magasin.Vendre(plante1));
+Console.WriteLine(magasin.Acheter("trefle"));
+Console.WriteLine(magasin.Vendre(2));
 Console.WriteLine(magasin);
 

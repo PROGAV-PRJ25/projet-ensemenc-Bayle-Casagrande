@@ -2,8 +2,10 @@ public abstract class Terrain
 {
     public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
     public int NombreDePlante {get; set;}
+    static int numerotation = 1;
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
+
 
     public List<Evenement> EventSurTerrain {get; set;}
     public int humidite;
@@ -103,6 +105,8 @@ public abstract class Terrain
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
             nouvellePlante.Age =0;
+            nouvellePlante.Numero= numerotation;
+            numerotation+=1;
             return "La graine a été semé.";
         }
     }
