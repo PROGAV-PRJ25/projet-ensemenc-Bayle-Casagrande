@@ -4,6 +4,7 @@ public abstract class Plante
 {
     //---!!!!!attention mettre en protected et mettre la classe en abstract
     public string Nature { get; set; }
+    public int Numero {get; set;} //Utiliser lors de la vente de la plante
     public string Nom { get; set; }
     public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 ??
     public int esperanceDeVie;
@@ -97,7 +98,7 @@ public abstract class Plante
         {
             // Faire un cas quand la plante est proche de la mort ?
             string[] pousse = AfficherPlante(this);
-            string affichage=$"- Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
+            string affichage=$"- Numéro : {Numero} Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
             if ((Taille == 4) && (Mort == 0))
             {
                 // Console.ResetColor();

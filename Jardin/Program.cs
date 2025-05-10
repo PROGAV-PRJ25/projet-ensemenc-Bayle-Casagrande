@@ -11,6 +11,9 @@ using System.Runtime.CompilerServices;
 // void Jeu()
 // {
     Console.WriteLine("Bienvenu dans le jeu du potager Irlandais !");
+    Console.WriteLine("Règle : ");
+    System.Threading.Thread.Sleep(500);
+
     int temps = 1;
     int nbTour = 5;
     int modeUrgence = 0;
@@ -45,9 +48,10 @@ using System.Runtime.CompilerServices;
         ChangerClimat(potagerTest,temps);
         ActualiserPlantes(potagerTest);
         ActualiserEvent(potagerTest);
+        Console.WriteLine(potagerTest);
+        RentrerMagasin(magasin);
         Console.WriteLine(potagerTest); //affichage du potager
         ActionJoueur(2);//action joueur + wiki
-        //magasin
         temps++;
 
     }
@@ -105,6 +109,41 @@ void ActualiserEvent(Potager potagerTest)
 
     }
 }
+
+
+void RentrerMagasin(Magasin magasin)
+{
+    Console.WriteLine("Voulez vous passer au magasin ?");
+    string reponse = Console.ReadLine();
+    if (reponse != "oui" && reponse != "non")
+    {
+        Console.WriteLine("Votre réponse n'est pas valide. Ecrivez 'oui' ou 'non'");
+        RentrerMagasin(magasin);
+    }
+    if (reponse == "oui")
+    {
+        Console.WriteLine(magasin);
+        string actionJoueurMagasin = "";
+        while (actionJoueurMagasin != "rien")
+        {
+            Console.WriteLine("Voulez vous 'acheter', 'vendre' ou ne 'rien' faire ?");
+            if (actionJoueurMagasin == "acheter");
+            {
+                Console.WriteLine("Quelle plante ?");
+                string planteChoisie = Console.ReadLine();
+                magasin.Acheter(planteChoisie);
+            }
+            if (actionJoueurMagasin == "vendre");
+            {
+                Console.WriteLine("Quelle planten donnez son numéro ?");
+                int numeroChoisie = Convert.ToInt32(Console.ReadLine());
+                magasin.Vendre(numeroChoisie);
+            }
+        }
+    }
+
+}
+
 
 void ActionJoueur(int nbAction)
 {
@@ -442,6 +481,7 @@ void ActionJeter()
 }
 
 
+
 // %%%%%%%% test de croissance de plante %%%%%%%%
 //Trefle test = new Trefle();
 //TerreBrune terrain1 = new TerreBrune(4);
@@ -493,7 +533,9 @@ void ActionJeter()
 
 // Magasin magasin = new Magasin(10);
 
+
 // Console.WriteLine(magasin.Acheter(plante1));
 // Console.WriteLine(magasin.Vendre(plante1));
 // Console.WriteLine(magasin);
+
 
