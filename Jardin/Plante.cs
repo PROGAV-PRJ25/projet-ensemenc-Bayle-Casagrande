@@ -4,6 +4,7 @@ public abstract class Plante
 {
     //---!!!!!attention mettre en protected et mettre la classe en abstract
     public string Nature { get; set; }
+    public int Numero {get; set;} //Utiliser lors de la vente de la plante
     public string Nom { get; set; }
     public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 ??
     public int esperanceDeVie;
@@ -77,11 +78,13 @@ public abstract class Plante
     public int SaisonDePlantaisonPrefere { get; set; } // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante devrait etre planté
     public int SaisonDePlantaison { get; set; } // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante est planté
 
+    public int Hydratation {get; set;} // à refaire mieux !
     public int Malade { get; set; }
     public Plante()
     {
-
+        Hydratation = 80;
     }
+    
     public override string ToString()
     {
         if (Mort == 1)
@@ -89,13 +92,13 @@ public abstract class Plante
             // afficher quand meme la plante? 
             // la mettre en couleur ?
             // Console.ResetColor();
-            return "La plante est morte vous devez la récolter.";
+            return "La plante est morte vous devez la jeter.";
         }
         else
         {
             // Faire un cas quand la plante est proche de la mort ?
             string[] pousse = AfficherPlante(this);
-            string affichage=$"- Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
+            string affichage=$"- Numéro : {Numero} Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
             if ((Taille == 4) && (Mort == 0))
             {
                 // Console.ResetColor();
@@ -135,7 +138,7 @@ public abstract class Plante
             pousse[3] = @" /^^\";
             pousse[2] =  "  ||";
             pousse[1] =  "  ||";
-            pousse[0] = @" /\";
+            pousse[0] = @"  /\";
             return pousse;
 
         }
@@ -144,24 +147,36 @@ public abstract class Plante
             string[] pousse = new string[3];
             pousse[2] = @" /^^\";
             pousse[1] =  "  ||";
-            pousse[0] = @" /\";
+            pousse[0] = @"  /\";
             return pousse;
         }
         else
         {
             string[] pousse = new string[2];
             pousse[1] = @" /^^\";
-            pousse[0] = @" /\";
+            pousse[0] = @"  /\";
             return pousse;
         }
     }
     public void Pousser()
     {
+        if (Taille==4)
+        {
+            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
+        }
+
         if (TerrainPlante.Acidite!=true)
         {
+            Hydratation -=12;
             double croissance = this.Age * this.VitesseDeCroissance*TerrainPlante.Fertilite;//ajouter acidité du terrain
             this.ChangerTaillePlante(croissance);
         }
+
+        if (Hydratation <=0)
+        {
+            Mort = 1;
+        }
+    
         
 
     }

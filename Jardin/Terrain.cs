@@ -2,8 +2,10 @@ public abstract class Terrain
 {
     public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
     public int NombreDePlante {get; set;}
+    static int numerotation = 1;
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
+
 
     public List<Evenement> EventSurTerrain {get; set;}
     public int humidite;
@@ -74,6 +76,7 @@ public abstract class Terrain
     }
 
     public bool Event {get; set;}
+    public Potager PotagerTerrain {get; set;}
     public Terrain(int placeDisponible)
     {
         NombreDePlante = 0;
@@ -95,7 +98,7 @@ public abstract class Terrain
     {
         if (NombreDePlante == Capacite)
         {
-            return "Ce terrain n'a plus de place pour acceuillir de nouvelle plante.";
+            return "Ce terrain n'a plus de place pour accueillir de nouvelle plante.";
         }
         else 
         {
@@ -103,6 +106,8 @@ public abstract class Terrain
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
             nouvellePlante.Age =0;
+            nouvellePlante.Numero= numerotation;
+            numerotation+=1;
             return "La graine a été semé.";
         }
     }
