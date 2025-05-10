@@ -1,10 +1,15 @@
+using System.ComponentModel;
+
 public class Potager
 {
     
     public List<Terrain> Terrains {get; set;}
+
+    public List<Plante> PlantesRecoltables {get;set;}
     public int Saison {get; set;}
     public Potager()
     {
+        PlantesRecoltables = new List<Plante>();
         Terrains = new List<Terrain>();
     }
     public override string ToString()
@@ -33,6 +38,7 @@ public class Potager
     public string AjouterTerrain(Terrain nouveauTerrain)
     {
         Terrains.Add(nouveauTerrain);
+        nouveauTerrain.PotagerTerrain = this;
         return "Le terrain a été ajouté au potager.";
     }
 
