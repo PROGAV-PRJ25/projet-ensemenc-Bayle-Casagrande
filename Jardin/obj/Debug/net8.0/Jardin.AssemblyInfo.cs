@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jardin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9584a0c4b3026d34ef0797d8f53b1d32e79c70ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75d16a83ffedc764256c6d4819ea9087307de429")]
 [assembly: System.Reflection.AssemblyProductAttribute("Jardin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Jardin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
