@@ -1,6 +1,4 @@
-﻿
-
-//Jeu();
+﻿Jeu();
 
 
 
@@ -9,10 +7,13 @@
 void Jeu()
 {
     Console.WriteLine("Bienvenu dans le jeu du potager Irlandais !");
+    Console.WriteLine("Règle");
+
+
     int temps = 1;
     int nbTour = 5;
     int modeUrgence = 0;
-    Potager potagerTest = new Potager();
+    Potager potagerIrlandais = new Potager();
     Magasin magasin = new Magasin(10);
 
     Trefle plante1 = new Trefle(); //morte
@@ -28,7 +29,7 @@ void Jeu()
     Console.WriteLine(terrain1.Semer(plante4));
     Console.WriteLine(terrain1.Semer(plante5));
 
-    Console.WriteLine(potagerTest.AjouterTerrain(terrain1));
+    Console.WriteLine(potagerIrlandais.AjouterTerrain(terrain1));
 
     //phase d'initialisation
     //création de 3 terrain
@@ -39,13 +40,14 @@ void Jeu()
     for (int i = 0; i < nbTour; i++)
     {
         System.Threading.Thread.Sleep(500);
-        Console.WriteLine($"#### {i} Tour ###");
-        ChangerClimat(potagerTest,temps);
-        ActualiserPlantes(potagerTest);
-        ActualiserEvent(potagerTest);
-        Console.WriteLine(potagerTest);
-        //action joueur + wiki
-        //magasin
+        Console.WriteLine($"#### {i} Mois ###");
+        ChangerClimat(potagerIrlandais,temps);
+        ActualiserPlantes(potagerIrlandais);
+        ActualiserEvent(potagerIrlandais);
+        Console.WriteLine(potagerIrlandais);
+        RentrerMagasin(magasin);
+        Console.WriteLine(potagerIrlandais); //affichage du potager
+        ActionJoueur(2);//action joueur + wiki
         temps++;
 
     }
@@ -55,13 +57,13 @@ void Jeu()
 
 //-------------------fonctions principales de déroulement de tour--------------
 
-void ChangerClimat(Potager potagerTest, int temps)
+void ChangerClimat(Potager potager, int temps)
 {
-    potagerTest.Saison = temps % 4;
+    potager.Saison = temps % 4;
 
-    potagerTest.ChangerSaison();
+    potager.ChangerSaison();
 
-    foreach (Terrain terrain in potagerTest.Terrains)
+    foreach (Terrain terrain in potager.Terrains)
     {
         terrain.ChangerMeteo();
     }
@@ -71,9 +73,9 @@ void ChangerClimat(Potager potagerTest, int temps)
 
 
 
-void ActualiserPlantes(Potager potagerTest)
+void ActualiserPlantes(Potager potager)
 {
-    foreach (Terrain terrain in potagerTest.Terrains)
+    foreach (Terrain terrain in potager.Terrains)
     {
         foreach (Plante plante in terrain.Plantation)
         {
@@ -84,9 +86,9 @@ void ActualiserPlantes(Potager potagerTest)
     }
 }
 
-void ActualiserEvent(Potager potagerTest)
+void ActualiserEvent(Potager potager)
 {
-    foreach (Terrain terrain in potagerTest.Terrains)
+    foreach (Terrain terrain in potager.Terrains)
     {
         if (terrain.Event!=true)
         {
@@ -155,7 +157,7 @@ Trefle plante5 = new Trefle(); //normal
 
 Magasin magasin = new Magasin(10);
 
-Console.WriteLine(magasin.Acheter(plante1));
-Console.WriteLine(magasin.Vendre(plante1));
+Console.WriteLine(magasin.Acheter("trefle"));
+Console.WriteLine(magasin.Vendre(2));
 Console.WriteLine(magasin);
 
