@@ -17,7 +17,7 @@ public class Magasin
         affichage += "Bienvenu dans le magasin, vous pourvez acheter des graines ou vendre vos plantes récoltés ici. \n";
         if (GrainesAchetes.Count >0)
         {
-            affichage += "Vous avez déja des graines : ";
+            affichage += "Vous avez déjà des graines : ";
             foreach(Plante p in GrainesAchetes)
             {
                 affichage += $"- {p.Nom}";
