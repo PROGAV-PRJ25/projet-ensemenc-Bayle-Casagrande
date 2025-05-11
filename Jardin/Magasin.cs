@@ -14,7 +14,7 @@ public class Magasin
     public override string ToString()
     {
         string affichage="";
-        affichage += "Bienvenu dans le magasin, vous pourvez acheter des graines ou vendre vos plantes récoltés ici. \n";
+        affichage += "\nBienvenu dans le magasin, vous pourvez acheter des graines ou vendre vos plantes récoltés ici. \n";
         if (GrainesAchetes.Count >0)
         {
             affichage += "Vous avez déjà des graines : ";
@@ -35,20 +35,22 @@ public class Magasin
         }
 
         // Mettre les possibilité d'achat
-        Console.WriteLine($"Vous avez {ArgentJoueur} pièces.");
+        Console.WriteLine($"\nVous avez {ArgentJoueur} pièces.");
         string reponse = "";
         while (reponse !="oui" && reponse !="non")
         {
-            Console.WriteLine ("Voulez vous accéder au wiki pour voir vos possibilités d'achats ?");
+            Console.WriteLine ("\nVoulez vous accéder au wiki pour voir vos possibilités d'achats ?");
+
             reponse = Console.ReadLine();
         }
         if (reponse == "oui")
         {
-            //wiki
+            Console.WriteLine(AfficherWiki());
         }
         
         return affichage;
     }
+    
     public string Vendre(int numero)
     {
         Plante planteAVendre = PlantesRecoltes.FirstOrDefault(p => p.Numero == numero);
@@ -91,6 +93,7 @@ public class Magasin
     {
         bool existence = false;
         Plante planteAAcheter = VerifierExistancePlante(planteAcheter, ref existence);
+        Console.WriteLine(planteAAcheter);
         
         if (existence==true)
         {
@@ -111,6 +114,10 @@ public class Magasin
         }
     }
 
-
+    public string AfficherWiki()
+    {
+        string affichage = "";
+        return affichage;
+    }
 
 }
