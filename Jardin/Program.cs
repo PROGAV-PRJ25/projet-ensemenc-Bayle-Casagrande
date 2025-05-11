@@ -114,7 +114,9 @@ void ActualiserEvent(Potager potagerTest)
 void RentrerMagasin(Magasin magasin)
 {
     Console.WriteLine("Voulez vous passer au magasin ?");
+
     string reponse = Console.ReadLine()!;
+
     if (reponse != "oui" && reponse != "non")
     {
         Console.WriteLine("Votre réponse n'est pas valide. Ecrivez 'oui' ou 'non'");
