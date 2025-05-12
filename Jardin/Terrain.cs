@@ -2,6 +2,7 @@ public abstract class Terrain
 {
     public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
     public int NombreDePlante {get; set;}
+    static int numerotation = 1;
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
 
@@ -85,7 +86,12 @@ public abstract class Terrain
     }
     public override string ToString()
     {
-        string affichage ="Dans ce terrain vous avez :  \n";
+        string affichage = "";
+        if (Plantation.Count ==0)
+        {
+            return "Vous n'avez pas encore de plante dans ce terrain. \n";
+        }
+        affichage ="Dans ce terrain vous avez :  \n";
         foreach (var plante in Plantation)
         {
             affichage += plante.ToString();
@@ -96,7 +102,7 @@ public abstract class Terrain
     {
         if (NombreDePlante == Capacite)
         {
-            return "Ce terrain n'a plus de place pour accueillir de nouvelle plante.";
+            return "\nCe terrain n'a plus de place pour accueillir de nouvelle plante.\n";
         }
         else 
         {
@@ -104,7 +110,9 @@ public abstract class Terrain
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
             nouvellePlante.Age =0;
-            return "La graine a été semé.";
+            nouvellePlante.Numero= numerotation;
+            numerotation+=1;
+            return "\nLa graine a été semé.";
         }
     }
     public void ChangerMeteo()
@@ -133,13 +141,15 @@ public abstract class Terrain
     {
         Random alea = new Random();
         int chance = alea.Next(1,11);
+        string affichage ="";
 
         if (chance==1)
         {
             Evenement fee = new Fee();
             Event = true;
             this.EventSurTerrain.Add(fee);
-            Console.WriteLine(fee);
+            affichage = fee.ToString();
+            affichage += $"{Type} !!";
         }
         else if (chance==2)
         {
@@ -147,7 +157,8 @@ public abstract class Terrain
             //insecte.Action()
             Event = true;
             this.EventSurTerrain.Add(insecte);
-            Console.WriteLine(insecte);
+            affichage = insecte.ToString();
+            affichage += $"{Type} !!";
             
              //au bout de 3 mois l'enlever, descend la fertilite du terrain
             //faire une fonction pour l'enlever
@@ -158,7 +169,8 @@ public abstract class Terrain
             //herbe action //permanent a part si désherbage, met l'acidite à true donc aucune croissance
             Event = true;
             this.EventSurTerrain.Add(herbe);
-            Console.WriteLine(herbe);
+            affichage = herbe.ToString();
+            affichage += $"{Type} !!";
 
             //faire une fonction pour l'enlever
         }

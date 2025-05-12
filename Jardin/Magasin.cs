@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 public class Magasin
 {
     public int ArgentJoueur {get; set;}
@@ -12,10 +14,10 @@ public class Magasin
     public override string ToString()
     {
         string affichage="";
-        affichage += "Bienvenu dans le magasin, vous pourvez acheter des graines ou vendre vos plantes récoltés ici. \n";
+        affichage += "\nBienvenu dans le magasin, vous pourvez acheter des graines ou vendre vos plantes récoltés ici. \n";
         if (GrainesAchetes.Count >0)
         {
-            affichage += "Vous avez déja des graines : ";
+            affichage += "Vous avez déjà des graines : ";
             foreach(Plante p in GrainesAchetes)
             {
                 affichage += $"- {p.Nom}";
@@ -33,10 +35,29 @@ public class Magasin
         }
 
         // Mettre les possibilité d'achat
+        Console.WriteLine($"\nVous avez {ArgentJoueur} pièces.");
+        string reponse = "";
+        while (reponse !="oui" && reponse !="non")
+        {
+            Console.WriteLine ("\nVoulez vous accéder au wiki pour voir vos possibilités d'achats ?");
+
+            reponse = Console.ReadLine();
+        }
+        if (reponse == "oui")
+        {
+            Console.WriteLine(AfficherWiki());
+        }
+        
         return affichage;
     }
-    public string Vendre(Plante planteAVendre)
+    
+    public string Vendre(int numero)
     {
+        Plante planteAVendre = PlantesRecoltes.FirstOrDefault(p => p.Numero == numero);
+        if (planteAVendre == null)
+        {
+            return $"Aucune plante trouvée avec le numéro {numero}.";
+        }
         if (planteAVendre.Taille==4 && planteAVendre.Mort==0)
         {
             ArgentJoueur += planteAVendre.PrixDeVente;
@@ -45,21 +66,58 @@ public class Magasin
         }
         else 
         {
-            return "La plante n'a pas pu être vendu";
+            return "La plante n'a pas pu être vendu. La plante est soit morte, soit pas encore mûre.";
         }
     }
-    public string Acheter(Plante planteAAcheter)
+
+    public Plante VerifierExistancePlante(string planteAcheter, ref bool existence)
     {
-        if (ArgentJoueur>=planteAAcheter.PrixAchatGraine)
+
+        if (planteAcheter == "trefle")
         {
-            ArgentJoueur -= planteAAcheter.PrixAchatGraine;
-            GrainesAchetes.Add(planteAAcheter);
-            return  $"La plante a été acheté pour {planteAAcheter.PrixAchatGraine} pièces";
+            Trefle planteAAcheter = new Trefle();
+            existence= true;
+            return planteAAcheter;
         }
-        else 
+        else
         {
-            return "La graine n'a pas pu être acheter";
+            Plante planteAAcheter = new Trefle();
+            existence = false;
+            return planteAAcheter;
         }
+
+    }
+
+    
+    public string Acheter(string planteAcheter)
+    {
+        bool existence = false;
+        Plante planteAAcheter = VerifierExistancePlante(planteAcheter, ref existence);
+        Console.WriteLine(planteAAcheter);
+        
+        if (existence==true)
+        {
+            if (ArgentJoueur>=planteAAcheter.PrixAchatGraine)
+            {
+                ArgentJoueur -= planteAAcheter.PrixAchatGraine;
+                GrainesAchetes.Add(planteAAcheter);
+                return  $"La plante a été acheté pour {planteAAcheter.PrixAchatGraine} pièces";
+            }
+            else 
+            {
+                return "La graine n'a pas pu être acheter";
+            }
+        }
+        else
+        {
+            return "Cette plante n'existe pas. Il faut écrire seulement le nom de la plante, sans majuscule ni accent.";
+        }
+    }
+
+    public string AfficherWiki()
+    {
+        string affichage = "";
+        return affichage;
     }
 
 }
