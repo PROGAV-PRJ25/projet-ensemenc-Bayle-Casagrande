@@ -3,7 +3,7 @@
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 //-------------variables de base-----------
-int temps = 0;
+/*int temps = 0;
 int nbTour = 10;
 int modeUrgence = 0;
 int argentJoueur = 10;
@@ -21,13 +21,13 @@ potagerIrlandais.AjouterTerrain(terrainTourbiere);
 //---------programme principal structure-------------------------------
 
 //phase d'introduction
-Introduction();
+PresenterIntroduction(nbTour);
 
 //tours
  while (temps < nbTour)
  {
     temps +=1;
-    ModeUrgence();
+    ActiverModeUrgence(potagerIrlandais);
     Console.Clear();
     Console.WriteLine($"\n\n%%%%%%%%% Mois {temps} %%%%%%%%%\n");
     ChangerClimat(potagerIrlandais,temps);
@@ -42,12 +42,12 @@ Introduction();
 }
 
 
-Console.WriteLine("\n\nFin de partie - Vous avez récolté tant de plantes, vous avez gagné tant d'argent,  ");
+Console.WriteLine("\n\nFin de partie - Vous avez récolté tant de plantes, vous avez gagné tant d'argent,  ");*/
 
 
 //-------------------fonctions principales de déroulement de tour--------------
 
-void Introduction()
+void PresenterIntroduction(int nbTour)
 {
     Console.Clear();
     Console.WriteLine("Bienvenu dans le jeu du potager Irlandais !\nRègles : \n Vous avez trois terrains dans votre potager Irlandais. Il faudra s'occuper de vos plantes ! Mais attention aux désagréments...\nCombien de mois souhaitez-vous jouer ?\n");
@@ -61,9 +61,10 @@ void Introduction()
      
 }
 
-void ModeUrgence()
+void ActiverModeUrgence(Potager potager)
 {
     Random alea = new Random();
+    int modeUrgence;
     modeUrgence = alea.Next(0, 10);
     int terrainToucher=alea.Next(0,3);
     if (modeUrgence == 1)
@@ -72,7 +73,7 @@ void ModeUrgence()
         string type ="";
         if (typeInt==0){type = "Souris";}
         else {type = "Tempête";}
-        potagerIrlandais.Urgence(potagerIrlandais.Terrains[terrainToucher], type);
+        potager.Urgence(potager.Terrains[terrainToucher], type);
     }
      System.Threading.Thread.Sleep(1000);
 
@@ -591,18 +592,23 @@ RentrerMagasin(magasin1);*/
 
 
 //Test état plante
-/* Trefle plante1 = new Trefle(); //morte
-    Trefle plante2 = new Trefle(); //malade
-    Trefle plante3 = new Trefle(); //proche mort
-    Trefle plante4 = new Trefle(); 
-    Trefle plante5 = new Trefle();
+Trefle plante1 = new Trefle(); //morte
+Trefle plante2 = new Trefle(); //malade
+Trefle plante3 = new Trefle(); //proche mort
+Trefle plante4 = new Trefle(); 
+Trefle plante5 = new Trefle();
+Potager potager = new Potager();
 
-    TerreBrune terrain1 = new TerreBrune(4);
-    Console.WriteLine(terrain1.Semer(plante1));
-    Console.WriteLine(terrain1.Semer(plante2));
-    Console.WriteLine(terrain1.Semer(plante3));
-    Console.WriteLine(terrain1.Semer(plante4));
-    Console.WriteLine(terrain1.Semer(plante5));
+TerreBrune terrain1 = new TerreBrune(4);
+Console.WriteLine(terrain1.Semer(plante1));
+Console.WriteLine(terrain1.Semer(plante2));
+Console.WriteLine(terrain1.Semer(plante3));
+Console.WriteLine(terrain1.Semer(plante4));
+Console.WriteLine(terrain1.Semer(plante5));
 
-    Console.WriteLine(potagerTest.AjouterTerrain(terrain1)); */
+Console.WriteLine(potager.AjouterTerrain(terrain1)); 
+Console.WriteLine(plante1); 
+Console.WriteLine(plante1.Compteur); 
+Console.WriteLine(plante1.TerrainPlante.Type); 
+Console.WriteLine(plante1.TerrainPrefere); 
 

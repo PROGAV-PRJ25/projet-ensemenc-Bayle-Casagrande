@@ -26,7 +26,7 @@ public abstract class Plante
     public int PrixDeVente { get; set; } // Une fois mûre
     public int PrixAchatGraine {get; set;} //Achat de la graine
     public int Taille { get; set; } // 1, 2, 3 ou 4
-    public Terrain? TerrainPlante { get; set; } //C'est le terrain ou la plante est semé
+    public Terrain TerrainPlante { get; set; } //C'est le terrain ou la plante est semé
     public int Age { get; set; } // Permet de savoir si l'éspérance de vie est dépassé ou non
 
     public int mort;
@@ -43,34 +43,9 @@ public abstract class Plante
             Console.WriteLine($"{mort}");
         }
     }
-    // Comprit entre 0 et 5
-    public int compteur;
-    public int Compteur
-    {
-        get
-        {
-            // int compteur = 5;
-            // if (TerrainPlante != null)
-            // {
-            //     if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
-            //         compteur -= 1;
-            //     if (TerrainPlante.Type != TerrainPrefere)
-            //         compteur -= 1;
-            //     if ((TerrainPlante.Humidite > BesoinHumidite * 1.5) || (TerrainPlante.Humidite < BesoinHumidite * 0.5))
-            //         compteur -= 1;
-            //     if ((TerrainPlante.Temperature > BesoinTemperature * 1.5) || (TerrainPlante.Temperature < BesoinTemperature * 0.5))
-            //         compteur -= 1;
-            //     if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
-            //         compteur -= 1;
-            // }
-            return compteur;
-        }
-        set //pour test a enlever apres
-        {
-            compteur = value;
 
-        }
-    } //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
+    // Comprit entre 0 et 5
+    public int Compteur{get; set;} //Il permet de comptabiliser combien de condition de préférence de la plante sont respecté
     public int PlaceNecessaire { get; set; } // Chaque plante a besoin d'une certaine place diponible dans le jardin pour être à l'aise
     public string TerrainPrefere { get; set; }
     public int BesoinHumidite { get; set; } // Pourcentage
@@ -83,10 +58,12 @@ public abstract class Plante
     public Plante()
     {
         Hydratation = 80;
+
     }
     
     public override string ToString()
     {
+        Compteur = MettreAJourCompteur();
         if (Mort == 1)
         {
             // afficher quand meme la plante? 
@@ -193,6 +170,24 @@ public abstract class Plante
         }
     }
 
+    public int MettreAJourCompteur()
+    {
+        int compteur = 5;
+        if (TerrainPlante != null)
+        {
+            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
+                {compteur -= 1;}
+            if (TerrainPlante.Type != TerrainPrefere)
+                {compteur -= 1;}
+            if ((TerrainPlante.Humidite > BesoinHumidite * 1.2) || (TerrainPlante.Humidite < BesoinHumidite * 0.2))
+                {compteur -= 1;}
+            if ((TerrainPlante.Temperature > BesoinTemperature * 1.2) || (TerrainPlante.Temperature < BesoinTemperature * 0.2))
+                {compteur -= 1;}
+            if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
+                {compteur -= 1;}
+        }
+        return compteur;
+    }
     // public void ChangerCouleur()
     // {
     //     if (Malade == 1)

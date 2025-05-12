@@ -112,6 +112,7 @@ public abstract class Terrain
             nouvellePlante.Age =0;
             nouvellePlante.Numero= numerotation;
             numerotation+=1;
+
             return "\nLa graine a été semé.";
         }
     }
