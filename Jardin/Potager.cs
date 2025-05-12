@@ -14,25 +14,16 @@ public class Potager
     }
     public override string ToString()
     {
-        string affichage ="";
+        string affichage ="\n\n-----------------Vos terrains ------------------\n";
         int i = 1 ;
         foreach (Terrain t in Terrains)
         {
-            Random alea = new Random();
-            int modeUrgence = alea.Next(0, 4);
-            if (modeUrgence == 1)
-            {
-                int typeInt = alea.Next(0,2);
-                string type ="";
-                if (typeInt==0){type = "Souris";}
-                else {type = "Tempête";}
-                Urgence(t, type);
-            }
-            affichage += $"###### Terrain ###### \n Type : {t.Type} - Capacité {t.Capacite} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C\n";
+            affichage += $"\n{t.Type} : Capacité {t.Capacite} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C\n";
             System.Threading.Thread.Sleep(500);
             affichage += t.ToString();
             System.Threading.Thread.Sleep(500);
         }
+        affichage+="\n------------------------------------------------\n";
         return affichage;
     }
     public string AjouterTerrain(Terrain nouveauTerrain)
@@ -58,7 +49,7 @@ public class Potager
             string planteManger = "";
             int reussite = 0; //Le joueur ne reussit pas forcement à faire fuir la souris
             Console.Clear();
-            Console.WriteLine("URGENCE : Une souris se déplace dans votre terrain ! Elle mange toutes vos plantes.");
+            Console.WriteLine($"URGENCE : Une souris se déplace dans le terrain {terrain.Type} ! Elle mange toutes vos plantes.");
             Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
             Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
             System.Threading.Thread.Sleep(500);
@@ -66,7 +57,7 @@ public class Potager
             {
                 
                 Console.Clear();
-                Console.WriteLine("URGENCE : Une souris se déplace dans votre terrain ! Elle mange toutes vos plantes.");
+                Console.WriteLine($"URGENCE : Une souris se déplace dans le terrain {terrain.Type} ! Elle mange toutes vos plantes.");
                 Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
                 Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
                 grille[positionLigne,positionColonne]=null;
