@@ -14,7 +14,7 @@ public class Potager
     }
     public override string ToString()
     {
-        string affichage ="\n\nVos terrains :\n";
+        string affichage ="\n\n-----------------Vos terrains ------------------\n";
         int i = 1 ;
         foreach (Terrain t in Terrains)
         {
@@ -23,6 +23,7 @@ public class Potager
             affichage += t.ToString();
             System.Threading.Thread.Sleep(500);
         }
+        affichage+="\n------------------------------------------------\n";
         return affichage;
     }
     public string AjouterTerrain(Terrain nouveauTerrain)
