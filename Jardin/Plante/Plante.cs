@@ -4,7 +4,6 @@ public abstract class Plante
 {
     //---!!!!!attention mettre en protected et mettre la classe en abstract
     public string Nature { get; set; }
-    public int Numero {get; set;} //Utiliser lors de la vente de la plante
     public string Nom { get; set; }
     public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 ??
     public int esperanceDeVie;
@@ -28,7 +27,6 @@ public abstract class Plante
     public int Taille { get; set; } // 1, 2, 3 ou 4
     public Terrain TerrainPlante { get; set; } //C'est le terrain ou la plante est semé
     public int Age { get; set; } // Permet de savoir si l'éspérance de vie est dépassé ou non
-
     public int mort;
     public int Mort
     {
@@ -50,8 +48,8 @@ public abstract class Plante
     public string TerrainPrefere { get; set; }
     public int BesoinHumidite { get; set; } // Pourcentage
     public int BesoinTemperature { get; set; }
-    public int SaisonDePlantaisonPrefere { get; set; } // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante devrait etre planté
-    public int SaisonDePlantaison { get; set; } // 1:Printemps, 2:Ete, 3:Automne, 4:Hiver Saison ou la plante est planté
+    public string SaisonDePlantaisonPrefere { get; set; } 
+    public string SaisonDePlantaison { get; set; } 
 
     public int Hydratation {get; set;} // à refaire mieux !
     public int Malade { get; set; }
@@ -69,17 +67,18 @@ public abstract class Plante
             // afficher quand meme la plante? 
             // la mettre en couleur ?
             // Console.ResetColor();
-            return "La plante est morte vous devez la jeter.";
+            return $"La plante : {Nom} est morte vous devez la jeter.\n";
         }
         else
         {
             // Faire un cas quand la plante est proche de la mort ?
             string[] pousse = AfficherPlante(this);
-            string affichage=$"- Numéro : {Numero} Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
+            string affichage=$"- Nom : {Nom}  Age : {Age}  Taille : {Taille}\n ";
+            affichage += AfficherProblemePlante();
             if ((Taille == 4) && (Mort == 0))
             {
                 // Console.ResetColor();
-                affichage += $"Cette plante est mûr et prêt à être récolté\n";
+                affichage += $"Cette plante est mûre et prête à être récolté\n";
             }
             if ((Age == EsperanceDeVie - 1) || (Compteur == 3)) // Cas quand la plante est proche de la mort 
             {
@@ -188,6 +187,28 @@ public abstract class Plante
         }
         return compteur;
     }
+    public string AfficherProblemePlante()
+    {
+        string affichage = "";
+        if (TerrainPlante != null)
+        {
+            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
+                {affichage += "Cette plante se sent très sérrer sur ce terrain.\n";}
+            if (TerrainPlante.Humidite < BesoinHumidite * 0.2)
+                {affichage += "L'humidité est trop basse pour cette plante.\n";}
+            if (TerrainPlante.Humidite > BesoinHumidite * 1.2) 
+                {affichage += "L'humidité est trop élevé pour cette plante.\n";}
+            if (TerrainPlante.Temperature > BesoinTemperature * 1.2)
+                {affichage += "La température est trop élevé pour cette plante.\n";}
+            if (TerrainPlante.Temperature < BesoinTemperature * 0.2)
+                {affichage += "La température est trop basse pour cette plante.\n";}
+            //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne serait potentiellement pas bon, ne sont pas affiché 
+            //Cela prendre trop de place inutile dans la console, car le joueur ne peut rien y faire
+        }
+        return affichage;
+    }
+    
+    
     // public void ChangerCouleur()
     // {
     //     if (Malade == 1)

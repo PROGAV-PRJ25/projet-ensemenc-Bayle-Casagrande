@@ -11,7 +11,7 @@ public class Iris : Plante
         TerrainPrefere = "Gleys";
         BesoinHumidite = 1;
         BesoinTemperature = 16;
-        SaisonDePlantaisonPrefere = 2;
+        SaisonDePlantaisonPrefere = "Ete";
         Taille = 1;
         Nom = "iris";
     }

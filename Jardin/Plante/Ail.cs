@@ -11,9 +11,9 @@ public class Ail : Plante
         TerrainPrefere = "Terre Brune";
         BesoinHumidite = 1;
         BesoinTemperature = 15;
-        SaisonDePlantaisonPrefere = 4;
+        SaisonDePlantaisonPrefere = "Hiver";
         Taille = 1;
-        Nom = "ail sauvage";
+        Nom = "ail";
     }
     public override string ToString()
     {

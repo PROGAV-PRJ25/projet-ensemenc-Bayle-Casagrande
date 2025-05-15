@@ -11,7 +11,7 @@ public class Jonc : Plante
         TerrainPrefere = "Gleys";
         BesoinHumidite = 1;
         BesoinTemperature = 13;
-        SaisonDePlantaisonPrefere = 3;
+        SaisonDePlantaisonPrefere = "Automne";
         Taille = 1;
         Nom = "jonc";
     }

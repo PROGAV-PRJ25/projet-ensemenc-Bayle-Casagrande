@@ -11,9 +11,9 @@ public class Bruyere : Plante
         TerrainPrefere = "Terre Brune";
         BesoinHumidite = 1;
         BesoinTemperature = 15;
-        SaisonDePlantaisonPrefere = 1;
+        SaisonDePlantaisonPrefere = "Printemps";
         Taille = 1;
-        Nom = "bruyère";
+        Nom = "bruyere";
     }
     public override string ToString()
     {
