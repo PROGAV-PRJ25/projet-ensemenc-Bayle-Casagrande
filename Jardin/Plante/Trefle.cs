@@ -11,9 +11,9 @@ public class Trefle : Plante
         TerrainPrefere = "Terre Brune";
         BesoinHumidite = 1;
         BesoinTemperature = 15;
-        SaisonDePlantaisonPrefere = 1;
+        SaisonDePlantaisonPrefere = "Printemps";
         Taille = 1;
-        Nom = "un trèfle";
+        Nom = "trefle";
     }
     public override string ToString()
     {

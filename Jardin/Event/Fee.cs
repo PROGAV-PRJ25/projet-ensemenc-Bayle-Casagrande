@@ -14,7 +14,6 @@ public class Fee : Evenement
         if (ComptMois<=Duree)
         {
             terEvent.Fertilite += 0.2;
-
         }
         else
         {

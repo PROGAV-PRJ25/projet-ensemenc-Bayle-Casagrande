@@ -11,7 +11,7 @@ public class Drosera : Plante
         TerrainPrefere = "Tourbiere";
         BesoinHumidite = 1;
         BesoinTemperature = 15;
-        SaisonDePlantaisonPrefere = 1;
+        SaisonDePlantaisonPrefere = "Printemps";
         Taille = 1;
         Nom = "drosera";
     }
