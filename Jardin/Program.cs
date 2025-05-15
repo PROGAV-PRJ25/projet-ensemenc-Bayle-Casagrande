@@ -563,7 +563,7 @@ void ActionJeter(Potager potager)
 }
 
 
-//-------------------quelques tests réaliser--------------
+//-------------------quelques tests réalisé--------------
 
 // %%%%%%%% test de croissance de plante %%%%%%%%
 //Trefle test = new Trefle();
