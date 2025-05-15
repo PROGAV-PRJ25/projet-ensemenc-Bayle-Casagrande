@@ -96,6 +96,60 @@ public abstract class Plante
             return affichage;
         }
     }
+
+
+    public void TomberMalade()
+    {
+        Random aleaMaladie = new Random();
+        int chanceMalade = aleaMaladie.Next(1, 11);
+        if (chanceMalade == 10)
+        {
+            this.VitesseDeCroissance -= 0.25;
+            Malade = 1;
+        }
+    }
+
+    public int MettreAJourCompteur()
+    {
+        int compteur = 5;
+        if (TerrainPlante != null)
+        {
+            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
+                {compteur -= 1;}
+            if (TerrainPlante.Type != TerrainPrefere)
+                {compteur -= 1;}
+            if ((TerrainPlante.Humidite > BesoinHumidite * 1.2) || (TerrainPlante.Humidite < BesoinHumidite * 0.2))
+                {compteur -= 1;}
+            if ((TerrainPlante.Temperature > BesoinTemperature * 1.2) || (TerrainPlante.Temperature < BesoinTemperature * 0.2))
+                {compteur -= 1;}
+            if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
+                {compteur -= 1;}
+        }
+        return compteur;
+    }
+
+// ----------affichage----------
+    public string AfficherProblemePlante()
+    {
+        string affichage = "";
+        if (TerrainPlante != null)
+        {
+            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
+                {affichage += "Cette plante se sent très sérrer sur ce terrain.\n";}
+            if (TerrainPlante.Humidite < BesoinHumidite * 0.2)
+                {affichage += "L'humidité est trop basse pour cette plante.\n";}
+            if (TerrainPlante.Humidite > BesoinHumidite * 1.2) 
+                {affichage += "L'humidité est trop élevé pour cette plante.\n";}
+            if (TerrainPlante.Temperature > BesoinTemperature * 1.2)
+                {affichage += "La température est trop élevé pour cette plante.\n";}
+            if (TerrainPlante.Temperature < BesoinTemperature * 0.2)
+                {affichage += "La température est trop basse pour cette plante.\n";}
+            //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne serait potentiellement pas bon, ne sont pas affiché 
+            //Cela prendre trop de place inutile dans la console, car le joueur ne peut rien y faire
+        }
+        return affichage;
+    }
+    
     public string[] AfficherPlante(Plante planteAfficher)
     {
         if (planteAfficher.Taille == 4)
@@ -134,6 +188,9 @@ public abstract class Plante
             return pousse;
         }
     }
+
+    public abstract void ChangerTaillePlante(double croissance);//défini pour chaque plante individuellement
+
     public void Pousser()
     {
         if (Taille==4)
@@ -156,58 +213,6 @@ public abstract class Plante
         
 
     }
-    public abstract void ChangerTaillePlante(double croissance);//défini pour chaque plante individuellement
-
-    public void TomberMalade()
-    {
-        Random aleaMaladie = new Random();
-        int chanceMalade = aleaMaladie.Next(1, 11);
-        if (chanceMalade == 10)
-        {
-            this.VitesseDeCroissance -= 0.25;
-            Malade = 1;
-        }
-    }
-
-    public int MettreAJourCompteur()
-    {
-        int compteur = 5;
-        if (TerrainPlante != null)
-        {
-            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
-                {compteur -= 1;}
-            if (TerrainPlante.Type != TerrainPrefere)
-                {compteur -= 1;}
-            if ((TerrainPlante.Humidite > BesoinHumidite * 1.2) || (TerrainPlante.Humidite < BesoinHumidite * 0.2))
-                {compteur -= 1;}
-            if ((TerrainPlante.Temperature > BesoinTemperature * 1.2) || (TerrainPlante.Temperature < BesoinTemperature * 0.2))
-                {compteur -= 1;}
-            if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
-                {compteur -= 1;}
-        }
-        return compteur;
-    }
-    public string AfficherProblemePlante()
-    {
-        string affichage = "";
-        if (TerrainPlante != null)
-        {
-            if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
-                {affichage += "Cette plante se sent très sérrer sur ce terrain.\n";}
-            if (TerrainPlante.Humidite < BesoinHumidite * 0.2)
-                {affichage += "L'humidité est trop basse pour cette plante.\n";}
-            if (TerrainPlante.Humidite > BesoinHumidite * 1.2) 
-                {affichage += "L'humidité est trop élevé pour cette plante.\n";}
-            if (TerrainPlante.Temperature > BesoinTemperature * 1.2)
-                {affichage += "La température est trop élevé pour cette plante.\n";}
-            if (TerrainPlante.Temperature < BesoinTemperature * 0.2)
-                {affichage += "La température est trop basse pour cette plante.\n";}
-            //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne serait potentiellement pas bon, ne sont pas affiché 
-            //Cela prendre trop de place inutile dans la console, car le joueur ne peut rien y faire
-        }
-        return affichage;
-    }
-    
     
     // public void ChangerCouleur()
     // {

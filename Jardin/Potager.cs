@@ -167,7 +167,6 @@ public class Potager
             Console.WriteLine("Mais certaines plantes ont perdu de l'espérance de vie...");
         }
     }
-
     public void ChangerSaison()
     {
         
@@ -205,7 +204,7 @@ public class Potager
         }
     }
 
-    
+
 //-------------------fonctions utiliser par le mode urgence--------------
     public string AfficherPotagerDynamique(int taille, string[,] grille)
     {
