@@ -5,7 +5,7 @@ public abstract class Plante
     //---!!!!!attention mettre en protected et mettre la classe en abstract
     public string Nature { get; set; }
     public string Nom { get; set; }
-    public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 ??
+    public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 
     public int esperanceDeVie;
     public int EsperanceDeVie // Si cette éspérence de vie est atteinte, la plante est déclaré morte
     {
