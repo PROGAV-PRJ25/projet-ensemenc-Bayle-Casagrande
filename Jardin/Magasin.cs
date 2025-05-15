@@ -30,7 +30,7 @@ public class Magasin
             affichage += "------ Vous avez déjà des graines : ------ ";
             foreach(Plante p in GrainesAchetes)
             {
-                affichage += $"- {p.Nom}";
+                affichage += $"- {p.Nom} ";
             }
             affichage += " \n";
         }
@@ -39,7 +39,7 @@ public class Magasin
             affichage += "------ Vous avez récolté : ------";
             foreach(Plante p in PlantesRecoltes)
             {
-                affichage += $"- {p.Nom}, prix de vente à {p.PrixDeVente} pièces";
+                affichage += $"- {p.Nom}, prix de vente à {p.PrixDeVente} pièces ";
             }
             affichage += " \n";
         }
@@ -49,13 +49,24 @@ public class Magasin
         return affichage;
     }
     
-    public string Vendre(int numero)
+    public string Vendre()
     {
-        Plante planteAVendre = PlantesRecoltes.FirstOrDefault(p => p.Numero == numero);
-        if (planteAVendre == null)
+        string affichage="";
+        Console.WriteLine("Voici vos possibilités de ventes :");
+        int i =1;
+        foreach (Plante p in PlantesRecoltes)
         {
-            return $"Aucune plante trouvée avec le numéro {numero}.";
+            affichage+=$"- {i} : {p.Nom} : {p.PrixDeVente} pièces \n";
+            i++;
         }
+        Console.WriteLine(affichage);
+        Console.WriteLine("\nQuelle plante ? Donnez son numéro\n");
+        int numeroChoisie = Convert.ToInt32(Console.ReadLine());
+        if (numeroChoisie<1  || numeroChoisie>PlantesRecoltes.Count)
+        {
+            return $"Le numéro n'est pas valide.";
+        }
+        Plante planteAVendre = PlantesRecoltes[numeroChoisie];
         if (planteAVendre.Taille==4 && planteAVendre.Mort==0)
         {
             ArgentJoueur += planteAVendre.PrixDeVente;
@@ -77,29 +88,73 @@ public class Magasin
             existence= true;
             return planteAAcheter;
         }
+        if (planteAcheter == "ail")
+        {
+            Ail planteAAcheter = new Ail();
+            existence= true;
+            return planteAAcheter;
+        }
+        if (planteAcheter == "bruyere")
+        {
+            Bruyere planteAAcheter = new Bruyere();
+            existence= true;
+            return planteAAcheter;
+        }
+        if (planteAcheter == "bruyere")
+        {
+            Bruyere planteAAcheter = new Bruyere();
+            existence= true;
+            return planteAAcheter;
+        }
+        if (planteAcheter == "drosera")
+        {
+            Drosera planteAAcheter = new Drosera();
+            existence= true;
+            return planteAAcheter;
+        }
+        if (planteAcheter == "iris")
+        {
+            Iris planteAAcheter = new Iris();
+            existence= true;
+            return planteAAcheter;
+        }
+        if (planteAcheter == "jonc")
+        {
+            Jonc planteAAcheter = new Jonc();
+            existence= true;
+            return planteAAcheter;
+        }
+        if (planteAcheter == "trefle")
+        {
+            Trefle planteAAcheter = new Trefle();
+            existence= true;
+            return planteAAcheter;
+        }
         else
         {
-            Plante planteAAcheter = new Trefle();
+            Plante planteAAcheter = new Trefle(); //Ne sert à rien juste à retourner sua
             existence = false;
-            return planteAAcheter;
+            return null;
         }
 
     }
 
     
-    public string Acheter(string planteAcheter)
+    public string Acheter()
     {
         string affichage="";
         Console.WriteLine("Voici vos possibilités d'achats :");
         foreach (Plante p in PlantesWiki)
         {
-            affichage+=$"-{p.Nom}";
+            affichage+=$"- {p.Nom} : {p.PrixAchatGraine} pièces\n";
         }
         Console.WriteLine(affichage);
         
+        Console.WriteLine($"\nQuelle plante ? Vous avez {ArgentJoueur} pièces.\n");
+        string planteChoisie = Convert.ToString(Console.ReadLine()!);
+        
         bool existence = false;
-        Plante planteAAcheter = VerifierExistancePlante(planteAcheter, ref existence);
-        Console.WriteLine(planteAAcheter);
+        Plante? planteAAcheter = VerifierExistancePlante(planteChoisie, ref existence);
         
         if (existence==true)
         {
@@ -123,7 +178,7 @@ public class Magasin
     public void AfficherWiki(Potager potager)
     {
         Console.WriteLine("\nBienvenue dans le wiki !");
-        Console.WriteLine("1-Terrains\n2-Plantes\n3-Sortir\n");
+        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Sortir\n");
 
         string choix = Console.ReadLine()!;
 
@@ -138,7 +193,7 @@ public class Magasin
         {
             foreach (Terrain t in potager.Terrains)
             {
-                affichage += $"{t.Type} - {t.Humidite} Humidité - {t.Temperature} Température\n";
+                affichage += $"{t.Type} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C \n";
             } 
             Console.WriteLine(affichage);
         }
@@ -146,7 +201,7 @@ public class Magasin
         {
             foreach (Plante p in PlantesWiki)
             {
-                affichage += $"- {p.Nom} - {p.EsperanceDeVie} mois Espérance de vie - {p.TerrainPrefere} terrain préféré - {p.SaisonDePlantaisonPrefere} saison préférée - {p.PrixDeVente} prix de vente - {p.PrixAchatGraine} prix d'achat\n";
+                affichage += $"{p.Nom} - Espérance de vie : {p.EsperanceDeVie} mois  - Terrain préféré : {p.TerrainPrefere} - Saison préférée : {p.SaisonDePlantaisonPrefere}  - Prix de vente : {p.PrixDeVente} pièces - Prix d'achat : {p.PrixAchatGraine} pièces \n";
             }
             Console.WriteLine(affichage);
         }

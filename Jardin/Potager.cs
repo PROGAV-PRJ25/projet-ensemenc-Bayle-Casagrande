@@ -33,7 +33,7 @@ public class Potager
         return "Le terrain a été ajouté au potager.";
     }
 
-    public void Urgence(Terrain terrain, string type)
+    public void FaireUrgence(Terrain terrain, string type)
     {
         int taille = terrain.Capacite;
         string[,] grille = CreerPotagerDynamique(taille, terrain.Plantation.Count);
@@ -167,8 +167,45 @@ public class Potager
             Console.WriteLine("Mais certaines plantes ont perdu de l'espérance de vie...");
         }
     }
+    public void ChangerSaison()
+    {
+        
+        if (this.Saison==1)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite -= 30;
+                terrain.Temperature +=11;
+            }
+        }
+        else if (this.Saison==2)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite -=20;
+                terrain.Temperature += 5;
+            }
+        }
+        else if (this.Saison==3)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite += 40;
+                terrain.Temperature -=7;
+            }
+        }
+        else if (this.Saison==4)
+        {
+            foreach (Terrain terrain in this.Terrains)
+            {
+                terrain.Humidite +=10;
+                terrain.Temperature -=9;
+            }
+        }
+    }
 
-// Fonction pour Urgence()
+
+//-------------------fonctions utiliser par le mode urgence--------------
     public string AfficherPotagerDynamique(int taille, string[,] grille)
     {
         string retour = "";
@@ -234,40 +271,4 @@ public class Potager
         }
     }
 
-    public void ChangerSaison()
-    {
-        
-        if (this.Saison==1)
-        {
-            foreach (Terrain terrain in this.Terrains)
-            {
-                terrain.Humidite -= 30;
-                terrain.Temperature +=11;
-            }
-        }
-        else if (this.Saison==2)
-        {
-            foreach (Terrain terrain in this.Terrains)
-            {
-                terrain.Humidite -=20;
-                terrain.Temperature += 5;
-            }
-        }
-        else if (this.Saison==3)
-        {
-            foreach (Terrain terrain in this.Terrains)
-            {
-                terrain.Humidite += 40;
-                terrain.Temperature -=7;
-            }
-        }
-        else if (this.Saison==4)
-        {
-            foreach (Terrain terrain in this.Terrains)
-            {
-                terrain.Humidite +=10;
-                terrain.Temperature -=9;
-            }
-        }
-    }
 }

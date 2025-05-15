@@ -2,7 +2,6 @@ public abstract class Terrain
 {
     public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
     public int NombreDePlante {get; set;}
-    static int numerotation = 1;
     public List<Plante> Plantation {get; set;}
     public string Type {get; set;}
 
@@ -87,6 +86,10 @@ public abstract class Terrain
     public override string ToString()
     {
         string affichage = "";
+        foreach (Evenement e in EventSurTerrain)
+        {
+            affichage += e.ToString();
+        }
         if (Plantation.Count ==0)
         {
             return "Vous n'avez pas encore de plante dans ce terrain. \n";
@@ -98,7 +101,7 @@ public abstract class Terrain
         }
         return affichage;
     }
-    public string Semer(Plante nouvellePlante)
+    public string Semer(Plante nouvellePlante, int temps)
     {
         if (NombreDePlante == Capacite)
         {
@@ -106,14 +109,19 @@ public abstract class Terrain
         }
         else 
         {
+            string affichage ="\nLa graine a été semé dans ce terrain.";
             NombreDePlante +=1;
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
             nouvellePlante.Age =0;
-            nouvellePlante.Numero= numerotation;
-            numerotation+=1;
-
-            return "\nLa graine a été semé.";
+            nouvellePlante.SaisonDePlantaison=CalculerSaisonPlantaison(temps);
+            if (nouvellePlante.TerrainPlante.Type != nouvellePlante.TerrainPrefere)
+                {affichage += "Mais cette graine n'a pas été semé dans son son terrain préféré.\n";}
+            if (nouvellePlante.TerrainPlante.Capacite - nouvellePlante.TerrainPlante.NombreDePlante < nouvellePlante.PlaceNecessaire)
+                {affichage += "Cette graine se sent très sérrer sur ce terrain.\n";}
+            if (nouvellePlante.SaisonDePlantaison != nouvellePlante.SaisonDePlantaisonPrefere)
+                {affichage += "Cette graine n'a pas été planté à la bonne saison.\n";}
+            return affichage;
         }
     }
     public void ChangerMeteo()
@@ -143,7 +151,6 @@ public abstract class Terrain
         Random alea = new Random();
         int chance = alea.Next(1,11);
         string affichage ="";
-
         if (chance==1)
         {
             Evenement fee = new Fee();
@@ -160,8 +167,7 @@ public abstract class Terrain
             this.EventSurTerrain.Add(insecte);
             affichage = insecte.ToString();
             affichage += $"{Type} !!";
-            
-             //au bout de 3 mois l'enlever, descend la fertilite du terrain
+            //au bout de 3 mois l'enlever, descend la fertilite du terrain
             //faire une fonction pour l'enlever
         }
         else if (chance==3)
@@ -172,9 +178,29 @@ public abstract class Terrain
             this.EventSurTerrain.Add(herbe);
             affichage = herbe.ToString();
             affichage += $"{Type} !!";
-
             //faire une fonction pour l'enlever
         }
     }
 
+public string CalculerSaisonPlantaison(int temps)
+{
+    int mois = temps%12;
+    if (mois<4)
+    {
+        return "Printemps";
+    }
+    else if (mois<8)
+    {
+        return "Ete";
+    }
+    else if (mois<12)
+    {
+        return "Automne";
+    }
+    else 
+    {
+        return "Hiver";
+    }
+    
+}
 }
