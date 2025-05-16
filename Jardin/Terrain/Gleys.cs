@@ -8,5 +8,10 @@ public class Gleys: Terrain
         Temperature = 15;
         Capacite = 10;
     }
+        public override string Semer(Plante nouvellePlante, int temps)
+    {
+        nouvellePlante.Humidite=90;
+        return base.Semer();
 
+    }
 }

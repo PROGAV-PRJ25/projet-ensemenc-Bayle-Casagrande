@@ -32,13 +32,10 @@ public abstract class Plante
     {
         get
         {
-            //return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0;
-            return mort;
+            return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0;
         }
-        set //pour test à enlever apres
-        {
-            mort = value;
-            Console.WriteLine($"{mort}");
+        set 
+        {;
         }
     }
 

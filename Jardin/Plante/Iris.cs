@@ -9,7 +9,7 @@ public class Iris : Plante
         PrixAchatGraine = 4;
         PlaceNecessaire=2;
         TerrainPrefere = "Gleys";
-        BesoinHumidite = 1;
+        BesoinHumidite = 60;
         BesoinTemperature = 16;
         SaisonDePlantaisonPrefere = "Ete";
         Taille = 1;

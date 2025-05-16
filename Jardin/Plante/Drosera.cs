@@ -9,7 +9,7 @@ public class Drosera : Plante
         PrixAchatGraine = 3;
         PlaceNecessaire=2;
         TerrainPrefere = "Tourbiere";
-        BesoinHumidite = 1;
+        BesoinHumidite = 90;
         BesoinTemperature = 15;
         SaisonDePlantaisonPrefere = "Printemps";
         Taille = 1;
