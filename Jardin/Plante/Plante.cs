@@ -64,7 +64,7 @@ public abstract class Plante
             // afficher quand meme la plante? 
             // la mettre en couleur ?
             // Console.ResetColor();
-            return $"La plante : {Nom} est morte vous devez la jeter.\n";
+            return $"- La plante {Nom} est morte vous devez la jeter.\n";
         }
         else
         {
@@ -115,9 +115,9 @@ public abstract class Plante
                 {compteur -= 1;}
             if (TerrainPlante.Type != TerrainPrefere)
                 {compteur -= 1;}
-            if ((TerrainPlante.Humidite > BesoinHumidite * 1.2) || (TerrainPlante.Humidite < BesoinHumidite * 0.2))
+            if ((TerrainPlante.Humidite > BesoinHumidite * 1.4) || (TerrainPlante.Humidite < BesoinHumidite * 0.4)) //Les plantes accepte une marge de 40%
                 {compteur -= 1;}
-            if ((TerrainPlante.Temperature > BesoinTemperature * 1.2) || (TerrainPlante.Temperature < BesoinTemperature * 0.2))
+            if ((TerrainPlante.Temperature > BesoinTemperature * 1.4) || (TerrainPlante.Temperature < BesoinTemperature * 0.4)) //Les plantes accepte une marge de 40%
                 {compteur -= 1;}
             if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
                 {compteur -= 1;}
@@ -133,13 +133,13 @@ public abstract class Plante
         {
             if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
                 {affichage += "Cette plante se sent très sérrer sur ce terrain.\n";}
-            if (TerrainPlante.Humidite < BesoinHumidite * 0.2)
+            if (TerrainPlante.Humidite < BesoinHumidite * 0.4)
                 {affichage += "L'humidité est trop basse pour cette plante.\n";}
-            if (TerrainPlante.Humidite > BesoinHumidite * 1.2) 
+            if (TerrainPlante.Humidite > BesoinHumidite * 1.4) 
                 {affichage += "L'humidité est trop élevé pour cette plante.\n";}
-            if (TerrainPlante.Temperature > BesoinTemperature * 1.2)
+            if (TerrainPlante.Temperature > BesoinTemperature * 1.4)
                 {affichage += "La température est trop élevé pour cette plante.\n";}
-            if (TerrainPlante.Temperature < BesoinTemperature * 0.2)
+            if (TerrainPlante.Temperature < BesoinTemperature * 0.4)
                 {affichage += "La température est trop basse pour cette plante.\n";}
             //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne serait potentiellement pas bon, ne sont pas affiché 
             //Cela prendre trop de place inutile dans la console, car le joueur ne peut rien y faire
@@ -190,10 +190,7 @@ public abstract class Plante
 
     public void Pousser()
     {
-        if (Taille==4)
-        {
-            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
-        }
+
 
         if (TerrainPlante.Acidite!=true)
         {
@@ -205,6 +202,11 @@ public abstract class Plante
         if (Hydratation <=0)
         {
             Mort = 1;
+        }
+        
+        if (Taille==4)
+        {
+            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
         }
     
         

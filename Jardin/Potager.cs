@@ -14,7 +14,7 @@ public class Potager
     }
     public override string ToString()
     {
-        string affichage ="\n\n-----------------Vos terrains ------------------\n";
+        string affichage ="\n\n----------------- Vos terrains ------------------\n";
         int i = 1 ;
         foreach (Terrain t in Terrains)
         {
@@ -52,7 +52,7 @@ public class Potager
             Console.WriteLine($"URGENCE : Une souris se déplace dans le terrain {terrain.Type} ! Elle mange toutes vos plantes.");
             Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
             Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(700);
             while(!(actionJoueur=="chasser"&&reussite==1))
             {
                 
@@ -163,7 +163,7 @@ public class Potager
                     }
                 }
             }
-            Console.WriteLine("Bravo ! Vous avez installer la bache.");
+            Console.WriteLine("Bravo ! Vous avez installé la bache.");
             Console.WriteLine("Mais certaines plantes ont perdu de l'espérance de vie...");
         }
     }
