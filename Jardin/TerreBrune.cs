@@ -2,7 +2,7 @@ public class TerreBrune: Terrain
 {
 
 
-    public TerreBrune(int placeDisponible) : base (placeDisponible)
+    public TerreBrune() 
     {
         Type = "Terre Brune";
         Humidite = 1;

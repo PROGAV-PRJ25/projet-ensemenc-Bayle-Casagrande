@@ -77,11 +77,7 @@ public abstract class Terrain
     public Potager PotagerTerrain {get; set;}
     public string Meteo {get; set;}
 
-
-
-
-
-    public Terrain(int placeDisponible)
+    public Terrain()
     {
         NombreDePlante = 0;
         Plantation = new List<Plante>();
@@ -193,25 +189,25 @@ public abstract class Terrain
         }
     }
 
-public string CalculerSaisonPlantaison(int temps)
-{
-    int mois = temps%12;
-    if (mois<4)
+    public string CalculerSaisonPlantaison(int temps)
     {
-        return "Printemps";
+        int mois = temps%12;
+        if (mois<4)
+        {
+            return "Printemps";
+        }
+        else if (mois<8)
+        {
+            return "Ete";
+        }
+        else if (mois<12)
+        {
+            return "Automne";
+        }
+        else 
+        {
+            return "Hiver";
+        }
+        
     }
-    else if (mois<8)
-    {
-        return "Ete";
-    }
-    else if (mois<12)
-    {
-        return "Automne";
-    }
-    else 
-    {
-        return "Hiver";
-    }
-    
-}
 }
