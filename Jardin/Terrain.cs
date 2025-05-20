@@ -6,11 +6,11 @@ public abstract class Terrain
     public string Type {get; set;}
 
     public List<Evenement> EventSurTerrain {get; set;}
-    public int humidite;
+    protected int humidite = 50;
     public int Humidite // En pourcentage
     {
-        set {return humidite;}
-        get{
+        get { return humidite;}
+        set{
                 humidite = value;
                 if(humidite < 0) 
                 {
@@ -20,7 +20,6 @@ public abstract class Terrain
                 {
                     humidite = 100;
                 }
-                return humidite;
             }
     }
 
