@@ -178,7 +178,7 @@ public class Magasin
     public void AfficherWiki(Potager potager)
     {
         Console.WriteLine("\nBienvenue dans le wiki !");
-        Console.WriteLine("1 - Terrains\n2 - Plantes\3 - Météo\n4 - Sortir\n");
+        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Météo\n4 - Sortir\n");
 
         string choix = Console.ReadLine()!;
 
@@ -193,7 +193,7 @@ public class Magasin
         {
             foreach (Terrain t in potager.Terrains)
             {
-                affichage += $"{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place :  - Meteo :  \n";
+                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite-t.NombreDePlante} - Meteo : {t.Meteo}  \n";
             } 
             Console.WriteLine(affichage);
         }
@@ -207,7 +207,7 @@ public class Magasin
         }
         else if (choix=="3")
         {
-            affichage = ""
+            Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
         }
 
     }
