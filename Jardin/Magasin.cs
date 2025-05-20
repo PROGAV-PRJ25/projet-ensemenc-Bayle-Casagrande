@@ -189,15 +189,15 @@ public class Magasin
         }
 
         string affichage = "";
-        if (choix=="1")
+        if (choix == "1")
         {
             foreach (Terrain t in potager.Terrains)
             {
-                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite-t.NombreDePlante} - Meteo : {t.Meteo}  \n";
-            } 
+                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo}  \n";
+            }
             Console.WriteLine(affichage);
         }
-        else if (choix=="2")
+        else if (choix == "2")
         {
             foreach (Plante p in PlantesWiki)
             {
@@ -205,9 +205,11 @@ public class Magasin
             }
             Console.WriteLine(affichage);
         }
-        else if (choix=="3")
+        else if (choix == "3")
         {
             Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
+
+
         }
 
     }
