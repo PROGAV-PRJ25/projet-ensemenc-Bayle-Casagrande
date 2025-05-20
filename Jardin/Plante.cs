@@ -52,7 +52,6 @@ public abstract class Plante
     public Plante()
     {
         Hydratation = 80;
-
     }
 
     //----------méthodes---------
