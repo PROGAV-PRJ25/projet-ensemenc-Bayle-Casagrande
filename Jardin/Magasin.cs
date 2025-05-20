@@ -178,11 +178,11 @@ public class Magasin
     public void AfficherWiki(Potager potager)
     {
         Console.WriteLine("\nBienvenue dans le wiki !");
-        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Sortir\n");
+        Console.WriteLine("1 - Terrains\n2 - Plantes\3 - Météo\n4 - Sortir\n");
 
         string choix = Console.ReadLine()!;
 
-        while ((choix!="1")&&(choix!="2")&&(choix!="3"))
+        while ((choix!="1")&&(choix!="2")&&(choix!="3")&&(choix!="4"))
         {
             Console.WriteLine("La saisie n'est pas valide, veuillez recommencer");
             choix = Console.ReadLine()!;
@@ -204,6 +204,10 @@ public class Magasin
                 affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces \n";
             }
             Console.WriteLine(affichage);
+        }
+        else if (choix=="3")
+        {
+            affichage = ""
         }
 
     }

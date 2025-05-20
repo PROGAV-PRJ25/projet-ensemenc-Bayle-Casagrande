@@ -127,20 +127,23 @@ public abstract class Terrain
     public void ChangerMeteo()
     {
         Random alea = new Random();
-        int meteo = alea.Next(1,4);
+        int nbAlea = alea.Next(1,4);
 
-        if (meteo==1) //soleil
+        if (nbAlea==1) //soleil
         {
+            this.Meteo = "Soleil"
             this.Humidite -=20;
             this.Temperature += 5;
         }
-        else if (meteo==2) //pluie
+        else if (nbAlea==2) //pluie
         {
+            this.Meteo = "Pluie"
             this.Humidite +=30;
             this.Temperature -= 5;
         }
         else if (meteo==3) //neige
         {
+            this.Meteo = ""
             this.Humidite +=25;
             this.Temperature -= 15;
         }
