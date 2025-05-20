@@ -9,9 +9,8 @@ public abstract class Terrain
     public int humidite;
     public int Humidite // En pourcentage
     {
-        set {return humidite;}
-        get{
-                humidite = value;
+        get {return humidite;}
+        set{
                 if(humidite < 0) 
                 {
                     humidite = 0;
@@ -20,7 +19,7 @@ public abstract class Terrain
                 {
                     humidite = 100;
                 }
-                return humidite;
+                else {humidite = value;}
             }
     }
 
@@ -86,18 +85,16 @@ public abstract class Terrain
     }
     public override string ToString()
     {
-        
         string affichage = "";
         foreach (Evenement e in EventSurTerrain)
         {
             affichage += e.ToString();
-            Console.WriteLine(e.ToString());
         }
         if (Plantation.Count ==0)
         {
             return "Vous n'avez pas encore de plante dans ce terrain. \n";
         }
-        affichage +="Dans ce terrain vous avez :  \n";
+        affichage ="Dans ce terrain vous avez :  \n";
         foreach (var plante in Plantation)
         {
             affichage += plante.ToString();

@@ -240,12 +240,15 @@ public class Potager
             int nombreAleatoire = random.Next(0,taille/2);
             colonne = nombreAleatoire;
             grille [colonne, ligne] = "​🌱​";
-            while (colonne == nombreAleatoire)
+            while (colonne == nombreAleatoire) //il ne faut pas que la deuxieme plante soit placé au meme endroit
             {
                 nombreAleatoire = random.Next(0,taille/2);
             }
-            colonne = nombreAleatoire;
-            grille [colonne, ligne] = "🌱​";
+            if ((i+2)<nbPlante) // dans le cas ou le nbPlante est impair
+            {
+                colonne = nombreAleatoire;
+                grille [colonne, ligne] = "🌱​";
+            }
             ligne +=1;
         }
         return grille;
