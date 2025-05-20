@@ -1,11 +1,16 @@
 public abstract class Terrain
 {
-    public int Capacite {get; set;} // Le jardin a une certaine capacité qui ne peut pas être dépasser
-    public int NombreDePlante {get; set;}
-    public List<Plante> Plantation {get; set;}
-    public string Type {get; set;}
+    //-------------accesseurs et attributs------------
+    
+    //----caractéristiques du terrain-----
+    public string Type { get; set; }
+    public int Capacite { get; set; } // Le jardin a une certaine capacité qui ne peut pas être dépassée
+    public int NombreDePlante {get; set;} //Nb de plantes plantées dans le terrain
+    public List<Plante> Plantation {get; set;} //Liste de toutes les plantes présentes sur le terrain
+    public Potager PotagerTerrain {get; set;} //Potager auquel il appartient
+    public List<Evenement> EventSurTerrain { get; set; } //liste des event sur le terrain
 
-    public List<Evenement> EventSurTerrain {get; set;}
+    //-----conditions sur le terrain--------
     protected int humidite = 50;
     public int Humidite // En pourcentage
     {
@@ -23,8 +28,7 @@ public abstract class Terrain
             }
     }
 
-    public double fertilite = 1; //influence croissance du terrain entre 0 et 1,5
-
+    protected double fertilite = 1; //influence la croissance des plantes du terrain entre 0 et 1,5
     public double Fertilite
     {
         get
@@ -44,7 +48,8 @@ public abstract class Terrain
                 else {fertilite = value;}
         }
     }
-    public bool acidite = false; //les plantes ne poussent plus
+
+    protected bool acidite = false; //Si True, les plantes ne poussent plus
     public bool Acidite
     {
         get
@@ -57,26 +62,31 @@ public abstract class Terrain
         }
     }
 
-    public int temperature;
-    public int Temperature 
+    protected int temperature;
+    public int Temperature //comprise entre 0 et 35
     {
         get {return temperature;}
         set{
-                if(temperature < 0) 
+                if (temperature < 0)
                 {
                     temperature = 0;
                 }
+                else if (temperature > 35)
+                {
+                    temperature = 35;  
+                }
                 else
                 {
-                    temperature= value;
+                    temperature = value;
                 }
             }
     }
 
-    public bool Event {get; set;}
-    public Potager PotagerTerrain {get; set;}
+    public bool Event {get; set;} //Si True, un event a lieu sur le terrain
     public string Meteo {get; set;}
 
+
+    //--------------Constructeur-----------
     public Terrain()
     {
         NombreDePlante = 0;
@@ -85,80 +95,94 @@ public abstract class Terrain
         Event = false;
         EventSurTerrain = new List<Evenement>();
     }
-    public override string ToString()
+    
+    //--------------affichage terrain----------------
+    public override string ToString() //pour afficher les plantes et les events du terrain
     {
         string affichage = "";
-        foreach (Evenement e in EventSurTerrain)
+
+        foreach (Evenement e in EventSurTerrain) //affichage des events
         {
             affichage += e.ToString();
         }
-        if (Plantation.Count ==0)
+
+        if (Plantation.Count == 0) //si aucune plante dans terrain
         {
             return "Vous n'avez pas encore de plante dans ce terrain. \n";
         }
-        affichage ="Dans ce terrain vous avez :  \n";
-        foreach (var plante in Plantation)
+        affichage = "Dans ce terrain vous avez :  \n";
+
+        foreach (var plante in Plantation) //sinon affichage de chaque plante avec leur méthode
         {
             affichage += plante.ToString();
         }
         return affichage;
     }
+    
+    //-------------méthodes utiles au terrain---------------
     public virtual string Semer(Plante nouvellePlante, int temps)
     {
         if (NombreDePlante == Capacite)
         {
             return "\nCe terrain n'a plus de place pour accueillir de nouvelles plantes.\n";
         }
-        else 
+        else
         {
-            string affichage ="\nLa graine a été semée dans ce terrain.";
-            NombreDePlante +=1;
-            Plantation.Add(nouvellePlante);
-            nouvellePlante.TerrainPlante=this;
-            nouvellePlante.Age =0;
-            nouvellePlante.SaisonDePlantaison=CalculerSaisonPlantaison(temps);
+            string affichage = "\nLa graine a été semée dans ce terrain.";
+            NombreDePlante += 1;
+            Plantation.Add(nouvellePlante); //ajout de la new plante à la liste du terrain
+
+            //initialisation des attributs pour la plante qui dépendent du terrain et du temps
+            nouvellePlante.TerrainPlante = this; 
+            nouvellePlante.Age = 0;
+            nouvellePlante.SaisonDePlantaison = CalculerSaisonPlantaison(temps);
+
+            //affichage des avertissements si les conditions de la plante ne sont pas respectées
             if (nouvellePlante.TerrainPlante.Type != nouvellePlante.TerrainPrefere)
-                {affichage += "\nMais cette graine n'a pas été semée dans son terrain préféré...\n";}
+            { affichage += "\nMais cette graine n'a pas été semée dans son terrain préféré...\n"; }
             if (nouvellePlante.TerrainPlante.Capacite - nouvellePlante.TerrainPlante.NombreDePlante < nouvellePlante.PlaceNecessaire)
-                {affichage += "\nCette graine se sent très serrée sur ce terrain...\n";}
+            { affichage += "\nCette graine se sent très serrée sur ce terrain...\n"; }
             if (nouvellePlante.SaisonDePlantaison != nouvellePlante.SaisonDePlantaisonPrefere)
-                {affichage += "\nCette graine n'a pas été plantée à la bonne saison...\n";}
+            { affichage += "\nCette graine n'a pas été plantée à la bonne saison...\n"; }
+
             return affichage;
         }
     }
-    public void ChangerMeteo() //totem bool if false déclenchement aléa
+    
+    public void ChangerMeteo() //change de manière aléatoire la météo sur le terrain
     {
         Random alea = new Random();
-        int nbAlea = alea.Next(1,4);
+        int nbAlea = alea.Next(1, 4);
 
-        if (nbAlea==1) //soleil
+        if (nbAlea == 1) //soleil
         {
             this.Meteo = "Soleil";
             this.Temperature += 10;
         }
-        else if (nbAlea==2) //pluie
+        else if (nbAlea == 2) //pluie
         {
             this.Meteo = "Pluie";
-            this.Humidite +=30;
+            this.Humidite += 30;
         }
-        else if (nbAlea==3) //neige
+        else if (nbAlea == 3) //neige
         {
             this.Meteo = "Neige";
             this.Temperature -= 15;
         }
-        else if (nbAlea==4)
+        else if (nbAlea == 4)
         {
             this.Meteo = "Vent";
             this.Humidite -= 20;
         }
     }
 
-    public void DeclencherEvent()
+    public void DeclencherEvent() //déclenche de manière aléatoire un event sur le terrain si il n'y a pas d'event en cours (càd Event=true)
     {
         Random alea = new Random();
-        int chance = alea.Next(1,11);
+        int chance = alea.Next(1,11); //environ 1 chance sur 3 de tomber sur un des 3 types d'event
         string affichage ="";
-        if (chance==1)
+        
+        if (chance == 1)
         {
             Evenement fee = new Fee();
             Event = true;
@@ -166,48 +190,44 @@ public abstract class Terrain
             affichage = fee.ToString();
             affichage += $"{Type} !!";
         }
-        else if (chance==2)
+        else if (chance == 2)
         {
             Evenement insecte = new Insecte();
-            //insecte.Action()
             Event = true;
             this.EventSurTerrain.Add(insecte);
             affichage = insecte.ToString();
             affichage += $"{Type} !!";
-            //au bout de 3 mois l'enlever, descend la fertilite du terrain
-            //faire une fonction pour l'enlever
         }
-        else if (chance==3)
+        else if (chance == 3)
         {
             Evenement herbe = new Herbe();
-            //herbe action //permanent a part si désherbage, met l'acidite à true donc aucune croissance
             Event = true;
             this.EventSurTerrain.Add(herbe);
             affichage = herbe.ToString();
             affichage += $"{Type} !!";
-            //faire une fonction pour l'enlever
         }
     }
 
-    public string CalculerSaisonPlantaison(int temps)
+    public string CalculerSaisonPlantaison(int temps) //calcul la saison et renvoie sa valeur
     {
-        int mois = temps%12;
-        if (mois<4)
+        int mois = temps % 12;
+
+        if (mois < 4)
         {
             return "Printemps";
         }
-        else if (mois<8)
+        else if (mois < 8)
         {
             return "Ete";
         }
-        else if (mois<12)
+        else if (mois < 12)
         {
             return "Automne";
         }
-        else 
+        else
         {
             return "Hiver";
         }
-        
+
     }
 }
