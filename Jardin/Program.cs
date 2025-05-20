@@ -52,15 +52,15 @@ void PresenterIntroduction(ref int nbTour)
     Console.WriteLine("🇮🇪 Bienvenu dans le jeu du potager Irlandais ! 🇮🇪\n");
     Console.WriteLine("Règles : ");
     Console.WriteLine("");
-    Console.WriteLine("\nDans ce jeu vous pouvez acheter des graines, les planter, puis les faire grandir. \nVous pourrez alors ensuite les récolter et les vendre.");
+    Console.WriteLine("\nDans ce jeu vous pouvez acheter des graines, les planter, puis les faire grandir. \nVous pourrez alors les récolter et les vendre.");
     Console.WriteLine("");
-    Console.WriteLine("Chaque plante as des besoins spécifiques. \nTels qu'une saison de plantaison préféré, un terrain préféré.\nMais aussi une température et une humidité qui les maintiennent en vie.\nElles ont aussi besoin d'une certaine place pour grandir serainement.\n"); 
+    Console.WriteLine("Chaque plante a des besoins spécifiques. \nTels qu'une saison de plantaison préféré, un terrain préféré.\nMais aussi une température et une humidité qui les maintiennent en vie.\nElles ont aussi besoin d'une certaine place pour grandir sereinement.\n"); 
     Console.WriteLine("");
-    Console.WriteLine("Attention ! Des évenements spécials peuvent avoir lieu sur vos terrains.\nTels que des fée 🧚 qui augmenteront la fertilité, mais aussi des insectes 🪲  et de la mauvaise herbe 🌿 qui empécheront la croissance de vos plantes.\n");
+    Console.WriteLine("Attention ! Des évènements spéciaux peuvent avoir lieu sur vos terrains.\nTels que des fées 🧚 qui augmenteront la fertilité, mais aussi des insectes 🪲 et de la mauvaise herbe 🌿 qui ralentiront la croissance de vos plantes.\n");
     Console.WriteLine("");
-    Console.WriteLine(" 🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudras alors écrire vite le mot indiquer pour protéger vos plantes.\nLes souris 🐁 mange les plantes, tandis que la tempête ⛈️ les abimes. \n");
+    Console.WriteLine(" 🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudra alors vite écrire le mot indiqué pour protéger vos plantes.\n Les souris 🐁 mangent les plantes, tandis que la tempête ⛈️ les abîme. \n");
     Console.WriteLine("");
-    Console.WriteLine("Vous avez trois terrains dans votre potager Irlandais, avec chacun des caractéristiques spéciales sur notament l'humidité et la température.\nCombien de mois souhaitez-vous jouer ?\n");
+    Console.WriteLine("Vous avez trois terrains dans votre potager Irlandais, avec chacun des caractéristiques spéciales notamment sur l'humidité et la température.\nCombien de mois souhaitez-vous jouer ?\n");
     nbTour = Convert.ToInt32(Console.ReadLine()!);
     Console.WriteLine($"\nVous avez {nbTour} mois pour utiliser au maximum votre potager Irlandais. Bonne chance ! 🍀\n");
     System.Threading.Thread.Sleep(3000);
@@ -219,15 +219,15 @@ void RentrerMagasin(Magasin magasin)
 
 void ActionSemer(Magasin magasin, Potager potager, int temps)
 {
-    Console.WriteLine("\nChoisissez une graine à semer dans votre inventaire");
+    Console.WriteLine("\nChoisissez le numéro d'une graine à semer dans votre inventaire.");
 
-    if (magasin.GrainesAchetes.Count()==0)
+    if (magasin.GrainesAchetes.Count() == 0)
     {
         Console.WriteLine("Aucune graine disponible dans l'inventaire");
     }
     else
     {
-        string affichage ="";
+        string affichage = "";
         int i = 0;
 
         foreach (Plante p in magasin.GrainesAchetes)
@@ -235,13 +235,13 @@ void ActionSemer(Magasin magasin, Potager potager, int temps)
 
             affichage += $"{i} - {p.Nom}\n";
             i++;
-        
+
         }
         Console.WriteLine($"{affichage}");
 
-        int choix = Convert.ToInt32(Console.ReadLine()!); 
-        
-        while ((choix<0)||(choix>magasin.GrainesAchetes.Count()))
+        int choix = Convert.ToInt32(Console.ReadLine()!);
+
+        while ((choix < 0) || (choix > magasin.GrainesAchetes.Count()))
         {
             Console.WriteLine("Saisie incorrecte, veuillez recommencer");
             choix = Convert.ToInt32(Console.ReadLine()!);
@@ -250,16 +250,16 @@ void ActionSemer(Magasin magasin, Potager potager, int temps)
         Console.WriteLine("\nOù souhaitez-vous la planter ?");
         string listTer = "";
         int j = 0;
-        foreach(Terrain t in potager.Terrains)
+        foreach (Terrain t in potager.Terrains)
         {
             listTer += $"\n{j} - {t.Type}";
             j++;
         }
         Console.WriteLine(listTer);
 
-        int choixPlanter = Convert.ToInt32(Console.ReadLine()!); 
+        int choixPlanter = Convert.ToInt32(Console.ReadLine()!);
 
-        while ((choixPlanter<0)||(choix>potager.Terrains.Count()))
+        while ((choixPlanter < 0) || (choix > potager.Terrains.Count()))
         {
             Console.WriteLine("Saisie incorrecte, veuillez recommencer");
             choixPlanter = Convert.ToInt32(Console.ReadLine()!);
@@ -311,37 +311,38 @@ void ActionRecolter(Potager potager, Magasin magasin)
 
 void ActionDesherber(Potager potager) 
 {
-    Console.WriteLine("\nChoisissez le terrain à désherber");
+    Console.WriteLine("\nChoisissez le numéro du terrain à désherber ou tapez 'sortir'");
 
     string affichage = "";
     int k = 0;
     foreach (Terrain t in potager.Terrains)
     {
-        if (t.EventSurTerrain.Count==0)
+        if (t.EventSurTerrain.Count == 0)
         {
-            affichage += $"\n{k} - {t.Type} - aucun évenement n'a eu lieu sur ce terrain ";
+            affichage += $"\n{k} - {t.Type} - aucun évènement n'a eu lieu sur ce terrain ";
         }
-        else 
+        else
         {
             affichage += $"\n{k} - {t.Type} - {t.EventSurTerrain[0].Nom}";
         }
         k++;
     }
     Console.WriteLine($"{affichage}");
-    int choix = Convert.ToInt32(Console.ReadLine()); 
+    string choix = Console.ReadLine()!;
 
-    while ((choix<0)||(choix>=potager.Terrains.Count()))
+    while ((choix!="0")&&(choix!="1")&&(choix!="2")&&(choix!="3"))
     {
         Console.WriteLine("Saisie incorrecte, veuillez recommencer.");
-        choix = Convert.ToInt32(Console.ReadLine()!);
+        choix = Console.ReadLine()!;
     }
-    
-    Terrain terrainChoisi = potager.Terrains[choix];
-    if (terrainChoisi.EventSurTerrain.Count==0)
+
+    Terrain terrainChoisi = potager.Terrains[Convert.ToInt32(choix)];
+
+    if (terrainChoisi.EventSurTerrain.Count == 0)
     {
         Console.WriteLine("Il n'y a pas de mauvaise herbe sur ce terrain");
     }
-    else if (terrainChoisi.EventSurTerrain[0].Nom!="De la mauvaise herbe") //liste event peut etre vide ! cela crer un probleme je pense
+    else if (terrainChoisi.EventSurTerrain[0].Nom != "De la mauvaise herbe") //liste event peut etre vide ! cela crer un probleme je pense
     {
         Console.WriteLine("Il n'y a pas de mauvaise herbe sur ce terrain");
     }
@@ -351,64 +352,66 @@ void ActionDesherber(Potager potager)
         terrainChoisi.Event = false;
         Console.WriteLine("Le potager a été désherbé.");
     }
+    
 }
 
 void ActionArroser(Potager potager)
 {
-    Console.WriteLine("\nChoisissez le terrain de la plante à arroser");
+    Console.WriteLine("\nChoisissez le numéro du terrain de la plante à arroser");
 
     string affichage = "";
     int l = 0;
     foreach (Terrain t in potager.Terrains)
     {
-        affichage += $"\n{l} - {t.Type}\n";
+        affichage += $"\n{l} - {t.Type}";
         l++;
     }
     Console.WriteLine(affichage);
 
-    int choix1 = Convert.ToInt32(Console.ReadLine()!);
+    string choix1 = Console.ReadLine()!;
 
-    while ((choix1<0)||(choix1>potager.Terrains.Count()))
+    if ((choix1 == "0") || (choix1 == "1") || (choix1 == "2"))
     {
-        Console.WriteLine("Saisie incorrecte, veuillez recommencer");
-        choix1 = Convert.ToInt32(Console.ReadLine()!);
-    }
+        Terrain terrainChoisi = potager.Terrains[Convert.ToInt32(choix1)];
 
-    Terrain terrainChoisi = potager.Terrains[choix1];
+        Console.WriteLine("\nChoisissez le numéro de la plante à arroser");
 
-    Console.WriteLine("\nChoisissez la plante à arroser");
+        if (terrainChoisi.Plantation.Count() == 0)
+        {
+            Console.WriteLine("Vous n'avez aucune plante sur ce terrain, revenez lorsque vous en aurez planté.");
+        }
+        else
+        {
+            string affichage2 = "";
+            int i = 0;
+            foreach (Plante p in terrainChoisi.Plantation)
+            {
+                affichage2 += $"\n{i} - {p.Nom} - {p.Hydratation} Hydratation \n";
+                i++;
+            }
+            Console.WriteLine(affichage2);
 
-    if (terrainChoisi.Plantation.Count()==0 )
-    {
-        Console.WriteLine("Vous n'avez aucune plante sur ce terrain, revenez lorsque vous en aurez planté.");
+            int choix = Convert.ToInt32(Console.ReadLine()!); //faire une vérif aussi
+
+            while ((choix < 0) || (choix > terrainChoisi.Plantation.Count()))
+            {
+                Console.WriteLine("Saisie incorrecte, veuillez recommencer.");
+                choix = Convert.ToInt32(Console.ReadLine()!);
+            }
+            Plante planteChoisie = potager.Terrains[Convert.ToInt32(choix1)].Plantation[choix];
+            planteChoisie.Hydratation += 15;
+            Console.WriteLine("La plante a été arrosée");
+        }
     }
     else
     {
-        string affichage2 ="";
-        int i = 0;
-        foreach (Plante p in terrainChoisi.Plantation)
-        {
-            affichage2 += $"\n{i} - {p.Nom} - {p.Hydratation} Hydratation \n";
-            i++;
-        }
-        Console.WriteLine(affichage2);
-
-        int choix = Convert.ToInt32(Console.ReadLine()!); //faire une vérif aussi
-
-        while ((choix<0)||(choix>terrainChoisi.Plantation.Count()) )
-        {
-            Console.WriteLine("Saisie incorrecte, veuillez recommencer.");
-            choix = Convert.ToInt32(Console.ReadLine()!);
-        }
-        Plante planteChoisie = potager.Terrains[choix1].Plantation[choix];
-        planteChoisie.Hydratation +=15;
-        Console.WriteLine("La plante a été arrosée");
+        Console.WriteLine("Sortie du menu");
     }
 }
 
 void ActionTraiter(Potager potager)
 {
-    Console.WriteLine("\nChoissisez le terrain de la plante à traiter");
+    Console.WriteLine("\nChoissisez le numéro du terrain de la plante à traiter");
 
     string affichage = "";
     int l = 0;
@@ -478,7 +481,7 @@ void ActionTraiter(Potager potager)
 
 void ActionJeter(Potager potager)
 {
-    Console.WriteLine("\nChoissisez le terrain de la plante à jeter");
+    Console.WriteLine("\nChoissisez le numéro du terrain de la plante à jeter");
 
     string affichage = "";
     int l = 0;
@@ -499,69 +502,69 @@ void ActionJeter(Potager potager)
     }
     Terrain terrainChoisi = potager.Terrains[choix1];
     
-    if (potager.Terrains[choix1].Plantation.Count ==0)
+    if (potager.Terrains[choix1].Plantation.Count == 0)
     {
-        Console.WriteLine("Vous n'avez aucune plante sur ce terrain, revenez lorsque vous en aurez planté."); 
+            Console.WriteLine("Vous n'avez aucune plante sur ce terrain, revenez lorsque vous en aurez planté.");
     }
-    else 
+    else
     {
-        Console.WriteLine("\nChoisissez la plante à jeter");
-        string affichage2="";
+        Console.WriteLine("\nChoisissez le numéro de la plante à jeter");
+        string affichage2 = "";
         int i = 0;
         foreach (Plante p in potager.Terrains[choix1].Plantation)
         {
-            if (p.Mort==1)
+            if (p.Mort == 1)
+                {
+                    affichage2 += $"\n{i} - {p.Nom} - Morte\n";
+                    i++;
+                }
+                else
+                {
+                    affichage2 += $"\n{i} - {p.Nom}\n";
+                    i++;
+                }
+            }
+            Console.WriteLine(affichage2);
+            int choix = Convert.ToInt32(Console.ReadLine()!);
+
+            while ((choix < 0) || (choix > terrainChoisi.Plantation.Count()))
             {
-                affichage2 += $"\n{i} - {p.Nom} - Morte\n";
-                i++;
+                Console.WriteLine("Saisie incorrecte, veuillez recommencer");
+                choix = Convert.ToInt32(Console.ReadLine()!);
+            }
+
+            Plante planteChoisie = potager.Terrains[choix1].Plantation[choix];
+
+            if (planteChoisie.Mort == 1)
+            {
+                planteChoisie.TerrainPlante.Plantation.Remove(planteChoisie);
+
+                Console.WriteLine("La plante morte a été jetée");
             }
             else
             {
-                affichage2 += $"\n{i} - {p.Nom}\n";
-                i++;
+                Console.WriteLine("Cette plante est encore en vie, la jeter quand même? (oui/non)");
+
+                string rep = Console.ReadLine()!;
+
+                while ((rep != "oui") && (rep != "non"))
+                {
+                    Console.WriteLine("Réponse incorrecte, veuillez réessayez");
+                    rep = Console.ReadLine()!;
+                }
+
+                if (rep == "oui")
+                {
+                    planteChoisie.TerrainPlante.Plantation.Remove(planteChoisie);
+
+                    Console.WriteLine("La plante a été jetée");
+                }
+                else if (rep == "non")
+                {
+                    Console.WriteLine("La plante n'a pas été jetée");
+                }
             }
         }
-        Console.WriteLine(affichage2);
-        int choix = Convert.ToInt32(Console.ReadLine()!);
-
-        while ((choix<0)||(choix>terrainChoisi.Plantation.Count()))
-        {
-            Console.WriteLine("Saisie incorrecte, veuillez recommencer");
-            choix = Convert.ToInt32(Console.ReadLine()!);
-        }
-
-        Plante planteChoisie = potager.Terrains[choix1].Plantation[choix];
-
-        if (planteChoisie.Mort==1)
-        {
-            planteChoisie.TerrainPlante.Plantation.Remove(planteChoisie);
-        
-            Console.WriteLine("La plante morte a été jetée");
-        }
-        else 
-        {
-            Console.WriteLine("Cette plante est encore en vie, la jeter quand même? (oui/non)");
-
-            string rep = Console.ReadLine()!;
-
-            while ((rep!="oui")&&(rep!="non"))
-            {
-                Console.WriteLine("Réponse incorrecte, veuillez réessayez");
-                rep = Console.ReadLine()!;
-            }
-
-            if (rep=="oui")
-            {
-                planteChoisie.TerrainPlante.Plantation.Remove(planteChoisie);
-        
-                Console.WriteLine("La plante a été jetée");
-            }
-            else if (rep=="non")
-            {
-                Console.WriteLine("La plante n'a pas été jetée");
-            }
-        }
-    }
 }
 
 

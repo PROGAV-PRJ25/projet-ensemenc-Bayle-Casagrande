@@ -162,11 +162,11 @@ public class Magasin
             {
                 ArgentJoueur -= planteAAcheter.PrixAchatGraine;
                 GrainesAchetes.Add(planteAAcheter);
-                return  $"La plante a été acheté pour {planteAAcheter.PrixAchatGraine} pièces";
+                return  $"La plante a été achetée pour {planteAAcheter.PrixAchatGraine} pièces";
             }
             else 
             {
-                return "La graine n'a pas pu être acheter";
+                return "La graine n'a pas pu être achetée";
             }
         }
         else
@@ -178,32 +178,38 @@ public class Magasin
     public void AfficherWiki(Potager potager)
     {
         Console.WriteLine("\nBienvenue dans le wiki !");
-        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Sortir\n");
+        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Météo\n4 - Sortir\n");
 
         string choix = Console.ReadLine()!;
 
-        while ((choix!="1")&&(choix!="2")&&(choix!="3"))
+        while ((choix!="1")&&(choix!="2")&&(choix!="3")&&(choix!="4"))
         {
             Console.WriteLine("La saisie n'est pas valide, veuillez recommencer");
             choix = Console.ReadLine()!;
         }
 
         string affichage = "";
-        if (choix=="1")
+        if (choix == "1")
         {
             foreach (Terrain t in potager.Terrains)
             {
-                affichage += $"{t.Type} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C \n";
-            } 
+                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo}  \n";
+            }
             Console.WriteLine(affichage);
         }
-        else if (choix=="2")
+        else if (choix == "2")
         {
             foreach (Plante p in PlantesWiki)
             {
-                affichage += $"{p.Nom} - Espérance de vie : {p.EsperanceDeVie} mois  - Terrain préféré : {p.TerrainPrefere} - Saison préférée : {p.SaisonDePlantaisonPrefere}  - Prix de vente : {p.PrixDeVente} pièces - Prix d'achat : {p.PrixAchatGraine} pièces \n";
+                affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces \n";
             }
             Console.WriteLine(affichage);
+        }
+        else if (choix == "3")
+        {
+            Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
+
+
         }
 
     }

@@ -9,8 +9,6 @@ public class Herbe : Evenement
     public void Action(Terrain terEvent)
     {
         ComptMois++;
-        terEvent.Acidite=true;
-
-        
+        terEvent.Acidite=true; 
     }
 }

@@ -18,7 +18,7 @@ public abstract class Evenement
     public override string ToString()
     {
 
-        return $"{Nom} est apparu sur le terrain. \n ";
+        return $"{Nom} est sur le terrain. \n ";
     }
 
 

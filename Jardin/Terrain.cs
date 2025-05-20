@@ -6,11 +6,12 @@ public abstract class Terrain
     public string Type {get; set;}
 
     public List<Evenement> EventSurTerrain {get; set;}
-    public int humidite;
+    protected int humidite = 50;
     public int Humidite // En pourcentage
     {
-        get {return humidite;}
+        get { return humidite;}
         set{
+                humidite = value;
                 if(humidite < 0) 
                 {
                     humidite = 0;
@@ -19,7 +20,6 @@ public abstract class Terrain
                 {
                     humidite = 100;
                 }
-                else {humidite = value;}
             }
     }
 
@@ -75,6 +75,12 @@ public abstract class Terrain
 
     public bool Event {get; set;}
     public Potager PotagerTerrain {get; set;}
+    public string Meteo {get; set;}
+
+
+
+
+
     public Terrain(int placeDisponible)
     {
         NombreDePlante = 0;
@@ -105,44 +111,49 @@ public abstract class Terrain
     {
         if (NombreDePlante == Capacite)
         {
-            return "\nCe terrain n'a plus de place pour accueillir de nouvelle plante.\n";
+            return "\nCe terrain n'a plus de place pour accueillir de nouvelles plantes.\n";
         }
         else 
         {
-            string affichage ="\nLa graine a été semé dans ce terrain.";
+            string affichage ="\nLa graine a été semée dans ce terrain.";
             NombreDePlante +=1;
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
             nouvellePlante.Age =0;
             nouvellePlante.SaisonDePlantaison=CalculerSaisonPlantaison(temps);
             if (nouvellePlante.TerrainPlante.Type != nouvellePlante.TerrainPrefere)
-                {affichage += "Mais cette graine n'a pas été semé dans son son terrain préféré.\n";}
+                {affichage += "\nMais cette graine n'a pas été semée dans son terrain préféré...\n";}
             if (nouvellePlante.TerrainPlante.Capacite - nouvellePlante.TerrainPlante.NombreDePlante < nouvellePlante.PlaceNecessaire)
-                {affichage += "Cette graine se sent très sérrer sur ce terrain.\n";}
+                {affichage += "\nCette graine se sent très serrée sur ce terrain...\n";}
             if (nouvellePlante.SaisonDePlantaison != nouvellePlante.SaisonDePlantaisonPrefere)
-                {affichage += "Cette graine n'a pas été planté à la bonne saison.\n";}
+                {affichage += "\nCette graine n'a pas été plantée à la bonne saison...\n";}
             return affichage;
         }
     }
-    public void ChangerMeteo()
+    public void ChangerMeteo() //totem bool if false déclenchement aléa
     {
         Random alea = new Random();
-        int meteo = alea.Next(1,4);
+        int nbAlea = alea.Next(1,4);
 
-        if (meteo==1) //soleil
+        if (nbAlea==1) //soleil
         {
-            this.Humidite -=20;
-            this.Temperature += 5;
+            this.Meteo = "Soleil";
+            this.Temperature += 10;
         }
-        else if (meteo==2) //pluie
+        else if (nbAlea==2) //pluie
         {
+            this.Meteo = "Pluie";
             this.Humidite +=30;
-            this.Temperature -= 5;
         }
-        else if (meteo==3) //neige
+        else if (nbAlea==3) //neige
         {
-            this.Humidite +=25;
+            this.Meteo = "Neige";
             this.Temperature -= 15;
+        }
+        else if (nbAlea==4)
+        {
+            this.Meteo = "Vent";
+            this.Humidite -= 20;
         }
     }
 
