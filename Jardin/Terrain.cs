@@ -75,6 +75,12 @@ public abstract class Terrain
 
     public bool Event {get; set;}
     public Potager PotagerTerrain {get; set;}
+    public string Meteo {get; set;}
+
+
+
+
+
     public Terrain(int placeDisponible)
     {
         NombreDePlante = 0;
@@ -124,25 +130,30 @@ public abstract class Terrain
             return affichage;
         }
     }
-    public void ChangerMeteo()
+    public void ChangerMeteo() //totem bool if false déclenchement aléa
     {
         Random alea = new Random();
-        int meteo = alea.Next(1,4);
+        int nbAlea = alea.Next(1,4);
 
-        if (meteo==1) //soleil
+        if (nbAlea==1) //soleil
         {
-            this.Humidite -=20;
-            this.Temperature += 5;
+            this.Meteo = "Soleil";
+            this.Temperature += 10;
         }
-        else if (meteo==2) //pluie
+        else if (nbAlea==2) //pluie
         {
+            this.Meteo = "Pluie";
             this.Humidite +=30;
-            this.Temperature -= 5;
         }
-        else if (meteo==3) //neige
+        else if (nbAlea==3) //neige
         {
-            this.Humidite +=25;
+            this.Meteo = "Neige";
             this.Temperature -= 15;
+        }
+        else if (nbAlea==4)
+        {
+            this.Meteo = "Vent";
+            this.Humidite -= 20;
         }
     }
 
