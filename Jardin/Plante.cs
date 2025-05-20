@@ -31,8 +31,7 @@ public abstract class Plante
             return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0; //ou si l'hydratation tombe à 0
         }
         set 
-        {;
-        }
+        {; }
     }
     public int Malade { get; set; }
     public int Compteur { get; set; } //Il permet de comptabiliser combien de condition de préférence de la plante sont respectés

@@ -77,11 +77,7 @@ public abstract class Terrain
     public Potager PotagerTerrain {get; set;}
     public string Meteo {get; set;}
 
-
-
-
-
-    public Terrain(int placeDisponible)
+    public Terrain()
     {
         NombreDePlante = 0;
         Plantation = new List<Plante>();
@@ -91,18 +87,16 @@ public abstract class Terrain
     }
     public override string ToString()
     {
-        
         string affichage = "";
         foreach (Evenement e in EventSurTerrain)
         {
             affichage += e.ToString();
-            Console.WriteLine(e.ToString());
         }
         if (Plantation.Count ==0)
         {
             return "Vous n'avez pas encore de plante dans ce terrain. \n";
         }
-        affichage +="Dans ce terrain vous avez :  \n";
+        affichage ="Dans ce terrain vous avez :  \n";
         foreach (var plante in Plantation)
         {
             affichage += plante.ToString();
@@ -124,11 +118,11 @@ public abstract class Terrain
             nouvellePlante.Age =0;
             nouvellePlante.SaisonDePlantaison=CalculerSaisonPlantaison(temps);
             if (nouvellePlante.TerrainPlante.Type != nouvellePlante.TerrainPrefere)
-                {affichage += "Mais cette graine n'a pas été semée dans son terrain préféré...\n";}
+                {affichage += "\nMais cette graine n'a pas été semée dans son terrain préféré...\n";}
             if (nouvellePlante.TerrainPlante.Capacite - nouvellePlante.TerrainPlante.NombreDePlante < nouvellePlante.PlaceNecessaire)
-                {affichage += "Cette graine se sent très serrée sur ce terrain...\n";}
+                {affichage += "\nCette graine se sent très serrée sur ce terrain...\n";}
             if (nouvellePlante.SaisonDePlantaison != nouvellePlante.SaisonDePlantaisonPrefere)
-                {affichage += "Cette graine n'a pas été plantée à la bonne saison...\n";}
+                {affichage += "\nCette graine n'a pas été plantée à la bonne saison...\n";}
             return affichage;
         }
     }
@@ -195,25 +189,25 @@ public abstract class Terrain
         }
     }
 
-public string CalculerSaisonPlantaison(int temps)
-{
-    int mois = temps%12;
-    if (mois<4)
+    public string CalculerSaisonPlantaison(int temps)
     {
-        return "Printemps";
+        int mois = temps%12;
+        if (mois<4)
+        {
+            return "Printemps";
+        }
+        else if (mois<8)
+        {
+            return "Ete";
+        }
+        else if (mois<12)
+        {
+            return "Automne";
+        }
+        else 
+        {
+            return "Hiver";
+        }
+        
     }
-    else if (mois<8)
-    {
-        return "Ete";
-    }
-    else if (mois<12)
-    {
-        return "Automne";
-    }
-    else 
-    {
-        return "Hiver";
-    }
-    
-}
 }

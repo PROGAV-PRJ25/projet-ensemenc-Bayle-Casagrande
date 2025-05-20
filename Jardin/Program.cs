@@ -10,9 +10,9 @@ int argentJoueur = 15;
 //-------- création des objets--------
 Potager potagerIrlandais = new Potager();
 Magasin magasin = new Magasin(argentJoueur);
-TerreBrune terrainTerreBrune = new TerreBrune(4);
-Tourbiere terrainTourbiere = new Tourbiere(6);
-Gleys terrainGleys = new Gleys(10);
+TerreBrune terrainTerreBrune = new TerreBrune();
+Tourbiere terrainTourbiere = new Tourbiere();
+Gleys terrainGleys = new Gleys();
 potagerIrlandais.AjouterTerrain(terrainGleys);
 potagerIrlandais.AjouterTerrain(terrainTerreBrune);
 potagerIrlandais.AjouterTerrain(terrainTourbiere);
@@ -58,7 +58,7 @@ void PresenterIntroduction(ref int nbTour)
     Console.WriteLine("");
     Console.WriteLine("Attention ! Des évènements spéciaux peuvent avoir lieu sur vos terrains.\nTels que des fées 🧚 qui augmenteront la fertilité, mais aussi des insectes 🪲 et de la mauvaise herbe 🌿 qui ralentiront la croissance de vos plantes.\n");
     Console.WriteLine("");
-    Console.WriteLine(" 🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudra alors vite écrire le mot indiqué pour protéger vos plantes.\n Les souris 🐁 mangent les plantes, tandis que la tempête ⛈️ les abîme. \n");
+    Console.WriteLine(" 🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudra alors vite écrire le mot indiqué pour protéger vos plantes.\nLes souris 🐁 mangent les plantes, tandis que la tempête ⛈️ les abîme. \n");
     Console.WriteLine("");
     Console.WriteLine("Vous avez trois terrains dans votre potager Irlandais, avec chacun des caractéristiques spéciales notamment sur l'humidité et la température.\nCombien de mois souhaitez-vous jouer ?\n");
     nbTour = Convert.ToInt32(Console.ReadLine()!);
@@ -86,13 +86,13 @@ void ActiverModeUrgence(Potager potager)
 
 }
 
-void ChangerClimat(Potager potagerTest, int temps)
+void ChangerClimat(Potager potager, int temps)
 {
-    potagerTest.Saison = temps % 4;
+    potager.Saison = temps % 4;
 
-    potagerTest.ChangerSaison();
+    potager.ChangerSaison();
 
-    foreach (Terrain terrain in potagerTest.Terrains)
+    foreach (Terrain terrain in potager.Terrains)
     {
         terrain.ChangerMeteo();
     }
@@ -342,7 +342,7 @@ void ActionDesherber(Potager potager)
     {
         Console.WriteLine("Il n'y a pas de mauvaise herbe sur ce terrain");
     }
-    else if (terrainChoisi.EventSurTerrain[0].Nom != "De la mauvaise herbe") //liste event peut etre vide ! cela crer un probleme je pense
+    else if (terrainChoisi.EventSurTerrain[0].Nom != "De la mauvaise herbe") 
     {
         Console.WriteLine("Il n'y a pas de mauvaise herbe sur ce terrain");
     }

@@ -1,7 +1,7 @@
 public class Gleys: Terrain
 {
 
-    public Gleys(int placeDisponible) : base (placeDisponible)
+    public Gleys() 
     {
         Type = "Gleys";
         Humidite = 50;

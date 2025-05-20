@@ -1,6 +1,6 @@
 public class Tourbiere : Terrain
 {
-    public Tourbiere(int placeDisponible) : base (placeDisponible)
+    public Tourbiere() 
     {
         Type = "Tourbiere";
         Humidite = 80;
