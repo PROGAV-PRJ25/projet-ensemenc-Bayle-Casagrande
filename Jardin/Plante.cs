@@ -4,7 +4,7 @@ public abstract class Plante
 {
     public string Nature { get; set; }
     public string Nom { get; set; }
-    public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 ??
+    public double VitesseDeCroissance { get; set; } // Echelle de 1 à 5 
     public int esperanceDeVie;
     public int EsperanceDeVie // Si cette éspérence de vie est atteinte, la plante est déclaré morte
     {
@@ -31,13 +31,10 @@ public abstract class Plante
     {
         get
         {
-            //return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0;
-            return mort;
+            return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0;
         }
-        set //pour test à enlever apres
-        {
-            mort = value;
-            Console.WriteLine($"{mort}");
+        set 
+        {;
         }
     }
 
@@ -66,7 +63,7 @@ public abstract class Plante
             // afficher quand meme la plante? 
             // la mettre en couleur ?
             // Console.ResetColor();
-            return $"La plante : {Nom} est morte vous devez la jeter.\n";
+            return $"- La plante {Nom} est morte vous devez la jeter.\n";
         }
         else
         {
@@ -117,9 +114,9 @@ public abstract class Plante
                 {compteur -= 1;}
             if (TerrainPlante.Type != TerrainPrefere)
                 {compteur -= 1;}
-            if ((TerrainPlante.Humidite > BesoinHumidite * 1.2) || (TerrainPlante.Humidite < BesoinHumidite * 0.2))
+            if ((TerrainPlante.Humidite > BesoinHumidite * 1.4) || (TerrainPlante.Humidite < BesoinHumidite * 0.4)) //Les plantes accepte une marge de 40%
                 {compteur -= 1;}
-            if ((TerrainPlante.Temperature > BesoinTemperature * 1.2) || (TerrainPlante.Temperature < BesoinTemperature * 0.2))
+            if ((TerrainPlante.Temperature > BesoinTemperature * 1.4) || (TerrainPlante.Temperature < BesoinTemperature * 0.4)) //Les plantes accepte une marge de 40%
                 {compteur -= 1;}
             if (SaisonDePlantaison != SaisonDePlantaisonPrefere)
                 {compteur -= 1;}
@@ -192,10 +189,7 @@ public abstract class Plante
 
     public void Pousser()
     {
-        if (Taille==4)
-        {
-            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
-        }
+
 
         if (TerrainPlante.Acidite!=true)
         {
@@ -207,6 +201,11 @@ public abstract class Plante
         if (Hydratation <=0)
         {
             Mort = 1;
+        }
+        
+        if (Taille==4)
+        {
+            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
         }
     
     }

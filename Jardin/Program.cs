@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 //-------------variables de base-----------
 int mois = 0;
 int nbTour = 10;
-int argentJoueur = 10;
+int argentJoueur = 15;
 
 //-------- création des objets--------
 Potager potagerIrlandais = new Potager();
@@ -40,7 +40,8 @@ PresenterIntroduction(ref nbTour);
 }
 
 
-Console.WriteLine("\n\nFin de partie - Vous avez récolté tant de plantes, vous avez gagné tant d'argent,  ");
+Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces. ");
+Console.WriteLine(potagerIrlandais);
 
 
 //-------------------fonctions principales de déroulement de tour--------------
@@ -51,7 +52,8 @@ void PresenterIntroduction(ref int nbTour)
     Console.WriteLine("🇮🇪 Bienvenu dans le jeu du potager Irlandais ! 🇮🇪\n");
     Console.WriteLine("Règles : ");
     Console.WriteLine("");
-    Console.WriteLine("\nVous devrez acheter des graines, les planter, puis les faire grandir. \nVous pourrez alors les récolter et les vendre.");
+    Console.WriteLine("\nDans ce jeu vous pouvez acheter des graines, les planter, puis les faire grandir. \nVous pourrez alors les récolter et les vendre.");
+    Console.WriteLine("");
     Console.WriteLine("Chaque plante a des besoins spécifiques. \nTels qu'une saison de plantaison préféré, un terrain préféré.\nMais aussi une température et une humidité qui les maintiennent en vie.\nElles ont aussi besoin d'une certaine place pour grandir sereinement.\n"); 
     Console.WriteLine("");
     Console.WriteLine("Attention ! Des évènements spéciaux peuvent avoir lieu sur vos terrains.\nTels que des fées 🧚 qui augmenteront la fertilité, mais aussi des insectes 🪲 et de la mauvaise herbe 🌿 qui ralentiront la croissance de vos plantes.\n");
@@ -136,7 +138,7 @@ void ActualiserEvent(Potager potager)
 void FaireActionJoueur(int nbAction, Magasin magasin, Potager potager, int temps)
 {
     string reponse = "";
-    //for (int i = 0;i<nbAction;i++)
+    //for (int i = 0;i<nbAction;i++) //Dans le cas ou le nombre d'action serait limiter
     while (reponse !="9")
     {
         Console.WriteLine("\nQue souhaitez-vous faire ?");

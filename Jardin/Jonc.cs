@@ -9,7 +9,7 @@ public class Jonc : Plante
         PrixAchatGraine = 1;
         PlaceNecessaire=2;
         TerrainPrefere = "Gleys";
-        BesoinHumidite = 1;
+        BesoinHumidite = 60;
         BesoinTemperature = 13;
         SaisonDePlantaisonPrefere = "Automne";
         Taille = 1;

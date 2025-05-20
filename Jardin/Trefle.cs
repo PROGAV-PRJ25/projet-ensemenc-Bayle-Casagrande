@@ -9,7 +9,7 @@ public class Trefle : Plante
         PrixAchatGraine = 2;
         PlaceNecessaire=2;
         TerrainPrefere = "Terre Brune";
-        BesoinHumidite = 1;
+        BesoinHumidite = 60;
         BesoinTemperature = 15;
         SaisonDePlantaisonPrefere = "Printemps";
         Taille = 1;

@@ -8,6 +8,7 @@ public class TerreBrune: Terrain
         Humidite = 1;
         Temperature = 15;
         Capacite = 5;
+        Fertilite = 1.4;
     }
 
 

@@ -53,7 +53,7 @@ public class Magasin
     {
         string affichage="";
         Console.WriteLine("Voici vos possibilités de ventes :");
-        int i =1;
+        int i =0;
         foreach (Plante p in PlantesRecoltes)
         {
             affichage+=$"- {i} : {p.Nom} : {p.PrixDeVente} pièces \n";
@@ -62,12 +62,12 @@ public class Magasin
         Console.WriteLine(affichage);
         Console.WriteLine("\nQuelle plante ? Donnez son numéro\n");
         int numeroChoisie = Convert.ToInt32(Console.ReadLine());
-        if (numeroChoisie<1  || numeroChoisie>PlantesRecoltes.Count)
+        if (numeroChoisie<0  || numeroChoisie>PlantesRecoltes.Count-1)
         {
             return $"Le numéro n'est pas valide.";
         }
         Plante planteAVendre = PlantesRecoltes[numeroChoisie];
-        if (planteAVendre.Taille==4 && planteAVendre.Mort==0)
+        if (planteAVendre.Taille==4 && planteAVendre.Mort==0) //Cette condition est toujours vérifier, car les plantes sont dans la liste PlantesRecoltables qui verifie deja cela 
         {
             ArgentJoueur += planteAVendre.PrixDeVente;
             PlantesRecoltes.Remove(planteAVendre);
