@@ -409,7 +409,7 @@ void ActionArroser(Potager potager)
 
 void ActionTraiter(Potager potager)
 {
-    Console.WriteLine("\nChoissisez le terrain de la plante à traiter");
+    Console.WriteLine("\nChoissisez le numéro du terrain de la plante à traiter");
 
     string affichage = "";
     int l = 0;
