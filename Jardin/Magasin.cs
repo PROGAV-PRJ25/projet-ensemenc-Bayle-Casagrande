@@ -129,7 +129,7 @@ public class Magasin
         {
             Plante planteAAcheter = new Trefle(); //Ne sert à rien juste à retourner
             existence = false;
-            return null;
+            return null; 
         }
 
     }

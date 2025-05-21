@@ -8,7 +8,7 @@ public abstract class Terrain
     public int NombreDePlante {get; set;} //Nb de plantes plantées dans le terrain
     public List<Plante> Plantation {get; set;} //Liste de toutes les plantes présentes sur le terrain
     public Potager PotagerTerrain {get; set;} //Potager auquel il appartient
-    public List<Evenement> EventSurTerrain { get; set; } //liste des event sur le terrain
+    public Evenement? EventSurTerrain { get; set; } //event sur le terrain
 
     //-----conditions sur le terrain--------
     protected int humidite = 50;
@@ -37,7 +37,7 @@ public abstract class Terrain
         }
         set
         {
-            if(fertilite < 0.5) 
+                if(fertilite < 0.5) 
                 {
                     fertilite = 0.5;
                 }
@@ -49,24 +49,16 @@ public abstract class Terrain
         }
     }
 
-    protected bool acidite = false; //Si True, les plantes ne poussent plus
-    public bool Acidite
-    {
-        get
-        { 
-            return acidite;
-        }
-        set
-        {
-            acidite = value;
-        }
-    }
+
+    public bool Acidite{ get; set; }
+    
 
     protected int temperature;
     public int Temperature //comprise entre 0 et 35
     {
         get {return temperature;}
         set{
+                temperature = value;
                 if (temperature < 0)
                 {
                     temperature = 0;
@@ -75,10 +67,7 @@ public abstract class Terrain
                 {
                     temperature = 35;  
                 }
-                else
-                {
-                    temperature = value;
-                }
+                
             }
     }
 
@@ -93,7 +82,7 @@ public abstract class Terrain
         Plantation = new List<Plante>();
         Capacite = 10;
         Event = false;
-        EventSurTerrain = new List<Evenement>();
+        Acidite = false;
     }
     
     //--------------affichage terrain----------------
@@ -101,16 +90,16 @@ public abstract class Terrain
     {
         string affichage = "";
 
-        foreach (Evenement e in EventSurTerrain) //affichage des events
+        if (EventSurTerrain!=null)
         {
-            affichage += e.ToString();
+            affichage += EventSurTerrain.ToString();
         }
 
         if (Plantation.Count == 0) //si aucune plante dans terrain
         {
             return "Vous n'avez pas encore de plante dans ce terrain. \n";
         }
-        affichage = "Dans ce terrain vous avez :  \n";
+        affichage += "\nDans ce terrain vous avez :  \n";
 
         foreach (var plante in Plantation) //sinon affichage de chaque plante avec leur méthode
         {
@@ -157,7 +146,7 @@ public abstract class Terrain
         if (nbAlea == 1) //soleil
         {
             this.Meteo = "Soleil";
-            this.Temperature += 10;
+            this.Temperature += 5;
         }
         else if (nbAlea == 2) //pluie
         {
@@ -167,12 +156,12 @@ public abstract class Terrain
         else if (nbAlea == 3) //neige
         {
             this.Meteo = "Neige";
-            this.Temperature -= 15;
+            this.Temperature -= 10;
         }
         else if (nbAlea == 4)
         {
             this.Meteo = "Vent";
-            this.Humidite -= 20;
+            this.Humidite -= 30;
         }
     }
 
@@ -186,25 +175,19 @@ public abstract class Terrain
         {
             Evenement fee = new Fee();
             Event = true;
-            this.EventSurTerrain.Add(fee);
-            affichage = fee.ToString();
-            affichage += $"{Type} !!";
+            this.EventSurTerrain = fee;
         }
         else if (chance == 2)
         {
             Evenement insecte = new Insecte();
             Event = true;
-            this.EventSurTerrain.Add(insecte);
-            affichage = insecte.ToString();
-            affichage += $"{Type} !!";
+            this.EventSurTerrain = insecte;
         }
         else if (chance == 3)
         {
             Evenement herbe = new Herbe();
             Event = true;
-            this.EventSurTerrain.Add(herbe);
-            affichage = herbe.ToString();
-            affichage += $"{Type} !!";
+            this.EventSurTerrain = herbe;
         }
     }
 

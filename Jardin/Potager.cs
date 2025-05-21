@@ -58,8 +58,8 @@ public class Potager
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite -= 30;
-                terrain.Temperature += 11;
+                terrain.Humidite -= 10;
+                terrain.Temperature += 5;
             }
         }
         else if (this.Saison == 2) //été
@@ -74,8 +74,8 @@ public class Potager
         {
             foreach (Terrain terrain in this.Terrains)
             {
-                terrain.Humidite += 40;
-                terrain.Temperature -= 7;
+                terrain.Humidite += 10;
+                terrain.Temperature -= 5;
             }
         }
         else if (this.Saison == 4) //hiver
@@ -83,7 +83,7 @@ public class Potager
             foreach (Terrain terrain in this.Terrains)
             {
                 terrain.Humidite += 10;
-                terrain.Temperature -= 9;
+                terrain.Temperature -= 3;
             }
         }
     }
@@ -147,8 +147,8 @@ public class Potager
 
             Console.Clear();
             Console.WriteLine($"URGENCE : Une souris se déplace dans le terrain {terrain.Type} ! Elle mange toutes vos plantes.");
-            Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
-            Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
+            Console.WriteLine("Ecrivez 'chasser' dans la console pour la faire fuir !");
+            Console.WriteLine("Attention vous ne la ferez peut être pas fuir du premier coup...");
             System.Threading.Thread.Sleep(700);
 
             while (!(actionJoueur == "chasser" && reussite == 1)) //Le joueur doit ecrire 'chasser' dans la console pour stopper le mouvement de la souris
@@ -156,7 +156,7 @@ public class Potager
                 Console.Clear();
                 Console.WriteLine($"URGENCE : Une souris se déplace dans le terrain {terrain.Type} ! Elle mange toutes vos plantes.");
                 Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
-                Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
+                Console.WriteLine("Attention vous ne la ferez peut être pas fuir du premier coup...");
 
                 grille[positionLigne, positionColonne] = null;
                 DeplacerSouris(ref positionLigne, ref positionColonne, ref sensHorizontale, ref sensVerticale, taille);
@@ -185,14 +185,14 @@ public class Potager
                 }
             }
 
-            Console.WriteLine("Bravo ! Vous avez fais fuir la souris 🐁"); //lorsque l'on sort de la boucle, donc quand le joueur à réussit son action
+            Console.WriteLine("Bravo ! Vous avez fait fuir la souris 🐁"); //lorsque l'on sort de la boucle, donc quand le joueur à réussit son action
             if (planteManger == "")
             {
-                Console.WriteLine("Elle ne vous a rien manger !");
+                Console.WriteLine("Elle ne vous a rien mangé !");
             }
             else
             {
-                Console.WriteLine($"Elle vous a manger : \n {planteManger}");
+                Console.WriteLine($"Elle vous a mangé : \n {planteManger}");
             }
         }
 
@@ -216,18 +216,18 @@ public class Potager
             int perdre = 0; //Les plantes ne perdront pas de l'esperance de vie à chaque tour de boucle
 
             Console.Clear();
-            Console.WriteLine("URGENCE : Une tempête passe sur votre jardin ! Elle endomage l'éspérance de vie de vos plante.");
-            Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bache sur vos plantes !");
-            Console.WriteLine("Attention la bache n'est pas facile à mettre...");
+            Console.WriteLine("URGENCE : Une tempête passe sur votre jardin ! Elle endommage l'espérance de vie de vos plantes.");
+            Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bâche sur vos plantes !");
+            Console.WriteLine("Attention la bâche n'est pas facile à mettre...");
             System.Threading.Thread.Sleep(500);
 
             while (!(actionJoueur == "proteger" && reussite == 1)) //Le joueur doit ecrire 'proteger' pour stopper la boucle
             {
 
                 Console.Clear();
-                Console.WriteLine("URGENCE : Une tempête passe sur votre jardin. Elle endomage l'éspérance de vie de vos plante !");
-                Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bache sur vos plantes !");
-                Console.WriteLine("Attention la bache n'est pas facile à mettre...");
+                Console.WriteLine("URGENCE : Une tempête passe sur votre jardin. Elle endommage l'espérance de vie de vos plantes !");
+                Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bâche sur vos plantes !");
+                Console.WriteLine("Attention la bâche n'est pas facile à mettre...");
 
                 foreach (Plante plante in terrain.Plantation) //Toutes les plantes du terrains peuvent perdre de l'espérance de vie
                 {

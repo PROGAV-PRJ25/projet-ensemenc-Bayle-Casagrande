@@ -17,6 +17,10 @@ potagerIrlandais.AjouterTerrain(terrainGleys);
 potagerIrlandais.AjouterTerrain(terrainTerreBrune);
 potagerIrlandais.AjouterTerrain(terrainTourbiere);
 
+
+
+
+
 //---------programme principal structure-------------------------------
 
 //phase d'introduction
@@ -33,7 +37,7 @@ PresenterIntroduction(ref nbTour);
     ActualiserPlantes(potagerIrlandais);
     ActualiserEvent(potagerIrlandais);
     Console.WriteLine(potagerIrlandais);
-    System.Threading.Thread.Sleep(2000);
+    System.Threading.Thread.Sleep(5000);
     FaireActionJoueur(6, magasin, potagerIrlandais, mois);//action joueur + wiki
     System.Threading.Thread.Sleep(1000);
 
@@ -116,17 +120,14 @@ void ActualiserEvent(Potager potager)
 {
     foreach (Terrain terrain in potager.Terrains)
     {
-        if (terrain.Event!=true)
+        if (terrain.EventSurTerrain==null)
         {
             terrain.DeclencherEvent();
         }
-        else if (terrain.Event==true)
+        else if (terrain.EventSurTerrain!=null)
         {
-            foreach (Evenement e in terrain.EventSurTerrain)
-            {
-                e.Action();
-            }
-            
+            terrain.EventSurTerrain.Action(terrain);
+                   
         }
 
     }
@@ -317,13 +318,13 @@ void ActionDesherber(Potager potager)
     int k = 0;
     foreach (Terrain t in potager.Terrains)
     {
-        if (t.EventSurTerrain.Count == 0)
+        if (t.EventSurTerrain == null)
         {
             affichage += $"\n{k} - {t.Type} - aucun évènement n'a eu lieu sur ce terrain ";
         }
         else
         {
-            affichage += $"\n{k} - {t.Type} - {t.EventSurTerrain[0].Nom}";
+            affichage += $"\n{k} - {t.Type} - {t.EventSurTerrain.Nom}";
         }
         k++;
     }
@@ -338,17 +339,17 @@ void ActionDesherber(Potager potager)
 
     Terrain terrainChoisi = potager.Terrains[Convert.ToInt32(choix)];
 
-    if (terrainChoisi.EventSurTerrain.Count == 0)
+    if (terrainChoisi.EventSurTerrain == null)
     {
         Console.WriteLine("Il n'y a pas de mauvaise herbe sur ce terrain");
     }
-    else if (terrainChoisi.EventSurTerrain[0].Nom != "De la mauvaise herbe") 
+    else if (terrainChoisi.EventSurTerrain.Nom != "De la mauvaise herbe") 
     {
         Console.WriteLine("Il n'y a pas de mauvaise herbe sur ce terrain");
     }
     else
     {
-        terrainChoisi.EventSurTerrain.RemoveAt(0);
+        terrainChoisi.EventSurTerrain = null;
         terrainChoisi.Event = false;
         Console.WriteLine("Le potager a été désherbé.");
     }
@@ -469,6 +470,7 @@ void ActionTraiter(Potager potager)
         if (planteChoisie.Malade==1)
         {
             planteChoisie.Malade = 0;
+            planteChoisie.VitesseDeCroissance = 1;
         
             Console.WriteLine("La plante a été traitée, elle n'est plus malade");
         }

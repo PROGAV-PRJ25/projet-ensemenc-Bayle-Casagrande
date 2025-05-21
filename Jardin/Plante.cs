@@ -65,7 +65,7 @@ public abstract class Plante
 
         if (chanceMalade == 10) //1 chance sur 10 que la plante tombe effectivement malade
         {
-            this.VitesseDeCroissance -= 0.25; //diminue sa vitesse de croissance
+            this.VitesseDeCroissance = 0.75; //diminue sa vitesse de croissance de 25%
             Malade = 1; //actualisation de sa condition
         }
     }
@@ -80,9 +80,9 @@ public abstract class Plante
             { compteur -= 1; }
             if (TerrainPlante.Type != TerrainPrefere) //si la plante n'est pas sur son terrain préféré
             { compteur -= 1; }
-            if ((TerrainPlante.Humidite > BesoinHumidite * 1.4) || (TerrainPlante.Humidite < BesoinHumidite * 0.4)) //Les plantes acceptent une marge de 40% à partir de leur besoin en humidité
+            if ((TerrainPlante.Humidite > BesoinHumidite * 1.5) || (TerrainPlante.Humidite < BesoinHumidite * 0.5)) //Les plantes acceptent une marge de 40% à partir de leur besoin en humidité
             { compteur -= 1; }
-            if ((TerrainPlante.Temperature > BesoinTemperature * 1.4) || (TerrainPlante.Temperature < BesoinTemperature * 0.4)) //Les plantes acceptent une marge de 40% à partir de leur besoin en température
+            if ((TerrainPlante.Temperature > BesoinTemperature * 1.5) || (TerrainPlante.Temperature < BesoinTemperature * 0.5)) //Les plantes acceptent une marge de 40% à partir de leur besoin en température
             { compteur -= 1; }
             if (SaisonDePlantaison != SaisonDePlantaisonPrefere) //si la plante n'est pas plantée lors de sa saison de prédilection
             { compteur -= 1; }
