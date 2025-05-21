@@ -20,7 +20,7 @@ potagerIrlandais.AjouterTerrain(terrainTourbiere);
 //---------programme principal structure-------------------------------
 
 //phase d'introduction
-/*PresenterIntroduction(ref nbTour);
+PresenterIntroduction(ref nbTour);
 
 //tours
  while (mois < nbTour)
@@ -41,7 +41,7 @@ potagerIrlandais.AjouterTerrain(terrainTourbiere);
 
 
 Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces. ");
-Console.WriteLine(potagerIrlandais);*/
+Console.WriteLine(potagerIrlandais);
 
 
 //-------------------fonctions principales de déroulement de tour--------------
@@ -633,7 +633,7 @@ RentrerMagasin(magasin1);*/
 
 //------Test état plante------
 
-Trefle plante1 = new Trefle(); 
+/*Trefle plante1 = new Trefle(); 
 Iris plante2 = new Iris(); 
 Jonc plante3 = new Jonc(); 
 Ail plante6 = new Ail();
@@ -656,5 +656,5 @@ Console.WriteLine(plante1.Compteur);
 
 //Test du type de terrain bien rempli leur de l'action semer()
 Console.WriteLine(plante1.TerrainPlante.Type); 
-Console.WriteLine(plante1.TerrainPrefere); 
+Console.WriteLine(plante1.TerrainPrefere);  */
 
