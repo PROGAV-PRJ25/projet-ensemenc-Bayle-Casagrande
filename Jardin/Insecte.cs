@@ -19,7 +19,6 @@ public class Insecte : Evenement
         else
         {
             terEvent.EventSurTerrain = null;
-            terEvent.Event = false;
             terEvent.Fertilite = 1;
         }
         

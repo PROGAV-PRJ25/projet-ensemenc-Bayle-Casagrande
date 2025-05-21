@@ -70,8 +70,6 @@ public abstract class Terrain
                 
             }
     }
-
-    public bool Event {get; set;} //Si True, un event a lieu sur le terrain
     public string Meteo {get; set;}
 
 
@@ -81,7 +79,6 @@ public abstract class Terrain
         NombreDePlante = 0;
         Plantation = new List<Plante>();
         Capacite = 10;
-        Event = false;
         Acidite = false;
     }
     
@@ -174,19 +171,16 @@ public abstract class Terrain
         if (chance == 1)
         {
             Evenement fee = new Fee();
-            Event = true;
             this.EventSurTerrain = fee;
         }
         else if (chance == 2)
         {
             Evenement insecte = new Insecte();
-            Event = true;
             this.EventSurTerrain = insecte;
         }
         else if (chance == 3)
         {
             Evenement herbe = new Herbe();
-            Event = true;
             this.EventSurTerrain = herbe;
         }
     }

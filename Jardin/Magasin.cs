@@ -34,7 +34,7 @@ public class Magasin
             affichage += "------ Vous avez récolté : ------";
             foreach(Plante p in PlantesRecoltes) //affichage des plantes récoltées et donc susceptible d'être vendues
             {
-                affichage += $"- {p.Nom}, prix de vente à {p.PrixDeVente} pièces ";
+                affichage += $"\n- {p.Nom}, prix de vente : {p.PrixDeVente} pièces \n";
             }
             affichage += " \n";
         }

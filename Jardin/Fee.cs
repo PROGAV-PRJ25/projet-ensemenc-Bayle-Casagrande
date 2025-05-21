@@ -2,7 +2,7 @@ public class Fee : Evenement
 {
     public Fee()
     {
-        Nom = "🧚‍♀️Une fée";
+        Nom = "🧚Une fée";
         ComptMois = 0;
         Duree = 2;
     }
@@ -18,7 +18,6 @@ public class Fee : Evenement
         else
         {
             terEvent.EventSurTerrain = null;
-            terEvent.Event = false;
             terEvent.Fertilite=1;
         }
 
