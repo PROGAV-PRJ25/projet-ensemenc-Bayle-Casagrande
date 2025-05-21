@@ -75,7 +75,7 @@ public abstract class Terrain
 
     public bool Event {get; set;}
     public Potager PotagerTerrain {get; set;}
-    public string Meteo {get; set;}
+    public string? Meteo {get; set;}
 
     public Terrain()
     {
@@ -84,6 +84,7 @@ public abstract class Terrain
         Capacite = 10;
         Event = false;
         EventSurTerrain = new List<Evenement>();
+        ChangerMeteo(); //La valeur Meteo est ainsi initialiser
     }
     public override string ToString()
     {
@@ -111,18 +112,18 @@ public abstract class Terrain
         }
         else 
         {
-            string affichage ="\nLa graine a été semée dans ce terrain.";
+            string affichage ="\nLa graine a été semée dans ce terrain.\n";
             NombreDePlante +=1;
             Plantation.Add(nouvellePlante);
             nouvellePlante.TerrainPlante=this;
             nouvellePlante.Age =0;
             nouvellePlante.SaisonDePlantaison=CalculerSaisonPlantaison(temps);
             if (nouvellePlante.TerrainPlante.Type != nouvellePlante.TerrainPrefere)
-                {affichage += "\nMais cette graine n'a pas été semée dans son terrain préféré...\n";}
+                {affichage += "Mais cette graine n'a pas été semée dans son terrain préféré...\n";}
             if (nouvellePlante.TerrainPlante.Capacite - nouvellePlante.TerrainPlante.NombreDePlante < nouvellePlante.PlaceNecessaire)
-                {affichage += "\nCette graine se sent très serrée sur ce terrain...\n";}
+                {affichage += "Cette graine se sent très serrée sur ce terrain...\n";}
             if (nouvellePlante.SaisonDePlantaison != nouvellePlante.SaisonDePlantaisonPrefere)
-                {affichage += "\nCette graine n'a pas été plantée à la bonne saison...\n";}
+                {affichage += "Cette graine n'a pas été plantée à la bonne saison...\n";}
             return affichage;
         }
     }

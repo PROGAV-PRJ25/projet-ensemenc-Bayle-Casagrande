@@ -20,7 +20,7 @@ potagerIrlandais.AjouterTerrain(terrainTourbiere);
 //---------programme principal structure-------------------------------
 
 //phase d'introduction
-PresenterIntroduction(ref nbTour);
+/*PresenterIntroduction(ref nbTour);
 
 //tours
  while (mois < nbTour)
@@ -41,7 +41,7 @@ PresenterIntroduction(ref nbTour);
 
 
 Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces. ");
-Console.WriteLine(potagerIrlandais);
+Console.WriteLine(potagerIrlandais);*/
 
 
 //-------------------fonctions principales de déroulement de tour--------------
@@ -631,24 +631,30 @@ void ActionJeter(Potager potager)
 RentrerMagasin(magasin1);*/
 
 
-//Test état plante
-/*Trefle plante1 = new Trefle(); //morte
-Trefle plante2 = new Trefle(); //malade
-Trefle plante3 = new Trefle(); //proche mort
-Trefle plante4 = new Trefle(); 
-Trefle plante5 = new Trefle();
+//------Test état plante------
+
+Trefle plante1 = new Trefle(); 
+Iris plante2 = new Iris(); 
+Jonc plante3 = new Jonc(); 
+Ail plante6 = new Ail();
+Trefle plante7 = new Trefle(); 
+
 Potager potager = new Potager();
 
-TerreBrune terrain1 = new TerreBrune(4);
-Console.WriteLine(terrain1.Semer(plante1));
-Console.WriteLine(terrain1.Semer(plante2));
-Console.WriteLine(terrain1.Semer(plante3));
-Console.WriteLine(terrain1.Semer(plante4));
-Console.WriteLine(terrain1.Semer(plante5));
+TerreBrune terrain1 = new TerreBrune();
+Console.WriteLine(terrain1.Semer(plante1,3)); //planter en printemps
+Console.WriteLine(terrain1.Semer(plante2,4)); //planter en ete
+Console.WriteLine(terrain1.Semer(plante3,8)); //planter en automne
+Console.WriteLine(terrain1.Semer(plante6, 11));  //planter en hiver
+Console.WriteLine(terrain1.Semer(plante7, 11));  //planter en hiver
 
 Console.WriteLine(potager.AjouterTerrain(terrain1)); 
-Console.WriteLine(plante1); 
+Console.WriteLine(potager);
+
+//Test compteur
 Console.WriteLine(plante1.Compteur); 
+
+//Test du type de terrain bien rempli leur de l'action semer()
 Console.WriteLine(plante1.TerrainPlante.Type); 
-Console.WriteLine(plante1.TerrainPrefere); */
+Console.WriteLine(plante1.TerrainPrefere); 
 

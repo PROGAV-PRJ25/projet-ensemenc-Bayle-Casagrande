@@ -123,16 +123,16 @@ public abstract class Plante
             if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
             { affichage += "🔔 Cette plante se sent très serrée.\n"; }
 
-            if (TerrainPlante.Humidite < BesoinHumidite * 0.2)
+            if (TerrainPlante.Humidite < BesoinHumidite * 0.4)
             { affichage += "🔔 L'humidité est trop basse pour cette plante.\n"; }
 
-            if (TerrainPlante.Humidite > BesoinHumidite * 1.2)
+            if (TerrainPlante.Humidite > BesoinHumidite * 1.4)
             { affichage += "🔔 L'humidité est trop élevée pour cette plante.\n"; }
 
-            if (TerrainPlante.Temperature > BesoinTemperature * 1.2)
+            if (TerrainPlante.Temperature > BesoinTemperature * 1.4)
             { affichage += "🔔 La température est trop élevée pour cette plante.\n"; }
 
-            if (TerrainPlante.Temperature < BesoinTemperature * 0.2)
+            if (TerrainPlante.Temperature < BesoinTemperature * 0.4)
             { affichage += "🔔 La température est trop basse pour cette plante.\n"; }
             //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne seraient pas bon ne sont pas affiché s
             //Car le joueur ne peut rien y faire
@@ -195,7 +195,7 @@ public abstract class Plante
         {
             string[] pousse = AfficherPlante(this); //affichage de la plante en graphique, récupération de la pousse
 
-            string affichage = $"- Nom : {Nom} | Age : {Age} | Taille : {Taille} | Hydratation:{Hydratation}\n "; //résumé de la plante et de ses conditions
+            string affichage = $"- Nom : {Nom} | Age : {Age} | Taille : {Taille} | Hydratation : {Hydratation}\n "; //résumé de la plante et de ses conditions
 
             affichage += AfficherProblemePlante(); //affichage des problème de la plante
 
