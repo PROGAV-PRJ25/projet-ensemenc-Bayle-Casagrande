@@ -95,7 +95,7 @@ public class Potager
             int sensVerticale = 1;
 
             string? actionJoueur = ""; //Ce que le joueur va ecrire dans la console
-            string planteManger = ""; //affichage finale des plantes mangé
+            string planteManger = ""; //affichage finale des plantes mangées
             int reussite = 0; //Le joueur ne reussit pas forcement à faire fuir la souris
 
             Console.Clear();
@@ -104,7 +104,7 @@ public class Potager
             Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
             System.Threading.Thread.Sleep(700);
 
-            while (!(actionJoueur == "chasser" && reussite == 1)) //Le joueur doit ecrire 'chasser' dan sla console pour stopper le mouvement de la souris
+            while (!(actionJoueur == "chasser" && reussite == 1)) //Le joueur doit ecrire 'chasser' dans la console pour stopper le mouvement de la souris
             {
                 Console.Clear();
                 Console.WriteLine($"URGENCE : Une souris se déplace dans le terrain {terrain.Type} ! Elle mange toutes vos plantes.");
@@ -114,7 +114,7 @@ public class Potager
                 grille[positionLigne, positionColonne] = null; 
                 DeplacerSouris(ref positionLigne, ref positionColonne, ref sensHorizontale, ref sensVerticale, taille);
                 
-                if (grille[positionLigne, positionColonne] == "🌱​") // si la souris est sur une plante, la plante est manger donc supprimer
+                if (grille[positionLigne, positionColonne] == "🌱​") // si la souris est sur une plante, la plante est mangée donc supprimée
                 {
                     int indexPlanteSupprimer = random.Next(0, terrain.Plantation.Count);
                     planteManger += $"{terrain.Plantation[indexPlanteSupprimer]}\n ";
@@ -165,7 +165,7 @@ public class Potager
 
             string? actionJoueur = ""; //De même, contient le mot écrit par le joueur
             int reussite = 0;
-            int esperancePerdu = 0; //Les plantes perde de l'éspérance de vie dans la durée ou les plante ne sont pas protégé
+            int esperancePerdu = 0; //Les plantes perdent de l'esperance de vie dans la durée ou les plantes ne sont pas protégées
             int perdre = 0; //Les plantes ne perdront pas de l'esperance de vie à chaque tour de boucle
 
             Console.Clear();
@@ -182,7 +182,7 @@ public class Potager
                 Console.WriteLine("Ecrivez 'proteger' dans la console pour placer une bache sur vos plantes !");
                 Console.WriteLine("Attention la bache n'est pas facile à mettre...");
 
-                foreach (Plante plante in terrain.Plantation) //Toutes les plantes du terrains peuvent perdre de l'éspérance de vie
+                foreach (Plante plante in terrain.Plantation) //Toutes les plantes du terrains peuvent perdre de l'espérance de vie
                 {
                     perdre = random.Next(0, 10); // Les plantes ont 1 chance sur 10 de perdre 1 d'espérance de vie à chaque tour de boucle
                     if (perdre == 9)
@@ -211,7 +211,7 @@ public class Potager
                     System.Threading.Thread.Sleep(500);
                     actionJoueur = "";
                 }
-                System.Threading.Thread.Sleep(500); //Permet d'espacée les chutes de pluie
+                System.Threading.Thread.Sleep(500); //Permet d'espacer les chutes de pluie
 
                 // Si une touche a été pressée, lire la ligne 
                 if (Console.KeyAvailable)
@@ -220,7 +220,7 @@ public class Potager
                     reussite = random.Next(0, 2); //Le joueur a une chance sur 2 de reussir à faire fuir la souris
                 }
 
-                // on remet l'affichage du jardin a zéro grace à la grillePluie créé qui n'est jamais modifier
+                // on remet l'affichage du jardin a zéro grace à la grillePluie créé qui n'est jamais modifiée
                 for (int i = 0; i < taille / 2; i++)
                 {
                     for (int j = 0; j < taille / 2; j++)
@@ -238,7 +238,7 @@ public class Potager
     
 
 
-//-------------------fonctions utiliser par le mode urgence--------------
+//-------------------fonctions utilisées par le mode urgence--------------
     public string AfficherPotagerDynamique(int taille, string[,] grille) //Affichage de la grille du potager dynamique
     {
         string retour = "";
@@ -276,12 +276,12 @@ public class Potager
             colonne = nombreAleatoire;
             grille[colonne, ligne] = "​🌱​";
 
-            while (colonne == nombreAleatoire) //il ne faut pas que la deuxieme plante soit placé au meme endroit
+            while (colonne == nombreAleatoire) //il ne faut pas que la deuxieme plante soit placée au meme endroit
             {
                 nombreAleatoire = random.Next(0, taille / 2);
             }
 
-            if ((i + 2) < nbPlante) // dans le cas ou le nbPlante est impair, il faut afficher une seul plante sur la dernière ligne
+            if ((i + 2) < nbPlante) // dans le cas ou le nbPlante est impair, il faut afficher une seule plante sur la dernière ligne
             {
                 colonne = nombreAleatoire;
                 grille[colonne, ligne] = "🌱​";
@@ -299,13 +299,12 @@ public class Potager
         {
             positionColonne += sensVerticale;
         }
-
         // Si ce n'est pas possible on change le sens verticale, elle redescend ou remonte sur la colonne à droite ou à gauche en fonction du sensHorizontale =1 ou =-1
         else
         {
             sensVerticale = sensVerticale * (-1);
 
-            if ((positionLigne + 1 + sensHorizontale > 0) && (positionLigne + sensHorizontale < taille / 2)) // Elle se déplace aussi à droite ou a gauche pour cahnger de colonne
+            if ((positionLigne + 1 + sensHorizontale > 0) && (positionLigne + sensHorizontale < taille / 2)) // Elle se déplace aussi à droite ou a gauche pour changer de colonne
             {
                 positionLigne += sensHorizontale;
             }
