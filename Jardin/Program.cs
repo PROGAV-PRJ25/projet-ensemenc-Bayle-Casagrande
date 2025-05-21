@@ -9,7 +9,7 @@ int argentJoueur = 15;
 
 //-------- création des objets--------
 Potager potagerIrlandais = new Potager();
-Magasin magasin = new Magasin(argentJoueur);
+Magasin magasin = new Magasin(argentJoueur,potagerIrlandais.PlantesWiki);
 TerreBrune terrainTerreBrune = new TerreBrune();
 Tourbiere terrainTourbiere = new Tourbiere();
 Gleys terrainGleys = new Gleys();
@@ -176,7 +176,7 @@ void FaireActionJoueur(int nbAction, Magasin magasin, Potager potager, int temps
                 break;
 
             case "7":
-                magasin.AfficherWiki(potager);
+                potager.AfficherWiki();
                 break;
 
             case "8":

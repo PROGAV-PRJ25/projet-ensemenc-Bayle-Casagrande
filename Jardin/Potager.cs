@@ -7,12 +7,23 @@ public class Potager
     public List<Terrain> Terrains { get; set; } //liste des terrains présents dans le potager
     public List<Plante> PlantesRecoltables {get;set;} //liste des plantes récoltables dans le potager
     public int Saison {get; set;} //saison du potager
+    public List<Plante> PlantesWiki {get; set;}
+
 
     //-----constructeur----
     public Potager()
     {
         PlantesRecoltables = new List<Plante>();
         Terrains = new List<Terrain>();
+
+        //création des plantes pour le wiki
+        Plante ail = new Ail();
+        Plante bruyere = new Bruyere();
+        Plante drosera = new Drosera();
+        Plante iris = new Iris();
+        Plante jonc = new Jonc();
+        Plante trefle = new Trefle();
+        PlantesWiki = new List<Plante>() { ail, bruyere, drosera, iris, jonc, trefle };
     }
     
     //------affichage-------
@@ -77,6 +88,42 @@ public class Potager
         }
     }
 
+    public void AfficherWiki()
+    {
+        Console.WriteLine("\nBienvenue dans le wiki !");
+        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Météo\n4 - Sortir\n");
+
+        string choix = Console.ReadLine()!;
+
+        while ((choix!="1")&&(choix!="2")&&(choix!="3")&&(choix!="4"))
+        {
+            Console.WriteLine("La saisie n'est pas valide, veuillez recommencer");
+            choix = Console.ReadLine()!;
+        }
+
+        string affichage = "";
+        if (choix == "1")
+        {
+            foreach (Terrain t in this.Terrains)
+            {
+                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo}  \n";
+            }
+            Console.WriteLine(affichage);
+        }
+        else if (choix == "2")
+        {
+            foreach (Plante p in PlantesWiki)
+            {
+                affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces \n";
+            }
+            Console.WriteLine(affichage);
+        }
+        else if (choix == "3")
+        {
+            Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
+        }
+
+    }
 
     public void FaireUrgence(Terrain terrain, string type) //mode urgence soit souris soit tempête
     {
@@ -111,9 +158,9 @@ public class Potager
                 Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
                 Console.WriteLine("Attention vous ne la ferez peut etre pas fuir du premier coup...");
 
-                grille[positionLigne, positionColonne] = null; 
+                grille[positionLigne, positionColonne] = null;
                 DeplacerSouris(ref positionLigne, ref positionColonne, ref sensHorizontale, ref sensVerticale, taille);
-                
+
                 if (grille[positionLigne, positionColonne] == "🌱​") // si la souris est sur une plante, la plante est mangée donc supprimée
                 {
                     int indexPlanteSupprimer = random.Next(0, terrain.Plantation.Count);
@@ -154,7 +201,7 @@ public class Potager
             Random random = new Random();
 
             // Création d'une deuxieme grille, pour afficher la pluie sur le jardin, on conserve ainsi une grille de base
-            string[,] grillePluie = new string[taille / 2, taille / 2]; 
+            string[,] grillePluie = new string[taille / 2, taille / 2];
             for (int i = 0; i < taille / 2; i++)
             {
                 for (int j = 0; j < taille / 2; j++)
