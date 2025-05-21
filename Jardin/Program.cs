@@ -138,53 +138,53 @@ void ActualiserEvent(Potager potager)
 void FaireActionJoueur(int nbAction, Magasin magasin, Potager potager, int temps)
 {
     string reponse = "";
-    //for (int i = 0;i<nbAction;i++) //Dans le cas ou le nombre d'action serait limiter
-    while (reponse !="9")
+    
+    while (reponse != "9")
     {
         Console.WriteLine("\nQue souhaitez-vous faire ?");
         Console.WriteLine("1 - Semer\n2 - Récolter\n3 - Désherber\n4 - Arroser\n5 - Traiter\n6 - Jeter\n7 - Wiki\n8 - Magasin\n9 - Ne rien faire");
         reponse = Console.ReadLine()!; //mettre un vérif de cas
-        while ((reponse!="1")&&(reponse!="2")&&(reponse!="3")&&(reponse!="4")&&(reponse!="5")&&(reponse!="6")&&(reponse!="7")&&(reponse!="8")&&(reponse!="9"))
+        while ((reponse != "1") && (reponse != "2") && (reponse != "3") && (reponse != "4") && (reponse != "5") && (reponse != "6") && (reponse != "7") && (reponse != "8") && (reponse != "9"))
         {
             Console.WriteLine("La saisie est invalide veuillez réessayer");
             reponse = Console.ReadLine()!;
         }
         switch (reponse)
         {
-            case "1" :
-            ActionSemer(magasin, potager, temps);
-            break;
+            case "1":
+                ActionSemer(magasin, potager, temps);
+                break;
 
-            case "2" :
-            ActionRecolter(potager, magasin);
-            break;
+            case "2":
+                ActionRecolter(potager, magasin);
+                break;
 
-            case "3" :
-            ActionDesherber(potager);
-            break;
+            case "3":
+                ActionDesherber(potager);
+                break;
 
-            case "4" :
-            ActionArroser(potager);
-            break;
+            case "4":
+                ActionArroser(potager);
+                break;
 
-            case "5" :
-            ActionTraiter(potager);
-            break;
+            case "5":
+                ActionTraiter(potager);
+                break;
 
-            case "6" :
-            ActionJeter(potager);
-            break;
+            case "6":
+                ActionJeter(potager);
+                break;
 
-            case "7" :
-            magasin.AfficherWiki(potager);
-            break;
-     
-            case "8" :
-            RentrerMagasin(magasin);
-            break;
+            case "7":
+                magasin.AfficherWiki(potager);
+                break;
 
-            case "9" :
-            break;
+            case "8":
+                RentrerMagasin(magasin);
+                break;
+
+            case "9":
+                break;
 
         }
     }

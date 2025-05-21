@@ -208,8 +208,6 @@ public class Magasin
         else if (choix == "3")
         {
             Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
-
-
         }
 
     }
