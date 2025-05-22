@@ -73,6 +73,7 @@ public abstract class Terrain
     public string Meteo {get; set;}
 
 
+
     //--------------Constructeur-----------
     public Terrain()
     {
@@ -80,6 +81,7 @@ public abstract class Terrain
         Plantation = new List<Plante>();
         Capacite = 10;
         Acidite = false;
+        ChangerMeteo(); //La valeur Meteo est ainsi initialiser
     }
     
     //--------------affichage terrain----------------

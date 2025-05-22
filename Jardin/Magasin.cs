@@ -47,6 +47,7 @@ public class Magasin
     public string Vendre()
     {
         string affichage="";
+
         Console.WriteLine("Voici vos possibilités de ventes :");
         int i =0;
         foreach (Plante p in PlantesRecoltes)
@@ -55,23 +56,20 @@ public class Magasin
             i++;
         }
         Console.WriteLine(affichage);
-        Console.WriteLine("\nQuelle plante ? Donnez son numéro\n");
+
+        Console.WriteLine("\nQuelle plante voulez vous vendre ? Donnez son numéro\n");
         int numeroChoisie = Convert.ToInt32(Console.ReadLine());
-        if (numeroChoisie<0  || numeroChoisie>PlantesRecoltes.Count-1)
+        
+        if (numeroChoisie < 0 || numeroChoisie > PlantesRecoltes.Count - 1)
         {
             return $"Le numéro n'est pas valide.";
         }
-        Plante planteAVendre = PlantesRecoltes[numeroChoisie];
-        if (planteAVendre.Taille==4 && planteAVendre.Mort==0) //Cette condition est toujours vérifier, car les plantes sont dans la liste PlantesRecoltables qui verifie deja cela 
-        {
-            ArgentJoueur += planteAVendre.PrixDeVente;
-            PlantesRecoltes.Remove(planteAVendre);
-            return  $"La plante a été vendue pour {planteAVendre.PrixDeVente} pièces";
-        }
-        else 
-        {
-            return "La plante n'a pas pu être vendue. La plante est soit morte, soit pas encore mûre.";
-        }
+
+        Plante planteAVendre = PlantesRecoltes[numeroChoisie]; //Pour afficher ensuite le prix de vente
+
+        ArgentJoueur += PlantesRecoltes[numeroChoisie].PrixDeVente;
+        PlantesRecoltes.Remove(PlantesRecoltes[numeroChoisie]);
+        return  $"La plante a été vendue pour {planteAVendre.PrixDeVente} pièces";
     }
 
     public Plante VerifierExistancePlante(string planteAcheter, ref bool existence)
@@ -138,6 +136,7 @@ public class Magasin
     public string Acheter()
     {
         string affichage="";
+
         Console.WriteLine("Voici vos possibilités d'achats :");
         foreach (Plante p in PlantesWiki)
         {
@@ -145,13 +144,13 @@ public class Magasin
         }
         Console.WriteLine(affichage);
         
-        Console.WriteLine($"\nQuelle plante ? Vous avez {ArgentJoueur} pièces.\n");
+        Console.WriteLine($"\nQuelle plante voulez vous acheter ? Vous avez {ArgentJoueur} pièces.\n");
         string planteChoisie = Convert.ToString(Console.ReadLine()!);
         
-        bool existence = false;
+        bool existence = false; //Permet de savoir si une plante a été acheter ou non
         Plante? planteAAcheter = VerifierExistancePlante(planteChoisie, ref existence);
         
-        if (existence==true)
+        if (existence==true) //La plante existe, a été créer et peut être acheter
         {
             if (ArgentJoueur>=planteAAcheter.PrixAchatGraine)
             {
@@ -164,10 +163,49 @@ public class Magasin
                 return "La graine n'a pas pu être achetée";
             }
         }
-        else
+        else //La plante n'existe pas et n'a pas pu être créer donc acheter
         {
             return "Cette plante n'existe pas. Il faut écrire seulement le nom de la plante, sans majuscule ni accent.";
         }
+    }
+    
+    public void AfficherWiki(Potager potager)
+    {
+        Console.WriteLine("\nBienvenue dans le wiki !");
+        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Météo\n4 - Sortir\n");
+
+        string choix = Console.ReadLine()!;
+
+        while ((choix != "1") && (choix != "2") && (choix != "3") && (choix != "4"))
+        {
+            Console.WriteLine("La saisie n'est pas valide, veuillez recommencer");
+            choix = Console.ReadLine()!;
+        }
+
+        string affichage = "";
+        if (choix == "1")
+        {
+            foreach (Terrain t in potager.Terrains)
+            {
+                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo}  \n";
+            }
+            Console.WriteLine(affichage);
+        }
+        else if (choix == "2")
+        {
+            foreach (Plante p in PlantesWiki)
+            {
+                affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces \n";
+            }
+            Console.WriteLine(affichage);
+        }
+        else if (choix == "3")
+        {
+            Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
+
+
+        }
+
     }
 
 }
