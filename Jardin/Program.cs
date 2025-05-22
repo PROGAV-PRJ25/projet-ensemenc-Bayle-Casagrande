@@ -30,7 +30,7 @@ PresenterIntroduction(ref nbTour);
 
 
 //tours
-while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.PlantesRecoltes.Count > 0)) 
+while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.PlantesRecoltes.Count > 0 || magasin.GrainesAchetes.Count > 0 )) 
 //Dans le cas ou le joueur n'a plus d'argent, plus de plantes récoltées et plus de plantes sur les terrains : le joueur a perdu. Il ne peut plus rien faire
 {
     mois += 1;
@@ -47,7 +47,7 @@ while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.Plante
     nombrePlantes = CompterPlanteTerrain(potagerIrlandais);
 }
 
-if (argentJoueur > 0 && nombrePlantes > 0 && magasin.PlantesRecoltes.Count > 0)
+if (argentJoueur > 0 && nombrePlantes > 0 && magasin.PlantesRecoltes.Count > 0 && magasin.GrainesAchetes.Count > 0)
 {
     Console.WriteLine("Vous avez perdu, car vous n'aviez plus de plantes et plus d'argents...");
 }
