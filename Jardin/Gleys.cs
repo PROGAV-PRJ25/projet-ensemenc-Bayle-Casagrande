@@ -9,10 +9,5 @@ public class Gleys: Terrain
         Capacite = 30;
     }
 
-    public override string Semer(Plante nouvellePlante, int temps)
-    {
-        nouvellePlante.Hydratation=90;
-        return base.Semer(nouvellePlante, temps);
 
-    }
 }

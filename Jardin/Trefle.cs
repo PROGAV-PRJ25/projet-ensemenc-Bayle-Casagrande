@@ -5,7 +5,7 @@ public class Trefle : Plante
         Nature = "Plante chanceuse";
         VitesseDeCroissance = 1;
         EsperanceDeVie = 12;
-        PrixDeVente = 10;
+        PrixDeVente = 9;
         PrixAchatGraine = 2;
         PlaceNecessaire=2;
         TerrainPrefere = "Terre Brune";
@@ -21,21 +21,21 @@ public class Trefle : Plante
     }
     public override void ChangerTaillePlante(double croissance )
     {
-        if (croissance<3)
+        if (croissance<2)
         {
             this.Taille = 1;
         }
-        else if ((croissance>=3)&&(croissance<6))
+        else if ((croissance>=2)&&(croissance<4))
         {
             this.Taille = 2;
 
         }
-        else if ((croissance>=6)&&(croissance<9))
+        else if ((croissance>=4)&&(croissance<6))
         {
             this.Taille = 3;
             
         }
-        else if (croissance>=9)
+        else if (croissance>=6)
         {
             this.Taille = 4;
             

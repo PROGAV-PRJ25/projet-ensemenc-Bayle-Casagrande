@@ -5,7 +5,7 @@ public class Magasin
     public int ArgentJoueur {get; set;}
     public List<Plante> GrainesAchetes {get; set;}
     public List<Plante> PlantesRecoltes {get;set;}
-    public List<Plante> PlantesWiki {get; set;}
+    protected List<Plante> PlantesWiki {get; set;}
 
     public Magasin(int argentJoueur, List<Plante> wiki)
     {
@@ -19,28 +19,27 @@ public class Magasin
     public override string ToString()
     {
         string affichage="";
-        affichage += "\nBienvenu dans le magasin, vous pouvez acheter des graines ou vendre vos plantes récoltées ici. \n";
+        affichage += "\nBienvenu dans le magasin, vous pouvez acheter des graines ou vendre vos plantes récoltées ici. \n\n";
         if (GrainesAchetes.Count >0) //affichage des graines détenues
         {
-            affichage += "------ Vous avez déjà des graines : ------ ";
+            affichage += "------ Vous avez déjà des graines : ------ \n";
             foreach(Plante p in GrainesAchetes)
             {
-                affichage += $"- {p.Nom} ";
+                affichage += $"- {p.Nom} \n";
             }
             affichage += " \n";
         }
         if (PlantesRecoltes.Count>0)
         {
-            affichage += "------ Vous avez récolté : ------";
+            affichage += "------ Vous avez récolté : ------\n";
             foreach(Plante p in PlantesRecoltes) //affichage des plantes récoltées et donc susceptible d'être vendues
             {
-                affichage += $"\n- {p.Nom}, prix de vente : {p.PrixDeVente} pièces \n";
+                affichage += $"- {p.Nom}, prix de vente : {p.PrixDeVente} pièces \n";
             }
             affichage += " \n";
         }
 
-        // Mettre les possibilité d'achat
-        affichage += $"\nVous avez {ArgentJoueur} pièces.";        
+        affichage += $"Vous avez {ArgentJoueur} pièces.\n";        
         return affichage;
     }
     
@@ -127,7 +126,7 @@ public class Magasin
         {
             Plante planteAAcheter = new Trefle(); //Ne sert à rien juste à retourner
             existence = false;
-            return null; 
+            return planteAAcheter; 
         }
 
     }
@@ -202,8 +201,6 @@ public class Magasin
         else if (choix == "3")
         {
             Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
-
-
         }
 
     }

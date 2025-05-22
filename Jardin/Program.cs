@@ -8,6 +8,7 @@ int mois = 0;
 int nbTour = 10;
 int argentJoueur = 15;
 int choixActionJoueur = -1;
+int nombrePlantes = 0; //Permet de savoir combien de plante sont planté dans tout terrain confondu
 //-------- création des objets--------
 Potager potagerIrlandais = new Potager();
 Magasin magasin = new Magasin(argentJoueur,potagerIrlandais.PlantesWiki);
@@ -27,25 +28,31 @@ potagerIrlandais.AjouterTerrain(terrainTourbiere);
 //phase d'introduction
 PresenterIntroduction(ref nbTour);
 
+
 //tours
- while (mois < nbTour)
- {
-    mois +=1;
+while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.PlantesRecoltes.Count > 0)) 
+//Dans le cas ou le joueur n'a plus d'argent, plus de plantes récoltées et plus de plantes sur les terrains : le joueur a perdu. Il ne peut plus rien faire
+{
+    mois += 1;
     ActiverModeUrgence(potagerIrlandais);
     Console.Clear();
     Console.WriteLine($"\n\n%%%%%%%%% Mois {mois} : {terrainGleys.CalculerSaisonPlantaison(mois)} %%%%%%%%%");
-    ChangerClimat(potagerIrlandais,mois);
+    ChangerClimat(potagerIrlandais, mois);
     ActualiserPlantes(potagerIrlandais);
     ActualiserEvent(potagerIrlandais);
     Console.WriteLine(potagerIrlandais);
     System.Threading.Thread.Sleep(5000);
     FaireActionJoueur(6, magasin, potagerIrlandais, mois);//action joueur + wiki
     System.Threading.Thread.Sleep(1000);
-
+    nombrePlantes = CompterPlanteTerrain(potagerIrlandais);
 }
 
+if (argentJoueur > 0 && nombrePlantes > 0 && magasin.PlantesRecoltes.Count > 0)
+{
+    Console.WriteLine("Vous avez perdu, car vous n'aviez plus de plantes et plus d'argents...");
+}
 
-Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces. ");
+Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces en {nbTour} mois. ");
 Console.WriteLine(potagerIrlandais);
 
 
@@ -53,7 +60,7 @@ Console.WriteLine(potagerIrlandais);
 
 void PresenterIntroduction(ref int nbTour)
 {
-    Console.Clear();
+    //Console.Clear();
     Console.WriteLine("🇮🇪 Bienvenu dans le jeu du potager Irlandais ! 🇮🇪\n");
     Console.WriteLine("Règles : ");
     Console.WriteLine("");
@@ -61,9 +68,9 @@ void PresenterIntroduction(ref int nbTour)
     Console.WriteLine("");
     Console.WriteLine("Chaque plante a des besoins spécifiques. \nTels qu'une saison de plantaison préféré, un terrain préféré.\nMais aussi une température et une humidité qui les maintiennent en vie.\nElles ont aussi besoin d'une certaine place pour grandir sereinement.\n"); 
     Console.WriteLine("");
-    Console.WriteLine("Attention ! Des évènements spéciaux peuvent avoir lieu sur vos terrains.\nTels que des fées 🧚 qui augmenteront la fertilité, mais aussi des insectes 🪲 et de la mauvaise herbe 🌿 qui ralentiront la croissance de vos plantes.\n");
+    Console.WriteLine("Attention ! Des évènements spéciaux peuvent avoir lieu sur vos terrains.\nTels que des fées 🧚 qui augmenteront la fertilité, mais aussi des insectes 🪲  et de la mauvaise herbe 🌿 qui ralentiront la croissance de vos plantes.\n");
     Console.WriteLine("");
-    Console.WriteLine(" 🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudra alors vite écrire le mot indiqué pour protéger vos plantes.\nLes souris 🐁 mangent les plantes, tandis que la tempête ⛈️ les abîme. \n");
+    Console.WriteLine("🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudra alors vite écrire le mot indiqué pour protéger vos plantes.\nLes souris 🐁 mangent les plantes, tandis que la tempête ⛈️ les abîme. \n");
     Console.WriteLine("");
     Console.WriteLine("Vous avez trois terrains dans votre potager Irlandais, avec chacun des caractéristiques spéciales notamment sur l'humidité et la température.\n");
     // nbTour = Convert.ToInt32(Console.ReadLine()!);
@@ -136,7 +143,18 @@ void ActualiserEvent(Potager potager)
     }
 }
 
-
+int CompterPlanteTerrain(Potager potager)
+{
+    int nb = 0;
+    foreach (Terrain t in potager.Terrains)
+    {
+        foreach (Plante p in t.Plantation)
+        {
+            nb += 1;
+        }
+    }
+    return nb;
+}
 //-------------------fonctions action joueur--------------
 
 void FaireActionJoueur(int nbAction, Magasin magasin, Potager potager, int temps)
@@ -326,7 +344,7 @@ void ActionDesherber(Potager potager)
     
 }
 
-void ActionArroser(Potager potager)
+/*void ActionArroser(Potager potager)
 {
     Console.WriteLine("\nChoisissez le numéro du terrain de la plante à arroser");
 
@@ -360,7 +378,28 @@ void ActionArroser(Potager potager)
         planteChoisie.Hydratation += 20;
         Console.WriteLine("La plante a été arrosée");
     }
+}*/
+void ActionArroser(Potager potager)
+{
+    Console.WriteLine("\nChoisissez le numéro du terrain que vous souhaitez arrosé");
 
+    AfficherListeTerrains(potagerIrlandais);
+
+    int choix1 = DemanderAction("", potager.Terrains.Count() - 1, 0);
+
+    Terrain terrainChoisi = potager.Terrains[Convert.ToInt32(choix1)];
+
+    Console.WriteLine("\nChoisissez le numéro de la plante à arroser");
+
+    if (terrainChoisi.Plantation.Count() == 0)
+    {
+        Console.WriteLine("Vous n'avez aucune plante sur ce terrain, revenez lorsque vous en aurez planté.");
+    }
+    else
+    {
+        terrainChoisi.Humidite += 20;
+        Console.WriteLine("La terrain a été arrosée");
+    }
 }
 
 void ActionTraiter(Potager potager)
@@ -494,7 +533,7 @@ int DemanderAction(string commentaire, int valeurMax, int valeurMin)
     int choix = choixActionJoueur;
 
     do
-        if (int.TryParse(Console.ReadLine()!, out int resultat))
+        if (int.TryParse(Console.ReadLine()!, out int resultat)) // Tente de lire et convertir l'entrée utilisateur en entier
         {
             choix = resultat;
         }
@@ -544,29 +583,25 @@ void AfficherListeTerrains(Potager potager) //à mettre dans potager?
 
 // %%%%%%%% test mode urgence %%%%%%%%
 
-// Trefle plante1 = new Trefle(); //morte
-// Trefle plante2 = new Trefle(); //malade
-// Trefle plante3 = new Trefle(); //proche mort
-// Trefle plante4 = new Trefle(); //mur
-// Trefle plante5 = new Trefle(); //normal
+/*Trefle plante1 = new Trefle();
+Trefle plante2 = new Trefle();
+Trefle plante3 = new Trefle(); 
+Trefle plante4 = new Trefle(); 
+Trefle plante5 = new Trefle(); 
 
-// plante1.Mort = 1;
-// Console.WriteLine(plante1.Mort);
-// plante2.Malade = 1;
-// plante3.Compteur = 3;
-// plante4.Taille = 4;
 
-// TerreBrune terrain1 = new TerreBrune(4);
-// Console.WriteLine(terrain1.Semer(plante1));
-// Console.WriteLine(terrain1.Semer(plante2));
-// Console.WriteLine(terrain1.Semer(plante3));
-// Console.WriteLine(terrain1.Semer(plante4));
-// Console.WriteLine(terrain1.Semer(plante5));
-// Console.WriteLine(terrain1);
+Gleys terrain1 = new Gleys();
+Console.WriteLine(terrain1.Semer(plante1,1));
+Console.WriteLine(terrain1.Semer(plante2,1));
+Console.WriteLine(terrain1.Semer(plante3,1));
+Console.WriteLine(terrain1.Semer(plante4,1));
+Console.WriteLine(terrain1.Semer(plante5,1));
+Console.WriteLine(terrain1);
 
-// Potager potager1 = new Potager();
-// Console.WriteLine(potager1.AjouterTerrain(terrain1));
-// potager1.Urgence(terrain1, "Tempête");
+Potager potager1 = new Potager();
+Console.WriteLine(potager1.AjouterTerrain(terrain1));
+
+potager1.FaireUrgence(terrain1, "Souris");*/
 
 
 
@@ -616,4 +651,5 @@ Console.WriteLine(plante1.Compteur);
 //Test du type de terrain bien rempli leur de l'action semer()
 Console.WriteLine(plante1.TerrainPlante.Type); 
 Console.WriteLine(plante1.TerrainPrefere);  */
+
 

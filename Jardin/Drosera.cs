@@ -4,7 +4,7 @@ public class Drosera : Plante
     {
         Nature = "carnivore";
         VitesseDeCroissance = 1;
-        EsperanceDeVie = 12;
+        EsperanceDeVie = 15;
         PrixDeVente = 13;
         PrixAchatGraine = 3;
         PlaceNecessaire=2;
@@ -25,17 +25,17 @@ public class Drosera : Plante
         {
             this.Taille = 1;
         }
-        else if ((croissance>=3)&&(croissance<6))
+        else if ((croissance>=4)&&(croissance<7))
         {
             this.Taille = 2;
 
         }
-        else if ((croissance>=6)&&(croissance<9))
+        else if ((croissance>=7)&&(croissance<11))
         {
             this.Taille = 3;
             
         }
-        else if (croissance>=9)
+        else if (croissance>=11)
         {
             this.Taille = 4;
             

@@ -3,11 +3,11 @@ public abstract class Terrain
     //-------------accesseurs et attributs------------
     
     //----caractéristiques du terrain-----
-    public string Type { get; set; }
+    public string? Type { get; set; }
     public int Capacite { get; set; } // Le jardin a une certaine capacité qui ne peut pas être dépassée
     public int NombreDePlante {get; set;} //Nb de plantes plantées dans le terrain
     public List<Plante> Plantation {get; set;} //Liste de toutes les plantes présentes sur le terrain
-    public Potager PotagerTerrain {get; set;} //Potager auquel il appartient
+    public Potager? PotagerTerrain {get; set;} //Potager auquel il appartient
     public Evenement? EventSurTerrain { get; set; } //event sur le terrain
 
     //-----conditions sur le terrain--------
@@ -37,11 +37,11 @@ public abstract class Terrain
         }
         set
         {
-                if(fertilite < 0.5) 
+                if(value < 0.5) 
                 {
                     fertilite = 0.5;
                 }
-                else if (fertilite > 1.5)
+                else if (value> 1.5)
                 {
                     fertilite=1.5;
                 }
@@ -70,7 +70,7 @@ public abstract class Terrain
                 
             }
     }
-    public string Meteo {get; set;}
+    public string? Meteo {get; set;}
 
 
 
@@ -89,7 +89,7 @@ public abstract class Terrain
     {
         string affichage = "";
 
-        if (EventSurTerrain!=null)
+        if (EventSurTerrain != null)
         {
             affichage += EventSurTerrain.ToString();
         }
@@ -168,7 +168,6 @@ public abstract class Terrain
     {
         Random alea = new Random();
         int chance = alea.Next(1,11); //environ 1 chance sur 3 de tomber sur un des 3 types d'event
-        string affichage ="";
         
         if (chance == 1)
         {

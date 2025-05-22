@@ -6,10 +6,10 @@ public abstract class Plante
 
     //caractéristiques plantes
 
-    public string Nature { get; set; } //type de la plante
-    public string Nom { get; set; }
-    public Terrain TerrainPlante { get; set; } //C'est le terrain où la plante est semée
-    public string SaisonDePlantaison { get; set; } //saison durant laquelle la plante est plantée
+    protected string? Nature { get; set; } //type de la plante
+    public string? Nom { get; set; }
+    public Terrain? TerrainPlante { get; set; } //C'est le terrain où la plante est semée
+    public string? SaisonDePlantaison { get; set; } //saison durant laquelle la plante est plantée
     public int PrixDeVente { get; set; } // Quand la plante est mûre, elle peut être vendue
     public int PrixAchatGraine {get; set;} //Achat de la graine
 
@@ -28,13 +28,13 @@ public abstract class Plante
     {
         get
         {
-            return (Age > EsperanceDeVie || Compteur < 3) ? 1 : 0; //ou si l'hydratation tombe à 0
+            return (Age > EsperanceDeVie || Compteur < 3 ) ? 1 : 0; //ou si l'hydratation tombe à 0
         }
         set 
         {; }
     }
     public int Malade { get; set; }
-    public int Compteur { get; set; } //Il permet de comptabiliser combien de condition de préférence de la plante sont respectés
+    protected int Compteur { get; set; } //Il permet de comptabiliser combien de condition de préférence de la plante sont respectés
 
     //besoins de la plante
     
@@ -42,8 +42,25 @@ public abstract class Plante
     public string TerrainPrefere { get; set; }
     public int BesoinHumidite { get; set; } 
     public int BesoinTemperature { get; set; }
-    public string SaisonDePlantaisonPrefere { get; set; } 
-    public int Hydratation { get; set;} //hydratation de la plante
+    public string SaisonDePlantaisonPrefere { get; set; }
+    protected int hydratation; //hydratation de la plante
+    public int Hydratation // En pourcentage
+    {
+        get { return hydratation;}
+        set
+        {
+            hydratation = value;
+            if (value < 0)
+            {
+                hydratation = 0;
+            }
+            else if (value > 100)
+            {
+                hydratation = 100;
+            }
+            else {hydratation = value;}
+        }
+    }
 
 
     //------constructeur----
@@ -51,6 +68,10 @@ public abstract class Plante
     public Plante()
     {
         Hydratation = 80;
+
+        // Valeur par défault
+        SaisonDePlantaisonPrefere = "Printemps";
+        TerrainPrefere = "Terre Brune";
     }
 
     //----------méthodes---------
@@ -61,9 +82,9 @@ public abstract class Plante
     public void TomberMalade()
     {
         Random aleaMaladie = new Random();
-        int chanceMalade = aleaMaladie.Next(1, 11); //nb aléatoire pour que la plante tombe malade
+        int chanceMalade = aleaMaladie.Next(0, 5); //1 chance sur 5 pour que la plante tombe malade
 
-        if (chanceMalade == 10) //1 chance sur 10 que la plante tombe effectivement malade
+        if (chanceMalade == 1) //1 chance sur 10 que la plante tombe effectivement malade
         {
             this.VitesseDeCroissance = 0.75; //diminue sa vitesse de croissance de 25%
             Malade = 1; //actualisation de sa condition
@@ -123,16 +144,16 @@ public abstract class Plante
             if (TerrainPlante.Capacite - TerrainPlante.NombreDePlante < PlaceNecessaire)
             { affichage += "🔔 Cette plante se sent très serrée.\n"; }
 
-            if (TerrainPlante.Humidite < BesoinHumidite * 0.4)
-            { affichage += "🔔 L'humidité est trop basse pour cette plante.\n"; }
+            if (TerrainPlante.Humidite < BesoinHumidite * 0.5)
+            { affichage += "🔔 L'humidité est trop basse pour cette plante. Vous pouvez l'arroser.\n"; }
 
-            if (TerrainPlante.Humidite > BesoinHumidite * 1.4)
+            if (TerrainPlante.Humidite > BesoinHumidite * 1.5)
             { affichage += "🔔 L'humidité est trop élevée pour cette plante.\n"; }
 
-            if (TerrainPlante.Temperature > BesoinTemperature * 1.4)
+            if (TerrainPlante.Temperature > BesoinTemperature * 1.5)
             { affichage += "🔔 La température est trop élevée pour cette plante.\n"; }
 
-            if (TerrainPlante.Temperature < BesoinTemperature * 0.4)
+            if (TerrainPlante.Temperature < BesoinTemperature * 0.5)
             { affichage += "🔔 La température est trop basse pour cette plante.\n"; }
             //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne seraient pas bon ne sont pas affiché s
             //Car le joueur ne peut rien y faire

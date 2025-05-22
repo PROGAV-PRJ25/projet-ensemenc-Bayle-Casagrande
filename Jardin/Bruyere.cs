@@ -4,7 +4,7 @@ public class Bruyere : Plante
     {
         Nature = "fleur";
         VitesseDeCroissance = 1;
-        EsperanceDeVie = 7;
+        EsperanceDeVie = 10;
         PrixDeVente = 15;
         PrixAchatGraine = 5;
         PlaceNecessaire=2;

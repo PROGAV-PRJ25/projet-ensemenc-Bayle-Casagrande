@@ -4,7 +4,7 @@ public class Ail : Plante
     {
         Nature = "légume";
         VitesseDeCroissance = 1;
-        EsperanceDeVie = 9;
+        EsperanceDeVie = 9; //L'ail vit longtemps et mûrit vite
         PrixDeVente = 8;
         PrixAchatGraine = 2;
         PlaceNecessaire=2;
@@ -21,21 +21,21 @@ public class Ail : Plante
     }
     public override void ChangerTaillePlante(double croissance )
     {
-        if (croissance<3)
+        if (croissance<1)
         {
             this.Taille = 1;
         }
-        else if ((croissance>=3)&&(croissance<6))
+        else if ((croissance>=1)&&(croissance<2))
         {
             this.Taille = 2;
 
         }
-        else if ((croissance>=6)&&(croissance<9))
+        else if ((croissance>=2)&&(croissance<3))
         {
             this.Taille = 3;
             
         }
-        else if (croissance>=9)
+        else if (croissance>=3)
         {
             this.Taille = 4;
             

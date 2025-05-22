@@ -33,7 +33,7 @@ public class Potager
         
         foreach (Terrain t in Terrains)
         {
-            affichage += $"\n{t.Type} : Capacité {t.Capacite-t.NombreDePlante} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C - Météo : {t.Meteo}\n"; //affichage des conditions du terrain
+            affichage += $"\n\n 🟫 {t.Type} : Capacité restante {t.Capacite-t.NombreDePlante} - Humidité : {t.Humidite}% - Température : {t.Temperature}°C - Météo : {t.Meteo}\n"; //affichage des conditions du terrain
             System.Threading.Thread.Sleep(500);
             affichage += t.ToString(); //affichage de chaque terrain
             System.Threading.Thread.Sleep(500);
