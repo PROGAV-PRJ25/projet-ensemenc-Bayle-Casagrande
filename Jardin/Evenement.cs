@@ -8,18 +8,18 @@ public abstract class Evenement
 
     public Evenement()
     {
-    
+
     }
 
-    public virtual void Action()
+    public virtual void Action(Terrain terrain)
     {
 
     }
+   
+    
     public override string ToString()
     {
-
         return $"{Nom} est sur le terrain. \n ";
     }
-
 
 }

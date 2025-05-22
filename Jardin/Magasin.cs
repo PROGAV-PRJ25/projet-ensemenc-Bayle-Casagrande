@@ -7,25 +7,20 @@ public class Magasin
     public List<Plante> PlantesRecoltes {get;set;}
     public List<Plante> PlantesWiki {get; set;}
 
-    public Magasin(int argentJoueur)
+    public Magasin(int argentJoueur, List<Plante> wiki)
     {
         GrainesAchetes = new List<Plante>();
         PlantesRecoltes = new List<Plante>();
         ArgentJoueur = argentJoueur;
-        Plante ail = new Ail();
-        Plante bruyere = new Bruyere();
-        Plante drosera = new Drosera();
-        Plante iris = new Iris();
-        Plante jonc = new Jonc();
-        Plante trefle = new Trefle();
-        PlantesWiki = new List<Plante>(){ail,bruyere,drosera,iris,jonc,trefle};
+
+        PlantesWiki = wiki;
     }
 
     public override string ToString()
     {
         string affichage="";
         affichage += "\nBienvenu dans le magasin, vous pouvez acheter des graines ou vendre vos plantes récoltées ici. \n";
-        if (GrainesAchetes.Count >0)
+        if (GrainesAchetes.Count >0) //affichage des graines détenues
         {
             affichage += "------ Vous avez déjà des graines : ------ ";
             foreach(Plante p in GrainesAchetes)
@@ -37,9 +32,9 @@ public class Magasin
         if (PlantesRecoltes.Count>0)
         {
             affichage += "------ Vous avez récolté : ------";
-            foreach(Plante p in PlantesRecoltes)
+            foreach(Plante p in PlantesRecoltes) //affichage des plantes récoltées et donc susceptible d'être vendues
             {
-                affichage += $"- {p.Nom}, prix de vente à {p.PrixDeVente} pièces ";
+                affichage += $"\n- {p.Nom}, prix de vente : {p.PrixDeVente} pièces \n";
             }
             affichage += " \n";
         }
@@ -83,7 +78,7 @@ public class Magasin
         if (planteAcheter == "trefle")
         {
             Trefle planteAAcheter = new Trefle();
-            existence= true;
+            existence= true; 
             return planteAAcheter;
         }
         if (planteAcheter == "ail")
@@ -130,9 +125,9 @@ public class Magasin
         }
         else
         {
-            Plante planteAAcheter = new Trefle(); //Ne sert à rien juste à retourner sua
+            Plante planteAAcheter = new Trefle(); //Ne sert à rien juste à retourner
             existence = false;
-            return null;
+            return null; 
         }
 
     }
@@ -173,7 +168,7 @@ public class Magasin
             return "Cette plante n'existe pas. Il faut écrire seulement le nom de la plante, sans majuscule ni accent.";
         }
     }
-
+    
     public void AfficherWiki(Potager potager)
     {
         Console.WriteLine("\nBienvenue dans le wiki !");
@@ -181,7 +176,7 @@ public class Magasin
 
         string choix = Console.ReadLine()!;
 
-        while ((choix!="1")&&(choix!="2")&&(choix!="3")&&(choix!="4"))
+        while ((choix != "1") && (choix != "2") && (choix != "3") && (choix != "4"))
         {
             Console.WriteLine("La saisie n'est pas valide, veuillez recommencer");
             choix = Console.ReadLine()!;
@@ -212,6 +207,5 @@ public class Magasin
         }
 
     }
-    
 
 }

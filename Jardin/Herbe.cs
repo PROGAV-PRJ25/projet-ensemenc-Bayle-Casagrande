@@ -2,13 +2,11 @@ public class Herbe : Evenement
 {
     public Herbe()
     {
-        Nom = "De la mauvaise herbe";
-        ComptMois = 0;
+        Nom = "🍃 De la mauvaise herbe";
     }
 
-    public void Action(Terrain terEvent)
+    public override void Action(Terrain terEvent)
     {
-        ComptMois++;
         terEvent.Acidite=true; 
     }
 }

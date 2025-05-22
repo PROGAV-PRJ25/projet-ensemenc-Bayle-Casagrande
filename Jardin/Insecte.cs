@@ -2,24 +2,24 @@ public class Insecte : Evenement
 {
     public Insecte()
     {
-        Nom = "Un insecte";
+        Nom = "🪲 Un insecte";
         ComptMois = 0;
-        Duree = 3;
+        Duree = 2;
     }
 
-    public void Action(Terrain terEvent)
+    public override void Action(Terrain terEvent)
     {
         ComptMois++;
 
-        if (ComptMois<=Duree)
+        if (ComptMois <= Duree)
         {
-            terEvent.Fertilite -= 0.2;
+            terEvent.Fertilite -= 0.1;
 
         }
         else
         {
-            terEvent.EventSurTerrain.RemoveAt(0);
-            terEvent.Event = false;
+            terEvent.EventSurTerrain = null;
+            terEvent.Fertilite = 1;
         }
         
     }
