@@ -31,7 +31,7 @@ PresenterIntroduction(ref nbTour);
 
 //tours
 while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.PlantesRecoltes.Count > 0 || magasin.GrainesAchetes.Count > 0 )) 
-//Dans le cas ou le joueur n'a plus d'argent, plus de plantes récoltées et plus de plantes sur les terrains : le joueur a perdu. Il ne peut plus rien faire
+//Dans le cas ou le joueur n'a plus d'argent, plus de plantes récoltées et plus de plantes sur les terrains : le joueur a perdu. Il ne peut plus rien faire.
 {
     mois += 1;
     ActiverModeUrgence(potagerIrlandais);
@@ -49,7 +49,7 @@ while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.Plante
 
 if (argentJoueur > 0 && nombrePlantes > 0 && magasin.PlantesRecoltes.Count > 0 && magasin.GrainesAchetes.Count > 0)
 {
-    Console.WriteLine("Vous avez perdu, car vous n'aviez plus de plantes et plus d'argents...");
+    Console.WriteLine("Vous avez perdu, car vous n'aviez plus de plantes et plus d'argent...");
 }
 
 Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces en {nbTour} mois. ");
@@ -90,7 +90,7 @@ void ActiverModeUrgence(Potager potager)
     int terrainToucher=alea.Next(0,3); //Permet de choisir quel terrain est touché
     if (modeUrgence == 1)
     {
-        int typeInt = alea.Next(0,2);
+        int typeInt = alea.Next(0,2); //choix aleatoire du type d'urgence souris ou tempête
         string type ="";
         if (typeInt==0){type = "Souris";}
         else {type = "Tempête";}
@@ -130,7 +130,7 @@ void ActualiserEvent(Potager potager)
 {
     foreach (Terrain terrain in potager.Terrains)
     {
-        if (terrain.EventSurTerrain==null)
+        if (terrain.EventSurTerrain==null) //si aucun event sur terrain
         {
             terrain.DeclencherEvent();
         }
