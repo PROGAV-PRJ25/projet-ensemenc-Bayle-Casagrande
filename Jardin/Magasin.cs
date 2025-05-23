@@ -11,7 +11,7 @@ public class Magasin
     {
         GrainesAchetes = new List<Plante>();
         PlantesRecoltes = new List<Plante>();
-        ArgentJoueur = argentJoueur;
+        ArgentJoueur = argentJoueur;//valeur de base
 
         PlantesWiki = wiki;
     }
