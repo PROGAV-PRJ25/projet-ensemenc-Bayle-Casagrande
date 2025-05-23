@@ -6,13 +6,12 @@ using System.Runtime.CompilerServices;
 //-------------variables de base-----------
 int mois = 0;
 int nbTour = 10;
-int argentJoueur = 15;
 int choixActionJoueur = -1;
 int nombrePlantes = 0; //Permet de savoir combien de plante sont plantées dans tout terrain confondu
 
 //-------- création des objets--------
 Potager potagerIrlandais = new Potager();
-Magasin magasin = new Magasin(argentJoueur,potagerIrlandais.PlantesWiki);
+Magasin magasin = new Magasin(15,potagerIrlandais.PlantesWiki);
 TerreBrune terrainTerreBrune = new TerreBrune();
 Tourbiere terrainTourbiere = new Tourbiere();
 Gleys terrainGleys = new Gleys();
@@ -28,7 +27,7 @@ PresenterIntroduction(ref nbTour);
 
 
 //tours
-while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.PlantesRecoltes.Count > 0 || magasin.GrainesAchetes.Count > 0 )) 
+while (mois < nbTour && (magasin.ArgentJoueur > 0 || nombrePlantes > 0 || magasin.PlantesRecoltes.Count() > 0 || magasin.GrainesAchetes.Count() > 0))
 //Dans le cas ou le joueur n'a plus d'argent, plus de plantes récoltées et plus de plantes sur les terrains : le joueur a perdu. Il ne peut plus rien faire.
 {
     mois += 1;
@@ -45,7 +44,7 @@ while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.Plante
     nombrePlantes = potagerIrlandais.CompterPlanteTerrain();
 }
 
-if (argentJoueur > 0 && nombrePlantes > 0 && magasin.PlantesRecoltes.Count > 0 && magasin.GrainesAchetes.Count > 0)
+if (magasin.ArgentJoueur == 0 && nombrePlantes == 0 && magasin.PlantesRecoltes.Count == 0 && magasin.GrainesAchetes.Count == 0)
 {
     Console.WriteLine("\n\nFin de partie - Vous avez perdu, car vous n'aviez plus de plantes et plus d'argent...");
 }
@@ -74,7 +73,6 @@ void PresenterIntroduction(ref int nbTour)
     Console.WriteLine("🚨 Des urgences peuvent aussi avoir lieu sur vos terrains. \nIl faudra alors vite écrire le mot indiqué pour protéger vos plantes.\nLes souris 🐁 mangent les plantes, tandis que la tempête ⛈️ les abîme. \n");
     Console.WriteLine("");
     Console.WriteLine("Vous avez trois terrains dans votre potager Irlandais, avec chacun des caractéristiques spéciales notamment sur l'humidité et la température.\n");
-    // nbTour = Convert.ToInt32(Console.ReadLine()!);
     nbTour = DemanderAction("Combien de mois souhaitez-vous jouer ? (entre 1 et 1000)\n",1000,1);
 
     Console.WriteLine($"\nVous avez {nbTour} mois pour utiliser au maximum votre potager Irlandais. Bonne chance ! 🍀\n");
@@ -503,7 +501,6 @@ int DemanderAction(string commentaire, int valeurMax, int valeurMin)
     return choix;
 
 }
-
 
 
 
