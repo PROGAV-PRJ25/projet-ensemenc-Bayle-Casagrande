@@ -24,14 +24,24 @@ public abstract class Plante
 
     public int EsperanceDeVie { get; set; } //durée de vie en mois
     public int Age { get; set; } // Âge de la plante, permet de savoir si l'espérance de vie est dépassée ou non
+    private int mort = 0;
     public int Mort //la plante est déclarée morte si son âge dépasse son espérance de vie ou si le compteur est inférieur à 3 (càd trop de conditions néfastes pour la plante)
     {
         get
         {
-            return (Age > EsperanceDeVie || Compteur < 3 ) ? 1 : 0; 
+            return mort;
         }
-        set 
-        {; }
+        set
+        {
+            if (Age > EsperanceDeVie || Compteur < 3)
+            {
+                mort = 1;
+            }
+            else
+            {
+                mort = 0;
+            }
+        }
     }
     public int Malade { get; set; }
     protected int Compteur { get; set; } //Il permet de comptabiliser combien de condition de préférence de la plante sont respectés

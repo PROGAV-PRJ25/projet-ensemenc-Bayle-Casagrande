@@ -340,7 +340,7 @@ void ActionDesherber(Potager potager)
 
 void ActionArroser(Potager potager)
 {
-    Console.WriteLine("\nChoisissez le numéro du terrain que vous souhaitez arrosé");
+    Console.WriteLine("\nChoisissez le numéro du terrain que vous souhaitez arroser");
 
     potagerIrlandais.AfficherListeTerrains();
 
@@ -498,7 +498,7 @@ int DemanderAction(string commentaire, int valeurMax, int valeurMin)
         {
             Console.WriteLine("Saisie incorrecte, veuillez recommencer");
         }
-    while ((choix == choixActionJoueur) || (choix < valeurMin) || (choix > valeurMax));
+    while ((choix == choixActionJoueur) || (choix < valeurMin) || (choix > valeurMax)); //comparaison avec la variable choix action joueur pour s'assurer qu'un nb différent à bien été entré
 
     return choix;
 
