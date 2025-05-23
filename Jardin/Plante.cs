@@ -43,31 +43,12 @@ public abstract class Plante
     public int BesoinHumidite { get; set; } 
     public int BesoinTemperature { get; set; }
     public string SaisonDePlantaisonPrefere { get; set; }
-    protected int hydratation; //hydratation de la plante
-    public int Hydratation // En pourcentage
-    {
-        get { return hydratation;}
-        set
-        {
-            hydratation = value;
-            if (value < 0)
-            {
-                hydratation = 0;
-            }
-            else if (value > 100)
-            {
-                hydratation = 100;
-            }
-            else {hydratation = value;}
-        }
-    }
 
 
     //------constructeur----
 
     public Plante()
     {
-        Hydratation = 80;
 
         // Valeur par défault
         SaisonDePlantaisonPrefere = "Printemps";
@@ -118,17 +99,16 @@ public abstract class Plante
 
     public void Pousser() //fonction que les plantes se développent selon leur âge et leur vitesse de croissance chaque mois
     {
-        if (TerrainPlante.Acidite!=true) //si le terrain où se trouve la plante est acide (en raison d'un évènement), les plantes ne poussent plus temporairement
+        if (TerrainPlante!.Acidite!=true) //si le terrain où se trouve la plante est acide (en raison d'un évènement), les plantes ne poussent plus temporairement
         { 
             //si le terrain n'est pas acide
-            Hydratation -=12; // la plante perd de son hydratation
             double croissance = this.Age * this.VitesseDeCroissance*TerrainPlante.Fertilite;//la plante croît selon son age, sa vitesse de croissance et la fertilité du terrain
             this.ChangerTaillePlante(croissance); //selon le nb obtenu pour la croissance, la plante atteint un certain seuil de croissance et sa taille est modifiée
         }
        
         if (Taille==4) //si après l'actualisation de la taille de la plante, la taille est de 4
         {
-            TerrainPlante.PotagerTerrain.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
+            TerrainPlante.PotagerTerrain!.PlantesRecoltables.Add(this); //ajout de la plante à la liste des plantes récoltables du potager
         }
     
     }
@@ -216,7 +196,7 @@ public abstract class Plante
         {
             string[] pousse = AfficherPlante(this); //affichage de la plante en graphique, récupération de la pousse
 
-            string affichage = $"- Nom : {Nom} | Age : {Age} | Taille : {Taille} | Hydratation : {Hydratation}\n "; //résumé de la plante et de ses conditions
+            string affichage = $"- Nom : {Nom} | Age : {Age} | Taille : {Taille}\n "; //résumé de la plante et de ses conditions
 
             affichage += AfficherProblemePlante(); //affichage des problème de la plante
 

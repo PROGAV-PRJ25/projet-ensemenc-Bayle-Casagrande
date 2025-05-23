@@ -19,7 +19,7 @@ public class Magasin
     public override string ToString()
     {
         string affichage="";
-        affichage += "\nBienvenu dans le magasin, vous pouvez acheter des graines ou vendre vos plantes récoltées ici. \n\n";
+        affichage += "\n ---- Bienvenu dans le magasin, vous pouvez acheter des graines ou vendre vos plantes récoltées ici. ----\n\n";
         if (GrainesAchetes.Count >0) //affichage des graines détenues
         {
             affichage += "------ Vous avez déjà des graines : ------ \n";

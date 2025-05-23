@@ -52,7 +52,7 @@ public abstract class Terrain
 
     public bool Acidite{ get; set; }
     
-
+    
     protected int temperature;
     public int Temperature //comprise entre 0 et 35
     {

@@ -158,7 +158,7 @@ public class Potager
                 Console.WriteLine("Ecrivez 'chasser' dans la console pour le faire fuir !");
                 Console.WriteLine("Attention vous ne la ferez peut être pas fuir du premier coup...");
 
-                grille[positionLigne, positionColonne] = null;
+                grille[positionLigne, positionColonne] = null!;
                 DeplacerSouris(ref positionLigne, ref positionColonne, ref sensHorizontale, ref sensVerticale, taille);
 
                 if (grille[positionLigne, positionColonne] == "🌱​") // si la souris est sur une plante, la plante est mangée donc supprimée
