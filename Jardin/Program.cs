@@ -74,7 +74,7 @@ void PresenterIntroduction(ref int nbTour)
     Console.WriteLine("");
     Console.WriteLine("Vous avez trois terrains dans votre potager Irlandais, avec chacun des caractéristiques spéciales notamment sur l'humidité et la température.\n");
     // nbTour = Convert.ToInt32(Console.ReadLine()!);
-    nbTour = DemanderAction("Combien de mois souhaitez-vous jouer ?\n",100,1);
+    nbTour = DemanderAction("Combien de mois souhaitez-vous jouer ? (entre 1 et 100)\n",100,1);
 
     Console.WriteLine($"\nVous avez {nbTour} mois pour utiliser au maximum votre potager Irlandais. Bonne chance ! 🍀\n");
     System.Threading.Thread.Sleep(3000);
