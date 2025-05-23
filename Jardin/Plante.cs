@@ -130,12 +130,7 @@ public abstract class Plante
             if (TerrainPlante.Humidite > BesoinHumidite * 1.5)
             { affichage += "🔔 L'humidité est trop élevée pour cette plante.\n"; }
 
-            if (TerrainPlante.Temperature > BesoinTemperature * 1.5)
-            { affichage += "🔔 La température est trop élevée pour cette plante.\n"; }
-
-            if (TerrainPlante.Temperature < BesoinTemperature * 0.5)
-            { affichage += "🔔 La température est trop basse pour cette plante.\n"; }
-            //Les autres problèmes tels que la saison de plantaison ou le terrain qui ne seraient pas bon ne sont pas affiché s
+            //Les autres problèmes tels que la temperature, la saison de plantaison ou le terrain qui ne seraient pas bon ne sont pas affiché s
             //Car le joueur ne peut rien y faire
         }
 
