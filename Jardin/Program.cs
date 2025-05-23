@@ -49,11 +49,14 @@ while (mois < nbTour && (argentJoueur > 0 || nombrePlantes > 0 || magasin.Plante
 
 if (argentJoueur > 0 && nombrePlantes > 0 && magasin.PlantesRecoltes.Count > 0 && magasin.GrainesAchetes.Count > 0)
 {
-    Console.WriteLine("Vous avez perdu, car vous n'aviez plus de plantes et plus d'argents...");
+    Console.WriteLine("\n\nFin de partie - Vous avez perdu, car vous n'aviez plus de plantes et plus d'argents...");
+}
+else
+{
+    Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces en {nbTour} mois. ");
+    Console.WriteLine(potagerIrlandais);
 }
 
-Console.WriteLine($"\n\nFin de partie - Vous avez gagné {magasin.ArgentJoueur} pièces en {nbTour} mois. ");
-Console.WriteLine(potagerIrlandais);
 
 
 //-------------------fonctions principales de déroulement de tour--------------
