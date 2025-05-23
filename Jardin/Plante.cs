@@ -7,11 +7,11 @@ public abstract class Plante
     //caractéristiques plantes
 
     protected string? Nature { get; set; } //type de la plante
-    public string? Nom { get; set; }
+    public string? Nom { get; protected set; }
     public Terrain? TerrainPlante { get; set; } //C'est le terrain où la plante est semée
     public string? SaisonDePlantaison { get; set; } //saison durant laquelle la plante est plantée
-    public int PrixDeVente { get; set; } // Quand la plante est mûre, elle peut être vendue
-    public int PrixAchatGraine {get; set;} //Achat de la graine
+    public int PrixDeVente { get; protected set; } // Quand la plante est mûre, elle peut être vendue
+    public int PrixAchatGraine {get; protected set;} //Achat de la graine
 
 
     //croissance et pousse de la plante
@@ -28,7 +28,7 @@ public abstract class Plante
     {
         get
         {
-            return (Age > EsperanceDeVie || Compteur < 3 ) ? 1 : 0; //ou si l'hydratation tombe à 0
+            return (Age > EsperanceDeVie || Compteur < 3 ) ? 1 : 0; 
         }
         set 
         {; }
@@ -38,10 +38,10 @@ public abstract class Plante
 
     //besoins de la plante
     
-    public int PlaceNecessaire { get; set; } // Chaque plante a besoin d'une certaine place diponible dans le jardin pour être à l'aise
-    public string TerrainPrefere { get; set; }
-    public int BesoinHumidite { get; set; } 
-    public int BesoinTemperature { get; set; }
+    public int PlaceNecessaire { get; protected set; } // Chaque plante a besoin d'une certaine place diponible dans le jardin pour être à l'aise
+    public string TerrainPrefere { get; protected set; }
+    public int BesoinHumidite { get; protected set; } 
+    public int BesoinTemperature { get; protected set; }
     public string SaisonDePlantaisonPrefere { get; set; }
 
 
@@ -50,7 +50,7 @@ public abstract class Plante
     public Plante()
     {
 
-        // Valeur par défault
+        // Valeur par défaut
         SaisonDePlantaisonPrefere = "Printemps";
         TerrainPrefere = "Terre Brune";
     }

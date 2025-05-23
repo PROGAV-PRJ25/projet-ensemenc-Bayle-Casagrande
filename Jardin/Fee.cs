@@ -11,11 +11,11 @@ public class Fee : Evenement
     {
         ComptMois++;
 
-        if (ComptMois <= Duree)
+        if (ComptMois <= Duree) //si son existence est inferieure à sa duree max
         {
             terEvent.Fertilite += 0.1;
         }
-        else
+        else //arrêt de l'event au bout de 3mois
         {
             terEvent.EventSurTerrain = null;
             terEvent.Fertilite=1;

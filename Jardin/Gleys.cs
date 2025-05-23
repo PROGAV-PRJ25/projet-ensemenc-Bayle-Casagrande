@@ -6,7 +6,7 @@ public class Gleys: Terrain
         Type = "Gleys";
         Humidite = 50;
         Temperature = 15;
-        Capacite = 30;
+        Capacite = 25;
     }
 
 

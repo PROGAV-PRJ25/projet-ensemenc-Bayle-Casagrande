@@ -11,12 +11,12 @@ public class Insecte : Evenement
     {
         ComptMois++;
 
-        if (ComptMois <= Duree)
+        if (ComptMois <= Duree)// si l'existence de l'insecte est inferieure à sa durée maximale
         {
             terEvent.Fertilite -= 0.1;
 
         }
-        else
+        else //enlève l'insecte au bout de la durée déterminée
         {
             terEvent.EventSurTerrain = null;
             terEvent.Fertilite = 1;

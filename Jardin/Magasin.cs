@@ -2,10 +2,10 @@ using System.Runtime.InteropServices;
 
 public class Magasin
 {
-    public int ArgentJoueur {get; set;}
-    public List<Plante> GrainesAchetes {get; set;}
-    public List<Plante> PlantesRecoltes {get;set;}
-    protected List<Plante> PlantesWiki {get; set;}
+    public int ArgentJoueur {get; private set;}
+    public List<Plante> GrainesAchetes {get; private set;}
+    public List<Plante> PlantesRecoltes {get; private set;}
+    protected List<Plante> PlantesWiki {get; private set;}
 
     public Magasin(int argentJoueur, List<Plante> wiki)
     {
@@ -71,7 +71,7 @@ public class Magasin
         return  $"La plante a été vendue pour {planteAVendre.PrixDeVente} pièces";
     }
 
-    public Plante VerifierExistancePlante(string planteAcheter, ref bool existence)
+    public Plante VerifierExistencePlante(string planteAcheter, ref bool existence)
     {
 
         if (planteAcheter == "trefle")
@@ -147,7 +147,7 @@ public class Magasin
         string planteChoisie = Convert.ToString(Console.ReadLine()!);
         
         bool existence = false; //Permet de savoir si une plante a été acheter ou non
-        Plante? planteAAcheter = VerifierExistancePlante(planteChoisie, ref existence);
+        Plante? planteAAcheter = VerifierExistencePlante(planteChoisie, ref existence);
         
         if (existence==true) //La plante existe, a été créer et peut être acheter
         {
@@ -162,47 +162,11 @@ public class Magasin
                 return "La graine n'a pas pu être achetée";
             }
         }
-        else //La plante n'existe pas et n'a pas pu être créer donc acheter
+        else //La plante n'existe pas et n'a pas pu être créé donc achetée
         {
             return "Cette plante n'existe pas. Il faut écrire seulement le nom de la plante, sans majuscule ni accent.";
         }
     }
     
-    public void AfficherWiki(Potager potager)
-    {
-        Console.WriteLine("\nBienvenue dans le wiki !");
-        Console.WriteLine("1 - Terrains\n2 - Plantes\n3 - Météo\n4 - Sortir\n");
-
-        string choix = Console.ReadLine()!;
-
-        while ((choix != "1") && (choix != "2") && (choix != "3") && (choix != "4"))
-        {
-            Console.WriteLine("La saisie n'est pas valide, veuillez recommencer");
-            choix = Console.ReadLine()!;
-        }
-
-        string affichage = "";
-        if (choix == "1")
-        {
-            foreach (Terrain t in potager.Terrains)
-            {
-                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo}  \n";
-            }
-            Console.WriteLine(affichage);
-        }
-        else if (choix == "2")
-        {
-            foreach (Plante p in PlantesWiki)
-            {
-                affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces \n";
-            }
-            Console.WriteLine(affichage);
-        }
-        else if (choix == "3")
-        {
-            Console.WriteLine("\n - Soleil : Temp. +10 \n - Neige : Temp. -15 \n - Pluie : Humidité +30 \n - Vent : Humidité -20");
-        }
-
-    }
 
 }

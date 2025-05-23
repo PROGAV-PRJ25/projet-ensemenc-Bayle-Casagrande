@@ -5,7 +5,7 @@ public class Tourbiere : Terrain
         Type = "Tourbiere";
         Humidite = 80;
         Temperature = 20;
-        Capacite = 40;
+        Capacite = 20;
 
     }
 

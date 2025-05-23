@@ -3,8 +3,8 @@ public abstract class Terrain
     //-------------accesseurs et attributs------------
     
     //----caractéristiques du terrain-----
-    public string? Type { get; set; }
-    public int Capacite { get; set; } // Le jardin a une certaine capacité qui ne peut pas être dépassée
+    public string? Type { get; protected set; }
+    public int Capacite { get; protected set; } // Le jardin a une certaine capacité qui ne peut pas être dépassée
     public int NombreDePlante {get; set;} //Nb de plantes plantées dans le terrain
     public List<Plante> Plantation {get; set;} //Liste de toutes les plantes présentes sur le terrain
     public Potager? PotagerTerrain {get; set;} //Potager auquel il appartient

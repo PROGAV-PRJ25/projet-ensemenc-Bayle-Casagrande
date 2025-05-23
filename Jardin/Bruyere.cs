@@ -4,12 +4,12 @@ public class Bruyere : Plante
     {
         Nature = "fleur";
         VitesseDeCroissance = 1;
-        EsperanceDeVie = 10;
+        EsperanceDeVie = 12;
         PrixDeVente = 15;
         PrixAchatGraine = 5;
         PlaceNecessaire=2;
         TerrainPrefere = "Terre Brune";
-        BesoinHumidite = 1;
+        BesoinHumidite = 10;
         BesoinTemperature = 15;
         SaisonDePlantaisonPrefere = "Printemps";
         Taille = 1;

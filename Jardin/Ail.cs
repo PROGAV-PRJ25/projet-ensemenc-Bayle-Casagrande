@@ -9,7 +9,7 @@ public class Ail : Plante
         PrixAchatGraine = 2;
         PlaceNecessaire=2;
         TerrainPrefere = "Terre Brune";
-        BesoinHumidite = 1;
+        BesoinHumidite = 10;
         BesoinTemperature = 15;
         SaisonDePlantaisonPrefere = "Hiver";
         Taille = 1;

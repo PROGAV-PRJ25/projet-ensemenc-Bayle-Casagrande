@@ -51,6 +51,32 @@ public class Potager
         return "Le terrain a été ajouté au potager.";
     }
 
+    public int CompterPlanteTerrain()
+    {
+        int nb = 0;
+        foreach (Terrain t in this.Terrains)
+        {
+            foreach (Plante p in t.Plantation)
+            {
+                nb += 1;
+            }
+        }
+        return nb;
+    }
+
+    public void AfficherListeTerrains()
+    {
+        string affichage = ""; //affichage des terrains
+        int l = 0;
+        foreach (Terrain t in this.Terrains)
+        {
+            affichage += $"\n{l} - {t.Type} ";
+            l++;
+
+        }
+        Console.WriteLine(affichage);
+    }
+
     public void ChangerSaison() //changement des saisons et donc modification de la température et de l'humidité des terrains
     {
 
@@ -106,7 +132,7 @@ public class Potager
         {
             foreach (Terrain t in this.Terrains)
             {
-                affichage += $"\n{t.Type} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo}  \n";
+                affichage += $"\n{t.Type} | Fertilité : {t.Fertilite} | Humidité : {t.Humidite}% | Temp. : {t.Temperature}°C - Place : {t.Capacite - t.NombreDePlante} - Meteo : {t.Meteo} - Event : {t.EventSurTerrain}\n";
             }
             Console.WriteLine(affichage);
         }
@@ -114,7 +140,7 @@ public class Potager
         {
             foreach (Plante p in PlantesWiki)
             {
-                affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces \n";
+                affichage += $"\n - {p.Nom} | Vie : {p.EsperanceDeVie} mois | Terrain : {p.TerrainPrefere} | Saison : {p.SaisonDePlantaisonPrefere}  | Besoin humidité : {p.BesoinHumidite} | Vente : {p.PrixDeVente} pièces | Achat : {p.PrixAchatGraine} pièces\n";
             }
             Console.WriteLine(affichage);
         }
@@ -277,7 +303,7 @@ public class Potager
                 }
             }
 
-            Console.WriteLine("Bravo ! Vous avez installé la bache.");
+            Console.WriteLine("Bravo ! Vous avez installé la bâche.");
             Console.WriteLine("Mais certaines plantes ont perdu de l'espérance de vie...");
         }
     }

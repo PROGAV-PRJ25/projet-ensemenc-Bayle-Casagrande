@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 
 public abstract class Evenement
 {
-    public string Nom {get; set;}
+    public string Nom {get; protected set;}
     protected int ComptMois {get; set;}
     protected int Duree {get; set;}
 
